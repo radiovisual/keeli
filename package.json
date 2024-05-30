@@ -1,16 +1,26 @@
 {
   "name": "i18n-validator",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "test": "jest"
+    "build:prod": "rm -rf dist/* && tsc -noEmit && esbuild src/index.mts --legal-comments=external --platform=node --bundle --outdir=dist --packages=external --minify --sourcemap",
+    "build:dev": "rm -rf dist/* && npm run typecheck && esbuild src/index.mts --platform=node --bundle --outdir=dist --packages=external",
+    "start": "npm run build:dev -- --watch",
+    "test": "jest",
+    "typecheck": "tsc --noEmit"
+  },
+  "bin": {
+    "i18n-validate": "dist/index.js"
   },
   "devDependencies": {
     "@types/node": "^20.12.13",
+    "esbuild": "0.21.4",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0"
   }
 }

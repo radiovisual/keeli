@@ -1,13 +1,25 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
+    "target": "ES2022",
+    "module": "ES2022",
+    "esModuleInterop": true,
+    "moduleResolution": "Bundler",
     "rootDir": "./src",
     "outDir": "./dist",
     "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.mts",
+    "src/rules/no-untranslated-files/no-untranslated-files.mts",
+    "src/rules/no-untranslated-files/index.mts",
+    "src/index.mts",
+    "src/config/default-config.mts",
+    "src/types.mts"
+  ],
   "exclude": ["node_modules", "dist"]
 }

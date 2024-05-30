@@ -1,4 +1,6 @@
-const defaultConfig = {
+import { Config } from "../types.mjs";
+
+const config: Config = {
   defaultLocale: "en",
   sourceFile: "en.json",
   supportedTranslations: [],
@@ -10,4 +12,4 @@ const defaultConfig = {
   enabled: true,
 };
 
-export default defaultConfig;
+export { config };

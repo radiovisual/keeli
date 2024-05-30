@@ -1,11 +1,11 @@
-import { Config, Problem, Rule, RuleMeta } from "../../types";
+import { Config, Problem, Rule, RuleMeta } from "../../types.mjs";
 
 const ruleMeta: RuleMeta = {
   name: "no-untranslated-files",
   description: `All files that are not in the application's source language must be translated`,
   url: "TBD",
   type: "validation",
-  defaultConfig: "error",
+  defaultSeverity: "error",
 };
 
 const noUntranslatedFilesRule: Rule = {
@@ -14,6 +14,7 @@ const noUntranslatedFilesRule: Rule = {
     console.log({ filecontent, config });
 
     const problem = {
+      severity: "error",
       name: "no-untranslated-files",
       locale: "fr",
       message: "Untranslated file found",

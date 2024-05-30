@@ -1,35 +1,36 @@
-export type RuleConfig = "error" | "warning" | "off";
+export type RuleSeverity = "error" | "warning" | "off";
 
-export interface Config {
+export type Config = {
   defaultLocale: string;
   sourceFile: string;
   supportedTranslations: string[];
   pathToTranslatedFiles: string;
   rules: {
-    [key: string]: RuleConfig;
+    [key: string]: RuleSeverity;
   };
   dryRun: boolean;
   enabled: boolean;
-}
+};
 
-export interface Problem {
+export type Problem = {
+  severity: RuleSeverity;
   name: string;
   locale: string;
   url: string;
   message: string;
   expected?: string;
   recieved?: string;
-}
+};
 
-export interface RuleMeta {
+export type RuleMeta = {
   name: string;
-  defaultConfig: RuleConfig;
+  defaultSeverity: RuleSeverity;
   description: string;
   type: "configuration" | "validation";
   url: string;
-}
+};
 
-export interface Rule {
+export type Rule = {
   meta: RuleMeta;
   run: (fileContent: string, config: Config) => Problem[];
-}
+};

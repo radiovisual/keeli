@@ -12,40 +12,40 @@ Furthermore, there are best practices we want to adhere to with our translated f
 
 ## Configuration
 
-For each project where you want to run the i18n-validator, you will need to have a file named `i18n-validator.config.js` with the following format:
+For each project where you want to run the i18n-validator, you will need to have a file named `i18n-validator.config.json` with the following format:
 
-```js
-const config = {
+```json
+{
   /**
    * The locale your application uses as the default language.
    * Example: 'en'
    *
    **/
-  defaultLocale: "en",
+  "defaultLocale": "en",
   /**
    * This is the name of the JSON file where your app's default language is defined.
    * Example: 'en.json' or 'source.json'
    *
    **/
-  sourceFile: "en.json",
+  "sourceFile": "en.json",
   /**
    * A list of languages or locales you translate to.
    * Example: ['de', 'fr', 'en_GB']
    *
    **/
-  supportedTranslations: ["de", "fr"],
+  "supportedTranslations": ["de", "fr"],
   /**
    * The path, relative to the root directory where your i18n files can be located.
    * Example: ['de', 'fr', 'en_GB']
    *
    **/
-  pathToTranslatedFiles: "i18n",
+  "pathToTranslatedFiles": "i18n",
   /**
    * The rules configuration. You can set each rule to 'error', 'warn' or 'off'
    * Note: If you do not provide a setting for a rule, then the rule's default setting will apply.
    *
    **/
-  rules: {
+  "rules": {
     "no-untranslated-files": "error",
   },
   /**
@@ -54,12 +54,12 @@ const config = {
    * Great for getting your i18n-validation setup in CI/CD pipelines without breaking your builds.
    *
    **/
-  dryRun: false,
+  "dryRun": false,
   /**
    * Enable or disable this entire i18n-validator.
    *
    **/
-  enabled: true,
+  "enabled": true,
 };
 ```
 

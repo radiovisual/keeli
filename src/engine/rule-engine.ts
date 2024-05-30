@@ -1,4 +1,4 @@
-import { Config, Rule } from "../types";
+import { Config, Rule } from "../types.mjs";
 import * as fs from "node:fs";
 import * as path from "node:path";
 
