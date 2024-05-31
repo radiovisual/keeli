@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-import { runRules } from "./engine/rule-engine";
-import * as fs from "node:fs";
-import * as path from "node:path";
-import { Config } from "./types.mjs";
-import { config } from "./config/default-config.mjs";
+import fs from "node:fs";
+import path from "node:path";
 import chalk from "chalk";
+
+import { runRules } from "./engine/rule-engine.ts";
+import { Config } from "./types.mjs";
+import { config } from "./config/default-config.mts";
 
 const defaultConfig: Config = config;
 

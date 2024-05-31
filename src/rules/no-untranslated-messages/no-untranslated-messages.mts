@@ -1,4 +1,4 @@
-import { Problem } from "../../classes/problem.class.mts";
+import { SEVERITY_LEVEL } from "../../constants.mts";
 import {
   Config,
   Rule,
@@ -6,6 +6,7 @@ import {
   RuleMeta,
   TranslationFiles,
 } from "../../types.mjs";
+import { getUntranslatedMessageProblem } from "./problems.ts";
 
 const ruleMeta: RuleMeta = {
   name: "no-untranslated-messages",
@@ -27,19 +28,22 @@ const noUntranslatedMessages: Rule = {
     const { severity } = context;
     const baseLocale = translationFiles[config.defaultLocale];
 
+    if (severity === SEVERITY_LEVEL.off) {
+      return;
+    }
+
     for (let [locale, data] of Object.entries(translationFiles)) {
       if (locale !== defaultLocale) {
         for (let [translatedKey, translatedMessage] of Object.entries(data)) {
           const baseMessage = baseLocale[translatedKey];
 
           if (baseMessage === translatedMessage) {
-            const problem = Problem.Builder.withRuleMeta(ruleMeta)
-              .withSeverity(severity)
-              .withLocale(locale)
-              .withMessage(
-                `Untranslated message found for key: ${translatedKey}`
-              )
-              .build();
+            const problem = getUntranslatedMessageProblem({
+              key: translatedKey,
+              locale,
+              severity,
+              ruleMeta,
+            });
 
             problemReporter.report(problem);
           }
