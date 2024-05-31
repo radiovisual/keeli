@@ -1,47 +1,25 @@
-import { Config, Rule } from "../types.mjs";
-import * as fs from "node:fs";
-import * as path from "node:path";
+import type { Config, Rule, TranslationFiles } from "../types.mts";
+import * as rules from "../rules/index.mjs";
+import { ProblemReporter } from "../classes/problem-reporter.mts";
+import { getRuleSeverity } from "../utils/rules-helpers.mts";
+import { SEVERITY_LEVEL } from "../constants.mts";
+import { loadLanguageFiles } from "../utils/file-helpers.mts";
 
-function loadRules(config: Config): Rule[] {
-  const rules: Rule[] = [];
+function runRules(config: Config) {
+  const problemReporter = new ProblemReporter();
+  const languageFiles = loadLanguageFiles(config) as TranslationFiles;
+  console.log({ languageFiles, rules });
 
-  const rulesDir = path.join(__dirname, "rules");
-  fs.readdirSync(rulesDir).forEach((dir) => {
-    const rulePath = path.join(rulesDir, dir);
-    if (fs.statSync(rulePath).isDirectory()) {
-      const rule = require(rulePath).default as Rule;
-      if (config.rules[rule.meta.name] !== "off") {
-        rules.push(rule);
-      }
+  Object.values(rules).forEach((rule) => {
+    const severity = getRuleSeverity(config, rule);
+
+    if (severity !== SEVERITY_LEVEL.off) {
+      rule.run(languageFiles, config, problemReporter, { severity });
     }
   });
 
-  return rules;
-}
-
-function runRules(config: Config) {
-  const rules = loadRules(config);
-  const sourceFilePath = path.join(
-    config.pathToTranslatedFiles,
-    config.sourceFile
-  );
-  const sourceFileContent = fs.readFileSync(sourceFilePath, "utf8");
-
-  config.supportedTranslations.forEach((locale) => {
-    const translatedFilePath = path.join(
-      config.pathToTranslatedFiles,
-      `${locale}.json`
-    );
-    const translatedFileContent = fs.readFileSync(translatedFilePath, "utf8");
-
-    rules.forEach((rule) => {
-      const problems = rule.run(translatedFileContent, config);
-      problems.forEach((problem) => {
-        const severity = config.rules[rule.meta.name];
-        console.log(`${severity.toUpperCase()}: [${locale}] ${problem}`);
-      });
-    });
-  });
+  // TODO: send problems to the problem logger
+  console.log("Problems found", problemReporter.getProblems());
 }
 
 export { runRules };

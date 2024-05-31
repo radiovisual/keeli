@@ -15,8 +15,8 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.mts",
-    "src/rules/no-untranslated-files/no-untranslated-files.mts",
-    "src/rules/no-untranslated-files/index.mts",
+    "src/rules/no-untranslated-messages/no-untranslated-messages.mts",
+    "src/rules/no-untranslated-messages/index.mts",
     "src/index.mts",
     "src/config/default-config.mts",
     "src/types.mts"

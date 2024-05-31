@@ -1,4 +1,7 @@
-export type RuleSeverity = "error" | "warning" | "off";
+import { ProblemReporter } from "./classes/problem-reporter.mts";
+import { SEVERITY_LEVEL } from "./constants.mts";
+
+export type RuleSeverity = keyof typeof SEVERITY_LEVEL;
 
 export type Config = {
   defaultLocale: string;
@@ -13,10 +16,9 @@ export type Config = {
 };
 
 export type Problem = {
+  ruleMeta: RuleMeta;
   severity: RuleSeverity;
-  name: string;
   locale: string;
-  url: string;
   message: string;
   expected?: string;
   recieved?: string;
@@ -30,7 +32,20 @@ export type RuleMeta = {
   url: string;
 };
 
+export type RuleContext = {
+  severity: RuleSeverity;
+};
+
+export type TranslationFiles = {
+  [key: string]: { [key: string]: string };
+};
+
 export type Rule = {
   meta: RuleMeta;
-  run: (fileContent: string, config: Config) => Problem[];
+  run: (
+    translationFiles: TranslationFiles,
+    config: Config,
+    problemReporter: ProblemReporter,
+    context: RuleContext
+  ) => void;
 };

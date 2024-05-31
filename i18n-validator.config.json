@@ -1,0 +1,11 @@
+{
+  "defaultLocale": "en",
+  "sourceFile": "en.json",
+  "supportedTranslations": ["de", "fr", "en"],
+  "pathToTranslatedFiles": "src/tests/fixtures/i18n",
+  "rules": {
+    "no-untranslated-messages": "error"
+  },
+  "dryRun": false,
+  "enabled": true
+}
