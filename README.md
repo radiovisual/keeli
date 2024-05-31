@@ -1,4 +1,4 @@
-# i18n-validator
+# i18n-validator [![CI](https://github.com/radiovisual/i18n-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/radiovisual/i18n-validator/actions/workflows/ci.yml)
 
 > Fast, configurable and extendable CLI to look for common problems in your translated source files.
 
