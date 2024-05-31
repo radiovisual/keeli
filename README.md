@@ -4,7 +4,7 @@
 
 ## Why?
 
-> Have you ever shipped "buggy" translation files to your users in proudction? Probably. I know I have!
+> Have you ever shipped "buggy" translation files to your users in production? **Probably**. I know I have!
 
 Translated files in your software project are an often-overlooked source of problems that can affect the usability and reliability of your applications. These translated files are often edited manually, built automatically (without any integrity checks) or outsourced to a third party to provide translations, and then these files typically do not pass through any of your automated tests, or get skipped in your manual tests...which means the hidden problems get shipped to your users in production. If you are reading this right now, you have probably shipped "buggy" translation files to real users in production, am I right?
 
@@ -46,7 +46,7 @@ For each project where you want to run the i18n-validator, you will need to have
    *
    **/
   "rules": {
-    "no-untranslated-files": "error",
+    "no-untranslated-files": "error"
   },
   /**
    * Set this dryRun setting to true to get all the same logging and reporting you would
@@ -59,8 +59,8 @@ For each project where you want to run the i18n-validator, you will need to have
    * Enable or disable this entire i18n-validator.
    *
    **/
-  "enabled": true,
-};
+  "enabled": true
+}
 ```
 
 # Rule Defaults
