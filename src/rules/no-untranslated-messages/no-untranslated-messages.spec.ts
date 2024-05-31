@@ -1,9 +1,9 @@
 import { createMockProblemReporter } from "../../tests/utils/test-helpers.ts";
 import {
-  Config,
-  RuleContext,
-  RuleSeverity,
-  TranslationFiles,
+	Config,
+	RuleContext,
+	RuleSeverity,
+	TranslationFiles,
 } from "../../types.mjs";
 import { noUntranslatedMessages } from "./no-untranslated-messages.mts";
 import { getUntranslatedMessageProblem } from "./problems.ts";
@@ -14,78 +14,78 @@ const rule = noUntranslatedMessages;
 const defaultLocale = "en";
 
 const baseConfig: Config = {
-  defaultLocale,
-  sourceFile: "en.json",
-  supportedTranslations: ["fr"],
-  pathToTranslatedFiles: "i18n",
-  rules: {
-    "no-untranslated-messages": "error",
-  },
-  dryRun: false,
-  enabled: true,
+	defaultLocale,
+	sourceFile: "en.json",
+	translationFiles: { fr: "fr.json" },
+	pathToTranslatedFiles: "i18n",
+	rules: {
+		"no-untranslated-messages": "error",
+	},
+	dryRun: false,
+	enabled: true,
 };
 
 describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
-  const severity = severityStr as unknown as RuleSeverity;
+	const severity = severityStr as unknown as RuleSeverity;
 
-  const context: RuleContext = {
-    severity,
-  };
+	const context: RuleContext = {
+		severity,
+	};
 
-  it(`should report untranslated messages with ${severity}`, () => {
-    const problemReporter = createMockProblemReporter();
+	it(`should report untranslated messages with ${severity}`, () => {
+		const problemReporter = createMockProblemReporter();
 
-    const translationFiles: TranslationFiles = {
-      en: { greeting: "Hello", farewell: "Goodbye" },
-      fr: { greeting: "Bonjour", farewell: "Goodbye" },
-    };
+		const translationFiles: TranslationFiles = {
+			en: { greeting: "Hello", farewell: "Goodbye" },
+			fr: { greeting: "Bonjour", farewell: "Goodbye" },
+		};
 
-    rule.run(translationFiles, baseConfig, problemReporter, context);
+		rule.run(translationFiles, baseConfig, problemReporter, context);
 
-    const expectedProblem = getUntranslatedMessageProblem({
-      key: "farewell",
-      locale: "fr",
-      severity,
-      ruleMeta,
-    });
+		const expectedProblem = getUntranslatedMessageProblem({
+			key: "farewell",
+			locale: "fr",
+			severity,
+			ruleMeta,
+		});
 
-    expect(problemReporter.report).toHaveBeenCalledTimes(1);
-    expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
-  });
+		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
+	});
 
-  it("should not report translated messages", () => {
-    const problemReporter = createMockProblemReporter();
+	it("should not report translated messages", () => {
+		const problemReporter = createMockProblemReporter();
 
-    const translationFiles: TranslationFiles = {
-      en: { greeting: "Hello", farewell: "Goodbye" },
-      fr: { greeting: "Bonjour", farewell: "Goodbye" },
-    };
+		const translationFiles: TranslationFiles = {
+			en: { greeting: "Hello", farewell: "Goodbye" },
+			fr: { greeting: "Bonjour", farewell: "Goodbye" },
+		};
 
-    rule.run(translationFiles, baseConfig, problemReporter, context);
+		rule.run(translationFiles, baseConfig, problemReporter, context);
 
-    const expectedProblem = getUntranslatedMessageProblem({
-      key: "greeting",
-      locale: "fr",
-      severity,
-      ruleMeta,
-    });
+		const expectedProblem = getUntranslatedMessageProblem({
+			key: "greeting",
+			locale: "fr",
+			severity,
+			ruleMeta,
+		});
 
-    expect(problemReporter.report).not.toHaveBeenCalledWith(expectedProblem);
-  });
+		expect(problemReporter.report).not.toHaveBeenCalledWith(expectedProblem);
+	});
 });
 
 describe(`${rule.meta.name}: off`, () => {
-  const problemReporter = createMockProblemReporter();
+	const problemReporter = createMockProblemReporter();
 
-  const context: RuleContext = {
-    severity: "off",
-  };
+	const context: RuleContext = {
+		severity: "off",
+	};
 
-  const translationFiles: TranslationFiles = {
-    en: { greeting: "Hello", farewell: "Goodbye" },
-    fr: { greeting: "Bonjour", farewell: "Goodbye" },
-  };
+	const translationFiles: TranslationFiles = {
+		en: { greeting: "Hello", farewell: "Goodbye" },
+		fr: { greeting: "Bonjour", farewell: "Goodbye" },
+	};
 
-  rule.run(translationFiles, baseConfig, problemReporter, context);
-  expect(problemReporter.report).not.toHaveBeenCalled();
+	rule.run(translationFiles, baseConfig, problemReporter, context);
+	expect(problemReporter.report).not.toHaveBeenCalled();
 });

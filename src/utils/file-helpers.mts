@@ -9,30 +9,35 @@ import { Config, TranslationFiles } from "../types.mts";
  * @returns TranslationFiles
  */
 export function loadLanguageFiles(config: Config): TranslationFiles {
-  let files: TranslationFiles = {};
+	let files: TranslationFiles = {};
 
-  // Ensure that the source file is included in the dataset of all translations.
-  // This helps catch situations where the source locale was not included in 'supportedTranslations'
-  const defaultSourceLocale = config.sourceFile.replace(".json", "");
-  const allSupportedLocales = new Set([
-    ...config.supportedTranslations,
-    defaultSourceLocale,
-  ]);
+	const allTranslationFiles = {
+		...config.translationFiles,
+	};
 
-  // Load translation files
-  Array.from(allSupportedLocales).forEach((locale) => {
-    const translatedFilePath = path.join(
-      config.pathToTranslatedFiles,
-      `${locale}.json`
-    );
-    try {
-      files[locale] = JSON.parse(fs.readFileSync(translatedFilePath, "utf8"));
-    } catch (err: unknown) {
-      console.error(
-        `There was an error trying to read the file at path: '${translatedFilePath}' for the locale: '${locale}'. Please ensure that this is a valid JSON file and try again.`
-      );
-    }
-  });
+	// Make sure that the source file is included in the translation files
+	if (!Object.keys(config.translationFiles).includes(config.defaultLocale)) {
+		allTranslationFiles[config.defaultLocale] = config.sourceFile;
+	}
 
-  return files;
+	// Load translation files
+	for (let [locale, translationFileName] of Object.entries(
+		allTranslationFiles
+	)) {
+		const translatedFilePath = path.join(
+			config.pathToTranslatedFiles,
+			translationFileName
+		);
+
+		try {
+			// TODO: convert to JSON before parsing if the file is not JSON. https://github.com/radiovisual/i18n-validator/issues/2
+			files[locale] = JSON.parse(fs.readFileSync(translatedFilePath, "utf8"));
+		} catch (err: unknown) {
+			console.error(
+				`There was an error trying to read the file at path: '${translatedFilePath}' for the locale: '${locale}'. Please ensure that this is a valid translation file and try again.`
+			);
+		}
+	}
+
+	return files;
 }

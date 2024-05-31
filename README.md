@@ -16,50 +16,50 @@ For each project where you want to run the i18n-validator, you will need to have
 
 ```json
 {
-  /**
-   * The locale your application uses as the default language.
-   * Example: 'en'
-   *
-   **/
-  "defaultLocale": "en",
-  /**
-   * This is the name of the JSON file where your app's default language is defined.
-   * Example: 'en.json' or 'source.json'
-   *
-   **/
-  "sourceFile": "en.json",
-  /**
-   * A list of languages or locales you translate to.
-   * Example: ['de', 'fr', 'en_GB']
-   *
-   **/
-  "supportedTranslations": ["de", "fr"],
-  /**
-   * The path, relative to the root directory where your i18n files can be located.
-   * Example: ['de', 'fr', 'en_GB']
-   *
-   **/
-  "pathToTranslatedFiles": "i18n",
-  /**
-   * The rules configuration. You can set each rule to 'error', 'warn' or 'off'
-   * Note: If you do not provide a setting for a rule, then the rule's default setting will apply.
-   *
-   **/
-  "rules": {
-    "no-untranslated-files": "error"
-  },
-  /**
-   * Set this dryRun setting to true to get all the same logging and reporting you would
-   * get in a real validation check, but no errors will be thrown if errors are found.
-   * Great for getting your i18n-validation setup in CI/CD pipelines without breaking your builds.
-   *
-   **/
-  "dryRun": false,
-  /**
-   * Enable or disable this entire i18n-validator.
-   *
-   **/
-  "enabled": true
+	/**
+	 * The locale your translations uses as the default or source language.
+	 * Example: 'en'
+	 *
+	 **/
+	"defaultLocale": "en",
+	/**
+	 * The filename of the file where your app's default/source language is defined.
+	 * Example: "default.json" | "source.json" | "en.json"
+	 *
+	 **/
+	"sourceFile": "en.json",
+	/**
+	 * An object describing the locale and its assosiated translation file name;
+	 * Example: {"de": "de.json", "fr": "fr.json" }
+	 *
+	 **/
+	"translationFiles": { "de": "de.json", "fr": "fr.json" },
+	/**
+	 * The path, relative to the root directory where your i18n files can be located.
+	 * Example: ['de', 'fr', 'en_GB']
+	 *
+	 **/
+	"pathToTranslatedFiles": "i18n",
+	/**
+	 * The rules configuration. You can set each rule to 'error', 'warn' or 'off'
+	 * Note: If you do not provide a setting for a rule, then the rule's default setting will apply.
+	 *
+	 **/
+	"rules": {
+		"no-untranslated-files": "error"
+	},
+	/**
+	 * Set this dryRun setting to true to get all the same logging and reporting you would
+	 * get in a real validation check, but no errors will be thrown if errors are found.
+	 * Great for getting your i18n-validation setup in CI/CD pipelines without breaking your builds.
+	 *
+	 **/
+	"dryRun": false,
+	/**
+	 * Enable or disable this entire i18n-validator.
+	 *
+	 **/
+	"enabled": true
 }
 ```
 
