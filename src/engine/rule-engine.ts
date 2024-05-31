@@ -18,7 +18,7 @@ function runRules(config: Config) {
     }
   });
 
-  // TODO: send problems to the problem logger
+  // TODO: send problems to the problem logger, respecting the dryRun
   console.log("Problems found", problemReporter.getProblems());
 }
 
