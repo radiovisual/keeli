@@ -36,7 +36,7 @@ For each project where you want to run the i18n-validator, you will need to have
 	"translationFiles": { "de": "de.json", "fr": "fr.json" },
 	/**
 	 * The path, relative to the root directory where your i18n files can be located.
-	 * Example: ['de', 'fr', 'en_GB']
+	 * Example: 'relative/path/to/i18n/files'
 	 *
 	 **/
 	"pathToTranslatedFiles": "i18n",
