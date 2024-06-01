@@ -7,7 +7,8 @@
 	},
 	"pathToTranslatedFiles": "src/tests/fixtures/i18n",
 	"rules": {
-		"no-untranslated-messages": "error"
+		"no-untranslated-messages": "error",
+		"no-empty-messages": "error"
 	},
 	"dryRun": false,
 	"enabled": true

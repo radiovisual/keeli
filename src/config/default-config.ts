@@ -6,7 +6,8 @@ const config: Config = {
 	translationFiles: {},
 	pathToTranslatedFiles: "i18n",
 	rules: {
-		"no-untranslated-files": "error",
+		"no-untranslated-messages": "error",
+		"no-empty-messages": "error",
 	},
 	dryRun: false,
 	enabled: true,

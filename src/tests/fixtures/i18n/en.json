@@ -1,3 +1,5 @@
 {
-  "hi": "Hi!"
+	"untranslated-message": "Hi!",
+	"empty-string": "",
+	"only-empty-in-en": ""
 }

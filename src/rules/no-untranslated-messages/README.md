@@ -32,6 +32,16 @@ fr.json: { 'hello': 'Salut!' }
 de.json: { 'hello': 'Hallo!' }
 ```
 
+## Example Configuration
+
+```json
+{
+	"rules": {
+		"no-untranslated-messages": "error"
+	}
+}
+```
+
 ## Version
 
 This rule was introduced in i18n-validator v1.0.0.
