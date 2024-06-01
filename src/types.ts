@@ -1,5 +1,5 @@
-import { ProblemReporter } from "./classes/problem-reporter.mts";
-import { SEVERITY_LEVEL } from "./constants.mts";
+import { ProblemReporter } from "./classes/problem-reporter.ts";
+import { SEVERITY_LEVEL } from "./constants.ts";
 
 export type RuleSeverity = keyof typeof SEVERITY_LEVEL;
 

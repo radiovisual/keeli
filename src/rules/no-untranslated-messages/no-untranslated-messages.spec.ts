@@ -4,8 +4,8 @@ import {
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.mjs";
-import { noUntranslatedMessages } from "./no-untranslated-messages.mts";
+} from "../../types.js";
+import { noUntranslatedMessages } from "./no-untranslated-messages.ts";
 import { getUntranslatedMessageProblem } from "./problems.ts";
 
 const ruleMeta = noUntranslatedMessages.meta;

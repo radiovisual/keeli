@@ -1,6 +1,6 @@
 import path from "node:path";
 import fs from "node:fs";
-import { Config, TranslationFiles } from "../types.mts";
+import { Config, TranslationFiles } from "../types";
 
 /**
  * Import all of the translation files in the current project and bundle their data into a single object.

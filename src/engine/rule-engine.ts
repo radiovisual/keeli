@@ -1,9 +1,9 @@
-import type { Config, TranslationFiles } from "../types.mts";
-import * as rules from "../rules/index.mjs";
-import { ProblemReporter } from "../classes/problem-reporter.mts";
-import { getRuleSeverity } from "../utils/rules-helpers.mts";
-import { SEVERITY_LEVEL } from "../constants.mts";
-import { loadLanguageFiles } from "../utils/file-helpers.mts";
+import type { Config, TranslationFiles } from "../types";
+import * as rules from "../rules/index.js";
+import { ProblemReporter } from "../classes/problem-reporter.js";
+import { getRuleSeverity } from "../utils/rules-helpers";
+import { SEVERITY_LEVEL } from "../constants";
+import { loadLanguageFiles } from "../utils/file-helpers";
 
 function runRules(config: Config) {
 	const problemReporter = new ProblemReporter();

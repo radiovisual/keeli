@@ -10,16 +10,16 @@
 		"noEmit": true,
 		"skipLibCheck": true,
 		"resolveJsonModule": true,
-		"allowImportingTsExtensions": true
+		"allowImportingTsExtensions": true,
+		"allowSyntheticDefaultImports": true
 	},
 	"include": [
 		"src/**/*.ts",
-		"src/**/*.mts",
-		"src/rules/no-untranslated-messages/no-untranslated-messages.mts",
-		"src/rules/no-untranslated-messages/index.mts",
-		"src/index.mts",
-		"src/config/default-config.mts",
-		"src/types.mts"
+		"src/rules/no-untranslated-messages/no-untranslated-messages.ts",
+		"src/rules/no-untranslated-messages/index.ts",
+		"src/index.ts",
+		"src/config/default-config.ts",
+		"src/types.ts"
 	],
 	"exclude": ["node_modules", "dist"]
 }

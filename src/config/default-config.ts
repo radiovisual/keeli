@@ -1,4 +1,4 @@
-import { Config } from "../types.mjs";
+import { Config } from "../types.ts";
 
 const config: Config = {
 	defaultLocale: "en",
