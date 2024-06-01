@@ -1,5 +1,6 @@
 {
 	"extensionsToTreatAsEsm": [".ts"],
 	"preset": "ts-jest",
-	"testEnvironment": "node"
+	"testEnvironment": "node",
+	"testPathIgnorePatterns": ["dist"]
 }

@@ -24,9 +24,13 @@ export type Problem = {
 	severity: RuleSeverity;
 	locale: string;
 	message: string;
-	expected?: string;
-	recieved?: string;
+	expected?: string | number | object;
+	received?: string | number | object;
 };
+
+export interface ProblemContext extends Problem {
+	key: string;
+}
 
 export type RuleMeta = {
 	name: string;

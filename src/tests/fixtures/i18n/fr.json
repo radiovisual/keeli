@@ -1,5 +1,11 @@
 {
 	"untranslated-message": "Hi!",
 	"empty-string": "",
-	"only-empty-in-en": "[FR] not empty"
+	"only-empty-in-en": "[FR] not empty",
+	"declares-a-valid-variable": "Salut, {firstName}",
+	"declares-an-unbalanced-variable-in-en": "[FR] unbalanced {variable}",
+	"declares-another-unbalanced-variable-in-en": "[FR] another unbalanced {variable}",
+	"declares-a-missing-variable-in-fr": "[FR] missing",
+	"declares-a-single-missing-variable-in-fr": "[FR] should be two {one}",
+	"declares-a-malfomed-variable-in-de": "[FR] malformed {variable}"
 }

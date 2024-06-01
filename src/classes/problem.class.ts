@@ -5,8 +5,8 @@ class Problem {
 	severity: RuleSeverity;
 	locale: string;
 	message: string;
-	expected?: string;
-	received?: string;
+	expected?: string | object | number;
+	received?: string | object | number;
 
 	public constructor(builder: ProblemBuilder) {
 		this.ruleMeta = builder.ruleMeta;
@@ -29,8 +29,8 @@ class ProblemBuilder {
 	locale!: string;
 	url!: string;
 	message!: string;
-	expected?: string;
-	received?: string;
+	expected?: string | object | number;
+	received?: string | object | number;
 
 	withSeverity(severity: RuleSeverity): this {
 		this.severity = severity;
@@ -52,12 +52,12 @@ class ProblemBuilder {
 		return this;
 	}
 
-	withExpected(expected?: string): this {
+	withExpected(expected?: string | object | number): this {
 		this.expected = expected;
 		return this;
 	}
 
-	withReceived(received?: string): this {
+	withReceived(received?: string | object | number): this {
 		this.received = received;
 		return this;
 	}
