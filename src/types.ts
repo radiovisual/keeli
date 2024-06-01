@@ -2,6 +2,10 @@ import { ProblemReporter } from "./classes/problem-reporter.ts";
 import { SEVERITY_LEVEL } from "./constants.ts";
 
 export type RuleSeverity = keyof typeof SEVERITY_LEVEL;
+export type RuleAdvancedConfig = {
+	severity: RuleSeverity;
+	ignoreKeys?: string[];
+};
 
 export type Config = {
 	defaultLocale: string;
@@ -9,7 +13,7 @@ export type Config = {
 	translationFiles: { [key: string]: string };
 	pathToTranslatedFiles: string;
 	rules: {
-		[key: string]: RuleSeverity;
+		[key: string]: RuleSeverity | RuleAdvancedConfig;
 	};
 	dryRun: boolean;
 	enabled: boolean;
@@ -34,6 +38,7 @@ export type RuleMeta = {
 
 export type RuleContext = {
 	severity: RuleSeverity;
+	ignoreKeys: string[];
 };
 
 export type TranslationFiles = {

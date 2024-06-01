@@ -25,7 +25,7 @@ const noUntranslatedMessages: Rule = {
 		context: RuleContext
 	) => {
 		const { defaultLocale } = config;
-		const { severity } = context;
+		const { severity, ignoreKeys } = context;
 		const baseLocale = translationFiles[config.defaultLocale];
 
 		if (severity === SEVERITY_LEVEL.off) {
@@ -35,6 +35,10 @@ const noUntranslatedMessages: Rule = {
 		for (let [locale, data] of Object.entries(translationFiles)) {
 			if (locale !== defaultLocale) {
 				for (let [translatedKey, translatedMessage] of Object.entries(data)) {
+					if (ignoreKeys.includes(translatedKey)) {
+						continue;
+					}
+
 					const baseMessage = baseLocale[translatedKey];
 
 					if (baseMessage === translatedMessage) {

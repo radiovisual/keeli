@@ -71,9 +71,47 @@ Each rule has a default setting of `error`, `warn` or `off`, these defaults will
 > [!IMPORTANT]
 > Pay special attention to any rules that have a default of `off`, these are opt-in rules that must be configured with a rule of `error` or `warn` in your configuration file before they will run.
 
-| Rule name             | Default |
-| --------------------- | ------- |
-| no-untranslated-files | `error` |
+| Rule name                | Default |
+| ------------------------ | ------- |
+| no-untranslated-messages | `error` |
+| no-empty-messages        | `error` |
+
+# Overriding Rules
+
+Some rules can have advanced configuration passed in. Each rule might be different, so you want to read the documentation for each rule, but here are the general override details:
+
+## ignoreKeys
+
+For validation rules that read through each key of a translated file, you can pass in an `ignoreKeys` array of strings that represent keys that should be ignored for the specific rule. Meaning, the rule will still run as expected on all keys, except for the keys specified. For example, if you have translation files that looks like this:
+
+```json
+{
+	"en": { "ok": "OK" },
+	"fr": { "ok": "OK" }
+}
+```
+
+Then you might want the rule `no-untranslated-messages` to ignore this key `'ok'` because the translation of "ok" might also be "ok" and trigger a false positive in the rule.
+
+To configure the `ignoreKeys` array you can assign an object to the rule name in the configuration file.
+
+```json
+{
+	"rules": {
+		"no-untranslated-messages": {
+			"severity": "error",
+			"ignoreKeys": ["ok"]
+		}
+	}
+}
+```
+
+Keep in mind that this same key will still pass through other rules, so you are free to mix-and-match these advanced settings to get the perfect setup for your project.
+
+> [!IMPORTANT] > **Be careful when ignoring keys**, ignored keys can lead to ignored problems.
+
+> [!TIP]
+> If you find that you are ignoring a lot of keys, consider moving some strings outside of your translated files (for example in a common messages library, etc)...
 
 # Contributing
 

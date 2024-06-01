@@ -28,7 +28,7 @@ const noEmptyMessages: Rule = {
 		context: RuleContext
 	) => {
 		const { defaultLocale } = config;
-		const { severity } = context;
+		const { severity, ignoreKeys } = context;
 		const baseLocale = translationFiles[defaultLocale];
 
 		if (severity === SEVERITY_LEVEL.off) {
@@ -37,6 +37,10 @@ const noEmptyMessages: Rule = {
 
 		for (const [locale, data] of Object.entries(translationFiles)) {
 			for (const [key, message] of Object.entries(data)) {
+				if (ignoreKeys.includes(key)) {
+					continue;
+				}
+
 				const baseMessage = baseLocale[key].trim();
 
 				const hasEmptyBaseMessage = locale === defaultLocale && !baseMessage;

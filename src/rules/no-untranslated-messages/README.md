@@ -34,10 +34,25 @@ de.json: { 'hello': 'Hallo!' }
 
 ## Example Configuration
 
+Simple configuration where you just supply the severity level:
+
 ```json
 {
 	"rules": {
 		"no-untranslated-messages": "error"
+	}
+}
+```
+
+Advanced configuration where you can pass extra configuration to the rule:
+
+```json
+{
+	"rules": {
+		"no-untranslated-messages": {
+			"severity": "error",
+			"ignoreKeys": ["ok"]
+		}
 	}
 }
 ```
