@@ -35,10 +35,25 @@ de.json: { 'hello': 'Hallo!' }
 
 ## Example Configuration
 
+Simple configuration where you just supply the severity level:
+
 ```json
 {
 	"rules": {
 		"no-empty-messages": "error"
+	}
+}
+```
+
+Advanced configuration where you can pass extra configuration to the rule:
+
+```json
+{
+	"rules": {
+		"no-empty-messages": {
+			"severity": "error",
+			"ignoreKeys": ["foo"]
+		}
 	}
 }
 ```
