@@ -4,9 +4,9 @@
 
 ## Why?
 
-> Have you ever shipped "buggy" translation files to your users in production? **Probably**. I know I have!
+> Have you ever shipped "buggy" translation files to your users in production? **Probably!**. I know I have!
 
-Translated files in your software project are an often-overlooked source of problems that can affect the usability, reliability and reputation of your applications. These translated files are often edited manually, built automatically (without any integrity checks) or outsourced to third parties to provide translations, and then these files typically do not pass through any of your automated tests, or get skipped in your manual tests...which means the hidden problems get shipped to your real users in production. _If you are reading this right now, you have probably shipped "buggy" translation files to real users in production, am I right?_
+Translated files in your software project are an often-overlooked source of problems that can affect the usability, reliability and reputation of your applications. These translated files are often edited manually, built automatically (without any integrity checks) or outsourced to third parties to provide translations. These files typically do not pass through any (or most) of your automated tests, or they get skipped in your manual tests...which means the hidden problems get shipped to your real users in production.
 
 Furthermore, there are best practices we want to adhere to with our translated files, and these best practices should be enforceable with an integrity check.
 
@@ -14,28 +14,28 @@ Furthermore, there are best practices we want to adhere to with our translated f
 
 For each project where you want to run the i18n-validator, you will need to have a file named `i18n-validator.config.json` with the following format:
 
-```json
+```json5
 {
 	/**
 	 * The locale your translations uses as the default or source language.
 	 * Example: 'en'
 	 *
 	 **/
-	"defaultLocale": "en",
+	defaultLocale: "en",
 	/**
 	 * The filename of the file where your app's default/source language is defined.
 	 * Example: "default.json" | "source.json" | "en.json"
 	 *
 	 **/
-	"sourceFile": "en.json",
+	sourceFile: "en.json",
 	/**
 	 * An object describing the locale and its assosiated translation file name.
 	 * Example: {"de": "de.json", "fr": "fr.json" }
 	 *
 	 **/
-	"translationFiles": {
-		"de": "de.json",
-		"fr": "fr.json"
+	translationFiles: {
+		de: "de.json",
+		fr: "fr.json",
 	},
 	/**
 	 * The path, relative to the root directory where your i18n files can be located.
@@ -45,7 +45,7 @@ For each project where you want to run the i18n-validator, you will need to have
 	 * the translationFiles object to create the path to each translation file.
 	 *
 	 **/
-	"pathToTranslatedFiles": "i18n",
+	pathToTranslatedFiles: "i18n",
 	/**
 	 * The rules configuration.
 	 *
@@ -64,11 +64,11 @@ For each project where you want to run the i18n-validator, you will need to have
 	 * Check the rule's documentation for advanced configuration options.
 	 *
 	 **/
-	"rules": {
+	rules: {
 		"no-untranslated-messages": "error",
 		"no-empty-messages": "error",
 		"no-html-messages": "error",
-		"no-invalid-variables": "error"
+		"no-invalid-variables": "error",
 	},
 	/**
 	 * Set this dryRun setting to true to get all the same logging and reporting
@@ -77,12 +77,12 @@ For each project where you want to run the i18n-validator, you will need to have
 	 * pipelines without breaking your builds.
 	 *
 	 **/
-	"dryRun": false,
+	dryRun: false,
 	/**
 	 * Enable or disable this entire i18n-validator.
 	 *
 	 **/
-	"enabled": true
+	enabled: true,
 }
 ```
 
@@ -130,7 +130,8 @@ To configure the `ignoreKeys` array you can assign an object to the rule name in
 }
 ```
 
-> [!IMPORTANT] > **Be careful when ignoring keys for specific rules**, ignored keys can lead to ignored problems!
+> [!IMPORTANT]
+> Be careful when ignoring keys for specific rules, ignored keys can lead to ignored problems!
 
 > [!TIP]
 > If you find that you are ignoring a lot of keys, consider moving some strings outside of your translated files (for example in a common messages library, etc)...
