@@ -50,7 +50,7 @@ For each project where you want to run the i18n-validator, you will need to have
 	 * Note: If you do not provide a severity setting for a rule, then the
 	 * rule's default setting will apply.
 	 *
-	 * You can also pass in advanced configuration for each rule if you pass in
+	 * You can also pass in advanced configuration for some rules if you pass in
 	 * an object like:
 	 *
 	 *     "rule-name": {
@@ -58,7 +58,7 @@ For each project where you want to run the i18n-validator, you will need to have
 	 *        "ignoreKeys": ["foo", "bar"]
 	 *     }
 	 *
-	 * Check the rule's documentation for more advanced configuration options.
+	 * Check the rule's documentation for advanced configuration options.
 	 *
 	 **/
 	"rules": {
