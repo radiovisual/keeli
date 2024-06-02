@@ -2,6 +2,8 @@
 
 ## Rule Details
 
+**Default Severity**: `error`
+
 All variables declared in the base messages file and any translated files must have valid syntax, and the variables declared in the base (source) messages file must exist in the translated string.
 
 Additionally, if there are variables declared in the translated files, those same variables must exist in the source string.
@@ -64,7 +66,7 @@ de.json: { 'hello': 'Hallo, {firstName}' }
 
 ## Example Configuration
 
-Simple configuration where you just supply the severity level:
+Simple configuration where you just supply the severity level of `error` | `warn` | `off`:
 
 ```json
 {
@@ -74,7 +76,15 @@ Simple configuration where you just supply the severity level:
 }
 ```
 
-Advanced configuration where you can pass extra configuration to the rule:
+## Advanced configuration options
+
+This rule supports some advanced configuration.
+
+Note that when you use the advanced configuration option you need to set the severity level using the `severity` property, otherwise the rule's default severity will apply.
+
+### ignoreKeys
+
+To disable the check for this rule for specific keys, you can pass in the name of the keys where you don't want this rule to run in the `ignoreKeys` array.
 
 ```json
 {

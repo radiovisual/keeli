@@ -6,7 +6,7 @@
 
 > Have you ever shipped "buggy" translation files to your users in production? **Probably**. I know I have!
 
-Translated files in your software project are an often-overlooked source of problems that can affect the usability and reliability of your applications. These translated files are often edited manually, built automatically (without any integrity checks) or outsourced to a third party to provide translations, and then these files typically do not pass through any of your automated tests, or get skipped in your manual tests...which means the hidden problems get shipped to your users in production. If you are reading this right now, you have probably shipped "buggy" translation files to real users in production, am I right?
+Translated files in your software project are an often-overlooked source of problems that can affect the usability, reliability and reputation of your applications. These translated files are often edited manually, built automatically (without any integrity checks) or outsourced to third parties to provide translations, and then these files typically do not pass through any of your automated tests, or get skipped in your manual tests...which means the hidden problems get shipped to your real users in production. _If you are reading this right now, you have probably shipped "buggy" translation files to real users in production, am I right?_
 
 Furthermore, there are best practices we want to adhere to with our translated files, and these best practices should be enforceable with an integrity check.
 
@@ -29,20 +29,36 @@ For each project where you want to run the i18n-validator, you will need to have
 	 **/
 	"sourceFile": "en.json",
 	/**
-	 * An object describing the locale and its assosiated translation file name;
+	 * An object describing the locale and its assosiated translation file name.
 	 * Example: {"de": "de.json", "fr": "fr.json" }
 	 *
 	 **/
 	"translationFiles": { "de": "de.json", "fr": "fr.json" },
 	/**
 	 * The path, relative to the root directory where your i18n files can be located.
-	 * Example: 'relative/path/to/i18n/files'
+	 * Example: 'relative/path/to/i18n/files'.
+	 *
+	 * Note: This relative path will be combined with the filenames you supplied in
+	 * the translationFiles object to create the path to each translation file.
 	 *
 	 **/
 	"pathToTranslatedFiles": "i18n",
 	/**
-	 * The rules configuration. You can set each rule to 'error', 'warn' or 'off'
-	 * Note: If you do not provide a setting for a rule, then the rule's default setting will apply.
+	 * The rules configuration.
+	 *
+	 * You can set each rule to a severity level of: 'error' | 'warn' | 'off'
+	 * Note: If you do not provide a severity setting for a rule, then the
+	 * rule's default setting will apply.
+	 *
+	 * You can also pass in advanced configuration for each rule if you pass in
+	 * an object like:
+	 *
+	 *     "rule-name": {
+	 *        "severity": "error",
+	 *        "ignoreKeys": ["foo", "bar"]
+	 *     }
+	 *
+	 * Check the rule's documentation for more advanced configuration options.
 	 *
 	 **/
 	"rules": {
@@ -50,9 +66,10 @@ For each project where you want to run the i18n-validator, you will need to have
 		"no-empty-messages": "error"
 	},
 	/**
-	 * Set this dryRun setting to true to get all the same logging and reporting you would
-	 * get in a real validation check, but no errors will be thrown if errors are found.
-	 * Great for getting your i18n-validation setup in CI/CD pipelines without breaking your builds.
+	 * Set this dryRun setting to true to get all the same logging and reporting
+	 * you would get in a real validation check, but no errors will be thrown if
+	 * errors are found. Great for getting your i18n-validation setup in CI/CD
+	 * pipelines without breaking your builds.
 	 *
 	 **/
 	"dryRun": false,
@@ -75,10 +92,11 @@ Each rule has a default setting of `error`, `warn` or `off`, these defaults will
 | ------------------------ | ------- |
 | no-untranslated-messages | `error` |
 | no-empty-messages        | `error` |
+| no-invalid-variables     | `error` |
 
 # Overriding Rules
 
-Some rules can have advanced configuration passed in. Each rule might be different, so you want to read the documentation for each rule, but here are the general override details:
+Some rules can have advanced configuration passed in. Each rule might be different, so you want to read the documentation for each rule, but here are some of the more general overrides available:
 
 ## ignoreKeys
 
@@ -91,7 +109,7 @@ For validation rules that read through each key of a translated file, you can pa
 }
 ```
 
-Then you might want the rule `no-untranslated-messages` to ignore this key `'ok'` because the translation of "ok" might also be "ok" and trigger a false positive in the rule.
+Then you might want the rule `no-untranslated-messages` to ignore this key `'ok'` because the translation of "ok" might also be "OK" and trigger a false positive in the rule.
 
 To configure the `ignoreKeys` array you can assign an object to the rule name in the configuration file.
 
@@ -106,16 +124,14 @@ To configure the `ignoreKeys` array you can assign an object to the rule name in
 }
 ```
 
-Keep in mind that this same key will still pass through other rules, so you are free to mix-and-match these advanced settings to get the perfect setup for your project.
-
-> [!IMPORTANT] > **Be careful when ignoring keys**, ignored keys can lead to ignored problems.
+> [!IMPORTANT] > **Be careful when ignoring keys for specific rules**, ignored keys can lead to ignored problems!
 
 > [!TIP]
 > If you find that you are ignoring a lot of keys, consider moving some strings outside of your translated files (for example in a common messages library, etc)...
 
 # Contributing
 
-Contributing to this project is always welcome! Open issues, Pull Requests, etc and let's make this project better together.
+Contributions to this project are always welcome! :heart: Feel free to open issues, pull requests, etc and let's make this project better together.
 
 ---
 
