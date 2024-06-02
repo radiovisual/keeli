@@ -64,7 +64,8 @@ For each project where you want to run the i18n-validator, you will need to have
 	"rules": {
 		"no-untranslated-messages": "error",
 		"no-empty-messages": "error",
-		"no-html-messages": "error"
+		"no-html-messages": "error",
+		"no-invalid-variables": "error"
 	},
 	/**
 	 * Set this dryRun setting to true to get all the same logging and reporting
