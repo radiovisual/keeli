@@ -8,6 +8,8 @@ const config: Config = {
 	rules: {
 		"no-untranslated-messages": "error",
 		"no-empty-messages": "error",
+		"no-invalid-variables": "error",
+		"no-html-messages": "error",
 	},
 	dryRun: false,
 	enabled: true,

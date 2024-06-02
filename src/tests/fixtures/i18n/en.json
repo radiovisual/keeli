@@ -7,5 +7,6 @@
 	"declares-another-unbalanced-variable-in-en": "[EN] another unbalanced {variable",
 	"declares-a-missing-variable-in-fr": "[EN] missing {variable}",
 	"declares-a-single-missing-variable-in-fr": "[EN] should be two {one} {two}",
-	"declares-a-malfomed-variable-in-de": "[EN] malformed {variable}"
+	"declares-a-malfomed-variable-in-de": "[EN] malformed {variable}",
+	"html-message": "Hi, <b>{firstName}</b>"
 }
