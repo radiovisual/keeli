@@ -2,6 +2,15 @@
 	"name": "i18n-validator",
 	"version": "1.0.0",
 	"main": "dist/index.js",
+	"description": "Configurable CLI validation tool to check for common problems in your translated source files.",
+	"author": {
+		"name": "Michael Wuergler",
+		"email": "wuergler@gmail.com",
+		"url": "https://github.com/radiovisual"
+	},
+	"bugs": {
+		"url": "https://github.com/radiovisual/i18n-validator/issues"
+	},
 	"scripts": {
 		"build:prod": "rm -rf dist/* && node build/cli.mjs",
 		"build:dev": "rm -rf dist/* && npm run typecheck && tsc && node build/cli.mjs",
@@ -12,6 +21,9 @@
 	"bin": {
 		"i18n-validate": "dist/index.js"
 	},
+	"files": [
+		"dist/**/*"
+	],
 	"devDependencies": {
 		"@types/jest": "^29.5.12",
 		"@types/node": "^20.12.13",
@@ -24,5 +36,21 @@
 	"dependencies": {
 		"@formatjs/icu-messageformat-parser": "^2.7.8",
 		"chalk": "^4.0.0"
-	}
+	},
+	"keywords": [
+		"cli",
+		"validation",
+		"check",
+		"i18n",
+		"translation",
+		"integrity",
+		"internationalization",
+		"locale",
+		"locales",
+		"json",
+		"automation",
+		"ci",
+		"cd"
+	],
+	"license": "MIT"
 }
