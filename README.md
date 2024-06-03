@@ -135,6 +135,12 @@ To configure the `ignoreKeys` array you can assign an object to the rule name in
 > [!TIP]
 > If you find that you are ignoring a lot of keys, consider moving some strings outside of your translated files (for example in a common messages library, etc)...
 
+# Tracking Ignored Problems
+
+A feature of this CLI tool is that whenever you intentionally skip/ignore a known problem, these problems are still tracked and reported by default (as of now, there is also no way for you to opt-out of seeing ignored problems in the log output, pull requests welcome!), **but any ignored errors won't fail your build, they are merely reported in the logs**.
+
+One of the main motivations with this CLI is to _expose_ (not hide) the problems in your translation files. I believe that ignoring problems and not showing these ignored problems in the logs prevents new problems from creeping into the files and also helps encourage best practices, additional benefits include: tracking technical debt and showing the consequences/risks you might be taking by ignoring actual problems.
+
 # Contributing
 
 Contributions to this project are always welcome! :heart: Feel free to open issues, pull requests, etc and let's make this project better together.

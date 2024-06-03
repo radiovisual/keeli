@@ -5,7 +5,7 @@ import {
 	RuleSeverity,
 	TranslationFiles,
 } from "../../types.js";
-import { noInvalidVariables } from "./no-invalid-variables.ts";
+import { noInvalidVariables } from "./no-invalid-variables";
 import {
 	getMismatchedVariableFromSourceProblem,
 	getMissingVariableFromSourceProblem,
@@ -47,7 +47,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 
 		rule.run(translationFiles, baseConfig, problemReporter, context);
 
-		const expectedProblem1 = getMissingVariableFromSourceProblem({
+		const expected1 = getMissingVariableFromSourceProblem({
 			key: "greeting",
 			locale: "fr",
 			severity,
@@ -56,7 +56,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			received: "",
 		});
 
-		const expectedProblem2 = getMissingVariableFromSourceProblem({
+		const expected2 = getMissingVariableFromSourceProblem({
 			key: "farewell",
 			locale: "fr",
 			severity,
@@ -66,8 +66,8 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 		});
 
 		expect(problemReporter.report).toHaveBeenCalledTimes(2);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem1);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem2);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
 	});
 
 	it(`should report unexpected variables in translation files with ${severity}`, () => {
@@ -83,7 +83,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 
 		rule.run(translationFiles, baseConfig, problemReporter, context);
 
-		const expectedProblem1 = getMismatchedVariableFromSourceProblem({
+		const expected1 = getMismatchedVariableFromSourceProblem({
 			key: "greeting",
 			locale: "fr",
 			severity,
@@ -92,7 +92,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			received: "unexpectedVariable",
 		});
 
-		const expectedProblem2 = getMismatchedVariableFromSourceProblem({
+		const expected2 = getMismatchedVariableFromSourceProblem({
 			key: "farewell",
 			locale: "fr",
 			severity,
@@ -102,8 +102,8 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 		});
 
 		expect(problemReporter.report).toHaveBeenCalledTimes(2);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem1);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem2);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
 	});
 
 	it(`should report unbalanced variable brackets in the source file with ${severity}`, () => {
@@ -122,7 +122,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 
 		rule.run(translationFiles, baseConfig, problemReporter, context);
 
-		const expectedProblem1 = getInvalidVariableSyntaxProblem({
+		const expected1 = getInvalidVariableSyntaxProblem({
 			key: "greeting",
 			locale: "en",
 			severity,
@@ -131,7 +131,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			received: "[EN] {greetingName",
 		});
 
-		const expectedProblem2 = getInvalidVariableSyntaxProblem({
+		const expected2 = getInvalidVariableSyntaxProblem({
 			key: "farewell",
 			locale: "en",
 			severity,
@@ -140,7 +140,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			received: "[EN] {farewellName",
 		});
 
-		const expectedProblem3 = getMismatchedVariableFromSourceProblem({
+		const expected3 = getMismatchedVariableFromSourceProblem({
 			key: "greeting",
 			locale: "fr",
 			severity,
@@ -149,7 +149,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			received: "greetingName",
 		});
 
-		const expectedProblem4 = getMismatchedVariableFromSourceProblem({
+		const expected4 = getMismatchedVariableFromSourceProblem({
 			key: "farewell",
 			locale: "fr",
 			severity,
@@ -159,10 +159,10 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 		});
 
 		expect(problemReporter.report).toHaveBeenCalledTimes(4);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem1);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem2);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem3);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem4);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected3, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected4, false);
 	});
 
 	it(`should ignore keys in ignoreKeys with severity ${severity}`, () => {
@@ -173,6 +173,24 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			fr: { greeting: "[FR]", farewell: "[FR]" },
 		};
 
+		const ignored1 = getMissingVariableFromSourceProblem({
+			key: "farewell",
+			locale: "fr",
+			severity,
+			ruleMeta,
+			expected: "firstName",
+			received: "",
+		});
+
+		const ignored2 = getMissingVariableFromSourceProblem({
+			key: "greeting",
+			locale: "fr",
+			severity,
+			ruleMeta,
+			expected: "firstName",
+			received: "",
+		});
+
 		const ignoreKeysContext = {
 			...context,
 			ignoreKeys: ["farewell", "greeting"],
@@ -180,7 +198,8 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 
 		rule.run(translationFiles, baseConfig, problemReporter, ignoreKeysContext);
 
-		expect(problemReporter.report).not.toHaveBeenCalled();
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored1, true);
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored2, true);
 	});
 
 	it(`should not report problems for keys to ignore with severity ${severity}`, () => {
@@ -196,7 +215,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			de: { greeting: "[DE]", farewell: "[DE]", chocolate: "[DE]" },
 		};
 
-		const expectedProblem1 = getMissingVariableFromSourceProblem({
+		const expected1 = getMissingVariableFromSourceProblem({
 			key: "greeting",
 			locale: "fr",
 			severity,
@@ -205,7 +224,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			received: "",
 		});
 
-		const expectedProblem2 = getMissingVariableFromSourceProblem({
+		const expected2 = getMissingVariableFromSourceProblem({
 			key: "greeting",
 			locale: "de",
 			severity,
@@ -214,16 +233,16 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			received: "",
 		});
 
-		const ignoredProblem1 = getMissingVariableFromSourceProblem({
+		const ignored1 = getMissingVariableFromSourceProblem({
 			key: "chocolate",
 			locale: "fr",
 			severity,
 			ruleMeta,
-			expected: "firstName",
+			expected: "chocolate",
 			received: "",
 		});
 
-		const ignoredProblem2 = getMissingVariableFromSourceProblem({
+		const ignored2 = getMissingVariableFromSourceProblem({
 			key: "chocolate",
 			locale: "de",
 			severity,
@@ -232,7 +251,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			received: "",
 		});
 
-		const ignoredProblem3 = getMissingVariableFromSourceProblem({
+		const ignored3 = getMissingVariableFromSourceProblem({
 			key: "farewell",
 			locale: "fr",
 			severity,
@@ -241,7 +260,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			received: "",
 		});
 
-		const ignoredProblem4 = getMissingVariableFromSourceProblem({
+		const ignored4 = getMissingVariableFromSourceProblem({
 			key: "farewell",
 			locale: "de",
 			severity,
@@ -257,12 +276,12 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 
 		rule.run(translationFiles, baseConfig, problemReporter, ignoreKeysContext);
 
-		expect(problemReporter.report).not.toHaveBeenCalledWith(ignoredProblem1);
-		expect(problemReporter.report).not.toHaveBeenCalledWith(ignoredProblem2);
-		expect(problemReporter.report).not.toHaveBeenCalledWith(ignoredProblem3);
-		expect(problemReporter.report).not.toHaveBeenCalledWith(ignoredProblem4);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem1);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem2);
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored1, true);
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored2, true);
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored3, true);
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored4, true);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
 	});
 });
 

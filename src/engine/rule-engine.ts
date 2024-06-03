@@ -17,7 +17,7 @@ function runRules(config: Config) {
 		(rule: Rule) => rule.meta.type === RULE_TYPE.validation
 	);
 
-	console.log({ configurationRules, validationRules });
+	// Configuration rules always run first because if we find problems with the configuration, we abort.
 	configurationRules.forEach((rule) => {
 		const severity = getRuleSeverity(config, rule);
 		const ignoreKeys = getRuleIgnoreKeys(config, rule);
@@ -28,7 +28,7 @@ function runRules(config: Config) {
 		});
 	});
 
-	if (problemReporter.getProblems().length > 0) {
+	if (problemReporter.getConfigurationProblemCount() > 0) {
 		// TODO: send config problems to the problem logger, respecting the dryRun
 		console.log("Config problems found", problemReporter.getProblems());
 		return;

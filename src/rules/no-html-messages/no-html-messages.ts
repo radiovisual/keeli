@@ -34,9 +34,7 @@ const noHtmlMessages: Rule = {
 
 		for (let [locale, data] of Object.entries(translationFiles)) {
 			for (let [key, message] of Object.entries(data)) {
-				if (ignoreKeys.includes(key)) {
-					continue;
-				}
+				const shouldIgnore = ignoreKeys.includes(key);
 
 				if (getMessageHasHtml(message)) {
 					problemReporter.report(
@@ -45,7 +43,8 @@ const noHtmlMessages: Rule = {
 							locale,
 							ruleMeta,
 							key,
-						})
+						}),
+						shouldIgnore
 					);
 				}
 			}

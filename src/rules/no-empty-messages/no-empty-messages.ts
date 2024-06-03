@@ -37,11 +37,8 @@ const noEmptyMessages: Rule = {
 
 		for (const [locale, data] of Object.entries(translationFiles)) {
 			for (const [key, message] of Object.entries(data)) {
-				if (ignoreKeys.includes(key)) {
-					continue;
-				}
-
 				const baseMessage = baseLocale[key] ? baseLocale[key].trim() : "";
+				const shouldIgnore = ignoreKeys.includes(key);
 
 				const hasEmptyBaseMessage = locale === defaultLocale && !baseMessage;
 				const hasEmptyTranslation =
@@ -49,7 +46,8 @@ const noEmptyMessages: Rule = {
 
 				if (hasEmptyBaseMessage) {
 					problemReporter.report(
-						getEmptySourceMessageProblem({ key, locale, severity, ruleMeta })
+						getEmptySourceMessageProblem({ key, locale, severity, ruleMeta }),
+						shouldIgnore
 					);
 				} else if (hasEmptyTranslation) {
 					problemReporter.report(
@@ -58,7 +56,8 @@ const noEmptyMessages: Rule = {
 							locale,
 							severity,
 							ruleMeta,
-						})
+						}),
+						shouldIgnore
 					);
 				}
 			}

@@ -39,7 +39,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 		const translationFiles: TranslationFiles = {
 			en: {
 				greeting: "[EN] <b>{firstName}</b>",
-				farewell: "[EN] </b>{firstName}</b>",
+				farewell: "[EN] <b>{firstName}</b>",
 			},
 			fr: {
 				greeting: "[FR] <b>{firstName}</b>",
@@ -49,28 +49,28 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 
 		rule.run(translationFiles, baseConfig, problemReporter, context);
 
-		const expectedProblem1 = getHtmlFoundInMessageProblem({
+		const expected1 = getHtmlFoundInMessageProblem({
 			key: "greeting",
 			locale: "en",
 			severity,
 			ruleMeta,
 		});
 
-		const expectedProblem2 = getHtmlFoundInMessageProblem({
+		const expected2 = getHtmlFoundInMessageProblem({
 			key: "farewell",
 			locale: "en",
 			severity,
 			ruleMeta,
 		});
 
-		const expectedProblem3 = getHtmlFoundInMessageProblem({
+		const expected3 = getHtmlFoundInMessageProblem({
 			key: "greeting",
 			locale: "fr",
 			severity,
 			ruleMeta,
 		});
 
-		const expectedProblem4 = getHtmlFoundInMessageProblem({
+		const expected4 = getHtmlFoundInMessageProblem({
 			key: "farewell",
 			locale: "fr",
 			severity,
@@ -78,10 +78,10 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 		});
 
 		expect(problemReporter.report).toHaveBeenCalledTimes(4);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem1);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem2);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem3);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem4);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected3, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected4, false);
 	});
 
 	it(`should ignore keys in ignoreKeys with severity ${severity}`, () => {
@@ -90,13 +90,41 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 		const translationFiles: TranslationFiles = {
 			en: {
 				greeting: "[EN] <b>{firstName}</b>",
-				farewell: "[EN] </b>{firstName}</b>",
+				farewell: "[EN] <b>{firstName}</b>",
 			},
 			fr: {
 				greeting: "[FR] <b>{firstName}</b>",
 				farewell: "[FR] <b>{firstName}</b>",
 			},
 		};
+
+		const ignored1 = getHtmlFoundInMessageProblem({
+			key: "greeting",
+			locale: "en",
+			severity,
+			ruleMeta,
+		});
+
+		const ignored2 = getHtmlFoundInMessageProblem({
+			key: "farewell",
+			locale: "en",
+			severity,
+			ruleMeta,
+		});
+
+		const ignored3 = getHtmlFoundInMessageProblem({
+			key: "greeting",
+			locale: "fr",
+			severity,
+			ruleMeta,
+		});
+
+		const ignored4 = getHtmlFoundInMessageProblem({
+			key: "farewell",
+			locale: "fr",
+			severity,
+			ruleMeta,
+		});
 
 		const ignoreKeysContext = {
 			...context,
@@ -105,7 +133,10 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 
 		rule.run(translationFiles, baseConfig, problemReporter, ignoreKeysContext);
 
-		expect(problemReporter.report).not.toHaveBeenCalled();
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored1, true);
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored2, true);
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored3, true);
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored4, true);
 	});
 
 	it(`should not report problems for keys to ignore with severity ${severity}`, () => {
@@ -122,28 +153,28 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			},
 		};
 
-		const expectedProblem1 = getHtmlFoundInMessageProblem({
+		const expected1 = getHtmlFoundInMessageProblem({
 			key: "greeting",
 			locale: "fr",
 			severity,
 			ruleMeta,
 		});
 
-		const expectedProblem2 = getHtmlFoundInMessageProblem({
+		const expected2 = getHtmlFoundInMessageProblem({
 			key: "greeting",
 			locale: "en",
 			severity,
 			ruleMeta,
 		});
 
-		const ignoredProblem1 = getHtmlFoundInMessageProblem({
+		const ignored1 = getHtmlFoundInMessageProblem({
 			key: "farewell",
 			locale: "en",
 			severity,
 			ruleMeta,
 		});
 
-		const ignoredProblem2 = getHtmlFoundInMessageProblem({
+		const ignored2 = getHtmlFoundInMessageProblem({
 			key: "farewell",
 			locale: "fr",
 			severity,
@@ -157,10 +188,10 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 
 		rule.run(translationFiles, baseConfig, problemReporter, ignoreKeysContext);
 
-		expect(problemReporter.report).not.toHaveBeenCalledWith(ignoredProblem1);
-		expect(problemReporter.report).not.toHaveBeenCalledWith(ignoredProblem2);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem1);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem2);
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored1, true);
+		expect(problemReporter.report).toHaveBeenCalledWith(ignored2, true);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
 	});
 });
 

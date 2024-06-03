@@ -46,14 +46,14 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 
 		rule.run(translationFiles, baseConfig, problemReporter, context);
 
-		const expectedProblem1 = getMissingExpectedKeyFoundProblem({
+		const expected1 = getMissingExpectedKeyFoundProblem({
 			key: "expected1",
 			locale: "fr",
 			severity,
 			ruleMeta,
 		});
 
-		const expectedProblem2 = getMissingExpectedKeyFoundProblem({
+		const expected2 = getMissingExpectedKeyFoundProblem({
 			key: "expected2",
 			locale: "fr",
 			severity,
@@ -61,8 +61,8 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 		});
 
 		expect(problemReporter.report).toHaveBeenCalledTimes(2);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem1);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem2);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected1);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected2);
 	});
 
 	it(`should report missing keys and unexpected keys in translation files with ${severity}`, () => {
@@ -75,14 +75,14 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 
 		rule.run(translationFiles, baseConfig, problemReporter, context);
 
-		const expectedProblem1 = getUnexpectedKeyFoundProblem({
+		const expected1 = getUnexpectedKeyFoundProblem({
 			key: "unexpected",
 			locale: "fr",
 			severity,
 			ruleMeta,
 		});
 
-		const expectedProblem2 = getMissingExpectedKeyFoundProblem({
+		const expected2 = getMissingExpectedKeyFoundProblem({
 			key: "expected1",
 			locale: "fr",
 			severity,
@@ -90,8 +90,8 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 		});
 
 		expect(problemReporter.report).toHaveBeenCalledTimes(2);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem1);
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem2);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected1);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected2);
 	});
 });
 

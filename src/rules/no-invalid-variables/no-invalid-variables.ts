@@ -47,9 +47,7 @@ const noInvalidVariables: Rule = {
 
 		for (let [locale, data] of Object.entries(translationFiles)) {
 			for (let [key, value] of Object.entries(data)) {
-				if (ignoreKeys.includes(key)) {
-					continue;
-				}
+				const shouldIgnore = ignoreKeys.includes(key);
 
 				// Check all files for unbalanced brackets, which can lead to syntax errors
 				// We report these first since if they exist they tend to mess with the other
@@ -67,7 +65,8 @@ const noInvalidVariables: Rule = {
 							// TODO: highlight the area where the problem occured
 							// since the error comes with location offsets where the error is found
 							received: value,
-						})
+						}),
+						shouldIgnore
 					);
 				}
 
@@ -87,7 +86,8 @@ const noInvalidVariables: Rule = {
 								// TODO: highlight the area where the problem occured
 								// since the error comes with location offsets where the error is found
 								received: value,
-							})
+							}),
+							shouldIgnore
 						);
 					}
 
@@ -110,7 +110,8 @@ const noInvalidVariables: Rule = {
 										ruleMeta,
 										expected: baseMessageVariable,
 										received: translatedVariables ?? "",
-									})
+									}),
+									shouldIgnore
 								);
 							}
 						}
@@ -132,7 +133,8 @@ const noInvalidVariables: Rule = {
 										ruleMeta,
 										expected: baseMessageVariables[key] ?? "",
 										received: translatedVariable,
-									})
+									}),
+									shouldIgnore
 								);
 							}
 						});

@@ -35,9 +35,7 @@ const noUntranslatedMessages: Rule = {
 		for (let [locale, data] of Object.entries(translationFiles)) {
 			if (locale !== defaultLocale) {
 				for (let [translatedKey, translatedMessage] of Object.entries(data)) {
-					if (ignoreKeys.includes(translatedKey)) {
-						continue;
-					}
+					const shouldIgnore = ignoreKeys.includes(translatedKey);
 
 					const baseMessage = baseLocale[translatedKey];
 
@@ -49,7 +47,7 @@ const noUntranslatedMessages: Rule = {
 							ruleMeta,
 						});
 
-						problemReporter.report(problem);
+						problemReporter.report(problem, shouldIgnore);
 					}
 				}
 			}
