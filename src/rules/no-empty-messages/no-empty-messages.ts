@@ -41,7 +41,7 @@ const noEmptyMessages: Rule = {
 					continue;
 				}
 
-				const baseMessage = baseLocale[key].trim();
+				const baseMessage = baseLocale[key] ? baseLocale[key].trim() : "";
 
 				const hasEmptyBaseMessage = locale === defaultLocale && !baseMessage;
 				const hasEmptyTranslation =

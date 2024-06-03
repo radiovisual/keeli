@@ -69,6 +69,7 @@ For each project where you want to run the i18n-validator, you will need to have
 		"no-empty-messages": "error",
 		"no-html-messages": "error",
 		"no-invalid-variables": "error",
+		"no-missing-keys": "error",
 	},
 	/**
 	 * Set this dryRun setting to true to get all the same logging and reporting
@@ -88,10 +89,7 @@ For each project where you want to run the i18n-validator, you will need to have
 
 # Rule Defaults
 
-Each rule has a default setting of `error`, `warn` or `off`, these defaults will apply if you do not provide a configuration for the rule in the configuration file.
-
-> [!IMPORTANT]
-> Pay special attention to any rules that have a default of `off`, these are opt-in rules that must be configured with a rule of `error` or `warn` in your configuration file before they will run.
+Each rule can have a default setting of `error`, `warn` or `off`, these defaults will apply if you do not provide a configuration for the rule in the configuration file.
 
 | Rule name                | Default |
 | ------------------------ | ------- |
@@ -99,6 +97,7 @@ Each rule has a default setting of `error`, `warn` or `off`, these defaults will
 | no-empty-messages        | `error` |
 | no-invalid-variables     | `error` |
 | no-html-messages         | `error` |
+| no-missing-keys          | `error` |
 
 # Overriding Rules
 

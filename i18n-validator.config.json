@@ -9,7 +9,9 @@
 	"rules": {
 		"no-untranslated-messages": "error",
 		"no-empty-messages": "error",
-		"no-html-messages": "error"
+		"no-html-messages": "error",
+		"no-missing-keys": "error",
+		"no-invalid-variables": "error"
 	},
 	"dryRun": false,
 	"enabled": true

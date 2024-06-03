@@ -8,5 +8,7 @@
 	"declares-a-missing-variable-in-fr": "[DE] missing {variable}",
 	"declares-a-single-missing-variable-in-fr": "[DE] should be two {one} {two}",
 	"declares-a-malfomed-variable-in-de": "[DE] malformed {variable",
-	"html-message": "[DE] Hi, <b>{firstName}</b>"
+	"html-message": "[DE] Hi, <b>{firstName}</b>",
+	"missing-key-in-fr": "[DE] this key should not be found in fr.json",
+	"unexpected-key": "[DE] this key is not defined in the source file en.json"
 }
