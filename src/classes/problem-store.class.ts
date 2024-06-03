@@ -1,21 +1,21 @@
 import { RULE_TYPE, SEVERITY_LEVEL } from "../constants.ts";
 import { Problem } from "../types.ts";
 
-export class ProblemReporter {
+export class ProblemStore {
 	// Validation Problems
-	private validationProblemsFound = 0;
+	private validationProblemsCount = 0;
 	private validationProblems: Problem[];
 
 	// Ignored Validation Problems
-	private ignoredValidationProblemsFound = 0;
+	private ignoredValidationProblemsCount = 0;
 	private ignoredValidationProblems: Problem[];
 
 	// Configuration Problems
-	private configurationProblemsFound = 0;
+	private configurationProblemsCount = 0;
 	private configurationProblems: Problem[];
 
 	// Ignored Configuration Problems
-	private ignoredConfigurationProblemsFound = 0;
+	private ignoredConfigurationProblemsCount = 0;
 	private ignoredConfigurationProblems: Problem[];
 
 	// Meta Counts
@@ -32,8 +32,8 @@ export class ProblemReporter {
 		this.ignoredValidationProblems = [];
 	}
 
-	report(problem: Problem, shouldIgnore = false) {
-		if (shouldIgnore) {
+	report(problem: Problem) {
+		if (problem.isIgnored) {
 			this.ignore(problem);
 			return;
 		}
@@ -47,12 +47,12 @@ export class ProblemReporter {
 		}
 
 		if (problem.ruleMeta.type === RULE_TYPE.configuration) {
-			this.configurationProblemsFound += 1;
+			this.configurationProblemsCount += 1;
 			this.configurationProblems.push(problem);
 		}
 
 		if (problem.ruleMeta.type === RULE_TYPE.validation) {
-			this.validationProblemsFound += 1;
+			this.validationProblemsCount += 1;
 			this.validationProblems.push(problem);
 		}
 	}
@@ -69,18 +69,42 @@ export class ProblemReporter {
 		}
 
 		if (problem.ruleMeta.type === RULE_TYPE.configuration) {
-			this.ignoredConfigurationProblemsFound += 1;
+			this.ignoredConfigurationProblemsCount += 1;
 			this.ignoredConfigurationProblems.push(problem);
 		}
 
 		if (problem.ruleMeta.type === RULE_TYPE.validation) {
-			this.ignoredValidationProblemsFound += 1;
+			this.ignoredValidationProblemsCount += 1;
 			this.ignoredValidationProblems.push(problem);
 		}
 	}
 
 	getProblems() {
 		return [...this.validationProblems, ...this.configurationProblems];
+	}
+
+	getAllProblems() {
+		return [
+			...this.validationProblems,
+			...this.ignoredValidationProblems,
+			...this.configurationProblems,
+			...this.ignoredConfigurationProblems,
+		];
+	}
+
+	getIgnoredProblems() {
+		return [
+			...this.ignoredValidationProblems,
+			...this.ignoredConfigurationProblems,
+		];
+	}
+
+	getIgnoredConfigurationProblems() {
+		return this.ignoredConfigurationProblems;
+	}
+
+	getIgnoredValidationProblems() {
+		return this.ignoredValidationProblems;
 	}
 
 	getConfigurationProblems() {
@@ -95,23 +119,31 @@ export class ProblemReporter {
 		return this.errorCount;
 	}
 
-	getIgnoredValidationProblemsCount() {
-		return this.ignoredValidationProblemsFound;
+	getIgnoredErrorCount() {
+		return this.ignoredErrorCount;
 	}
 
-	getIgnoredConfigurationProblemsCount() {
-		return this.ignoredConfigurationProblemsFound;
+	getIgnoredWarningCount() {
+		return this.ignoredWarningCount;
 	}
 
 	getWarningCount() {
 		return this.warningCount;
 	}
 
+	getIgnoredValidationProblemsCount() {
+		return this.ignoredValidationProblemsCount;
+	}
+
+	getIgnoredConfigurationProblemsCount() {
+		return this.ignoredConfigurationProblemsCount;
+	}
+
 	getConfigurationProblemCount() {
-		return this.configurationProblemsFound;
+		return this.configurationProblemsCount;
 	}
 
 	getValidationProblemCount() {
-		return this.validationProblemsFound;
+		return this.validationProblemsCount;
 	}
 }

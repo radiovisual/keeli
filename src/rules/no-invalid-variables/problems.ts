@@ -8,12 +8,13 @@ type ProblemContext = {
 	ruleMeta: RuleMeta;
 	expected?: string | object | number;
 	received?: string | object | number;
+	isIgnored?: boolean;
 };
 
 export function getMissingVariableFromSourceProblem(
 	problemContext: ProblemContext
 ): Problem {
-	const { key, locale, severity, ruleMeta, expected, received } =
+	const { key, locale, severity, ruleMeta, expected, received, isIgnored } =
 		problemContext;
 
 	return Problem.Builder.withRuleMeta(ruleMeta)
@@ -21,6 +22,7 @@ export function getMissingVariableFromSourceProblem(
 		.withLocale(locale)
 		.withMessage(`Missing variable for key: ${key}`)
 		.withExpected(expected)
+		.withIsIgnored(isIgnored)
 		.withReceived(received)
 		.build();
 }
@@ -28,12 +30,13 @@ export function getMissingVariableFromSourceProblem(
 export function getMismatchedVariableFromSourceProblem(
 	problemContext: ProblemContext
 ): Problem {
-	const { key, locale, severity, ruleMeta, expected, received } =
+	const { key, locale, severity, ruleMeta, expected, received, isIgnored } =
 		problemContext;
 
 	return Problem.Builder.withRuleMeta(ruleMeta)
 		.withSeverity(severity)
 		.withLocale(locale)
+		.withIsIgnored(isIgnored)
 		.withMessage(`Unknown variable found in translation file for key: ${key}`)
 		.withExpected(expected)
 		.withReceived(received)
@@ -43,11 +46,13 @@ export function getMismatchedVariableFromSourceProblem(
 export function getInvalidVariableSyntaxProblem(
 	problemContext: ProblemContext
 ): Problem {
-	const { key, locale, severity, ruleMeta, received } = problemContext;
+	const { key, locale, severity, ruleMeta, received, isIgnored } =
+		problemContext;
 
 	return Problem.Builder.withRuleMeta(ruleMeta)
 		.withSeverity(severity)
 		.withLocale(locale)
+		.withIsIgnored(isIgnored)
 		.withMessage(`Invalid variable syntax found in key: ${key}`)
 		.withReceived(received)
 		.build();
@@ -56,11 +61,13 @@ export function getInvalidVariableSyntaxProblem(
 export function getUnbalancedVariableBracketsSyntaxProblem(
 	problemContext: ProblemContext
 ): Problem {
-	const { key, locale, severity, ruleMeta, received } = problemContext;
+	const { key, locale, severity, ruleMeta, received, isIgnored } =
+		problemContext;
 
 	return Problem.Builder.withRuleMeta(ruleMeta)
 		.withSeverity(severity)
 		.withLocale(locale)
+		.withIsIgnored(isIgnored)
 		.withMessage(`Unbalanced variable brackets found in key: ${key}`)
 		.withReceived(received)
 		.build();

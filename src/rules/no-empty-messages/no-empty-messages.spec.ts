@@ -35,49 +35,51 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severity) => {
 	};
 
 	it(`should report empty messages in the source file with severity: ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: { greeting: "Hello", empty: "" },
 			fr: { greeting: "Bonjour", empty: "not empty" },
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, context);
+		rule.run(translationFiles, baseConfig, problemStore, context);
 
 		const expectedProblem = getEmptySourceMessageProblem({
 			key: "empty",
 			locale: "en",
 			severity: severity as RuleSeverity,
 			ruleMeta,
+			isIgnored: false,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem, false);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 
 	it(`should report empty messages in translation file with severity: ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: { greeting: "Hello", empty: "not empty" },
 			fr: { greeting: "Bonjour", empty: "" },
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, context);
+		rule.run(translationFiles, baseConfig, problemStore, context);
 
 		const expectedProblem = getEmptyTranslatedMessageProblem({
 			key: "empty",
 			locale: "fr",
 			severity: severity as RuleSeverity,
 			ruleMeta,
+			isIgnored: false,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem, false);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 
 	it(`should ignore keys in ignoreKeys with severity: ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: { greeting: "Hello", empty: "not empty" },
@@ -91,25 +93,21 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severity) => {
 			ignoreKeys,
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, ignoreKeysContext);
+		rule.run(translationFiles, baseConfig, problemStore, ignoreKeysContext);
 
 		const ignoredProblem = getEmptyTranslatedMessageProblem({
 			key: "empty",
 			locale: "fr",
 			severity: severity as RuleSeverity,
 			ruleMeta,
+			isIgnored: true,
 		});
 
-		const shouldIgnore = true;
-
-		expect(problemReporter.report).toHaveBeenCalledWith(
-			ignoredProblem,
-			shouldIgnore
-		);
+		expect(problemStore.report).toHaveBeenCalledWith(ignoredProblem);
 	});
 
 	it(`should not report problems for keys to ignore with severity ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: { greeting: "", farewell: "", chocolate: "" },
@@ -121,6 +119,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severity) => {
 			locale: "en",
 			severity: severity as RuleSeverity,
 			ruleMeta,
+			isIgnored: false,
 		});
 
 		const ignored1 = getEmptySourceMessageProblem({
@@ -128,6 +127,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severity) => {
 			locale: "en",
 			severity: severity as RuleSeverity,
 			ruleMeta,
+			isIgnored: true,
 		});
 
 		const ignored2 = getEmptySourceMessageProblem({
@@ -135,6 +135,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severity) => {
 			locale: "en",
 			severity: severity as RuleSeverity,
 			ruleMeta,
+			isIgnored: true,
 		});
 
 		const ignored3 = getEmptyTranslatedMessageProblem({
@@ -142,6 +143,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severity) => {
 			locale: "fr",
 			severity: severity as RuleSeverity,
 			ruleMeta,
+			isIgnored: true,
 		});
 
 		const ignored4 = getEmptyTranslatedMessageProblem({
@@ -149,6 +151,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severity) => {
 			locale: "fr",
 			severity: severity as RuleSeverity,
 			ruleMeta,
+			isIgnored: true,
 		});
 
 		const expected2 = getEmptyTranslatedMessageProblem({
@@ -156,6 +159,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severity) => {
 			locale: "fr",
 			severity: severity as RuleSeverity,
 			ruleMeta,
+			isIgnored: false,
 		});
 
 		const ignoreKeysContext = {
@@ -163,34 +167,34 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severity) => {
 			ignoreKeys: ["farewell", "chocolate"],
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, ignoreKeysContext);
+		rule.run(translationFiles, baseConfig, problemStore, ignoreKeysContext);
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
-		expect(problemReporter.report).toHaveBeenCalledWith(ignored1, true);
-		expect(problemReporter.report).toHaveBeenCalledWith(ignored2, true);
-		expect(problemReporter.report).toHaveBeenCalledWith(ignored3, true);
-		expect(problemReporter.report).toHaveBeenCalledWith(ignored4, true);
-		expect(problemReporter.report).toHaveBeenCalledTimes(6);
+		expect(problemStore.report).toHaveBeenCalledWith(expected1);
+		expect(problemStore.report).toHaveBeenCalledWith(expected2);
+		expect(problemStore.report).toHaveBeenCalledWith(ignored1);
+		expect(problemStore.report).toHaveBeenCalledWith(ignored2);
+		expect(problemStore.report).toHaveBeenCalledWith(ignored3);
+		expect(problemStore.report).toHaveBeenCalledWith(ignored4);
+		expect(problemStore.report).toHaveBeenCalledTimes(6);
 	});
 
 	it("should not report non-empty messages", () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: { greeting: "Hello", farewell: "Goodbye" },
 			fr: { greeting: "Bonjour", farewell: "Au revoir" },
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, context);
+		rule.run(translationFiles, baseConfig, problemStore, context);
 
-		expect(problemReporter.report).not.toHaveBeenCalled();
+		expect(problemStore.report).not.toHaveBeenCalled();
 	});
 });
 
 describe(`${rule.meta.name}: off`, () => {
 	it("should not report problems when severity = off", () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const context: RuleContext = {
 			severity: "off",
@@ -202,7 +206,7 @@ describe(`${rule.meta.name}: off`, () => {
 			fr: { greeting: "Bonjour", empty: "" },
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, context);
-		expect(problemReporter.report).not.toHaveBeenCalled();
+		rule.run(translationFiles, baseConfig, problemStore, context);
+		expect(problemStore.report).not.toHaveBeenCalled();
 	});
 });

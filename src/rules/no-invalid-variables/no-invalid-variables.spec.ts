@@ -39,14 +39,14 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 	};
 
 	it(`should report missing variables in translation files with ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: { greeting: "[EN] {firstName}", farewell: "[EN] {firstName}" },
 			fr: { greeting: "[FR]", farewell: "[FR]" },
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, context);
+		rule.run(translationFiles, baseConfig, problemStore, context);
 
 		const expected1 = getMissingVariableFromSourceProblem({
 			key: "greeting",
@@ -55,6 +55,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "firstName",
 			received: "",
+			isIgnored: false,
 		});
 
 		const expected2 = getMissingVariableFromSourceProblem({
@@ -64,15 +65,16 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "firstName",
 			received: "",
+			isIgnored: false,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledTimes(2);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
+		expect(problemStore.report).toHaveBeenCalledTimes(2);
+		expect(problemStore.report).toHaveBeenCalledWith(expected1);
+		expect(problemStore.report).toHaveBeenCalledWith(expected2);
 	});
 
 	it(`should report unexpected variables in translation files with ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: { greeting: "[EN]", farewell: "[EN]" },
@@ -82,7 +84,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			},
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, context);
+		rule.run(translationFiles, baseConfig, problemStore, context);
 
 		const expected1 = getMismatchedVariableFromSourceProblem({
 			key: "greeting",
@@ -91,6 +93,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "",
 			received: "unexpectedVariable",
+			isIgnored: false,
 		});
 
 		const expected2 = getMismatchedVariableFromSourceProblem({
@@ -100,15 +103,16 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "",
 			received: "unexpectedVariable",
+			isIgnored: false,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledTimes(2);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
+		expect(problemStore.report).toHaveBeenCalledTimes(2);
+		expect(problemStore.report).toHaveBeenCalledWith(expected1);
+		expect(problemStore.report).toHaveBeenCalledWith(expected2);
 	});
 
 	it(`should report malformed variables in translation files with ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: {
@@ -121,7 +125,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			},
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, context);
+		rule.run(translationFiles, baseConfig, problemStore, context);
 
 		const expected1 = getUnbalancedVariableBracketsSyntaxProblem({
 			key: "greeting",
@@ -130,6 +134,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: undefined,
 			received: translationFiles.fr.greeting,
+			isIgnored: false,
 		});
 
 		const expected2 = getInvalidVariableSyntaxProblem({
@@ -139,6 +144,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: undefined,
 			received: translationFiles.fr.greeting,
+			isIgnored: false,
 		});
 
 		const expected3 = getMissingVariableFromSourceProblem({
@@ -148,16 +154,17 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "expectedGreetingVariable",
 			received: "",
+			isIgnored: false,
 		});
 
-		// expect(problemReporter.report).toHaveBeenCalledTimes(1);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected3, false);
+		expect(problemStore.report).toHaveBeenCalledTimes(3);
+		expect(problemStore.report).toHaveBeenCalledWith(expected1);
+		expect(problemStore.report).toHaveBeenCalledWith(expected2);
+		expect(problemStore.report).toHaveBeenCalledWith(expected3);
 	});
 
 	it(`should report unbalanced variable brackets in the source file with ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: {
@@ -170,7 +177,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			},
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, context);
+		rule.run(translationFiles, baseConfig, problemStore, context);
 
 		const expected1 = getUnbalancedVariableBracketsSyntaxProblem({
 			key: "greeting",
@@ -179,6 +186,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: undefined,
 			received: "[EN] {greetingName",
+			isIgnored: false,
 		});
 
 		const expected2 = getUnbalancedVariableBracketsSyntaxProblem({
@@ -188,6 +196,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: undefined,
 			received: "[EN] {farewellName",
+			isIgnored: false,
 		});
 
 		const expected3 = getMismatchedVariableFromSourceProblem({
@@ -197,6 +206,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "",
 			received: "greetingName",
+			isIgnored: false,
 		});
 
 		const expected4 = getMismatchedVariableFromSourceProblem({
@@ -206,17 +216,18 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "",
 			received: "farewellName",
+			isIgnored: false,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledTimes(4);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected3, false);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected4, false);
+		expect(problemStore.report).toHaveBeenCalledTimes(4);
+		expect(problemStore.report).toHaveBeenCalledWith(expected1);
+		expect(problemStore.report).toHaveBeenCalledWith(expected2);
+		expect(problemStore.report).toHaveBeenCalledWith(expected3);
+		expect(problemStore.report).toHaveBeenCalledWith(expected4);
 	});
 
 	it(`should ignore keys in ignoreKeys with severity ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: { greeting: "[EN] {firstName}", farewell: "[EN] {firstName}" },
@@ -230,6 +241,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "firstName",
 			received: "",
+			isIgnored: true,
 		});
 
 		const ignored2 = getMissingVariableFromSourceProblem({
@@ -239,6 +251,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "firstName",
 			received: "",
+			isIgnored: true,
 		});
 
 		const ignoreKeysContext = {
@@ -246,14 +259,14 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ignoreKeys: ["farewell", "greeting"],
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, ignoreKeysContext);
+		rule.run(translationFiles, baseConfig, problemStore, ignoreKeysContext);
 
-		expect(problemReporter.report).toHaveBeenCalledWith(ignored1, true);
-		expect(problemReporter.report).toHaveBeenCalledWith(ignored2, true);
+		expect(problemStore.report).toHaveBeenCalledWith(ignored1);
+		expect(problemStore.report).toHaveBeenCalledWith(ignored2);
 	});
 
 	it(`should not report problems for keys to ignore with severity ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: {
@@ -272,6 +285,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "firstName",
 			received: "",
+			isIgnored: false,
 		});
 
 		const expected2 = getMissingVariableFromSourceProblem({
@@ -281,6 +295,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "firstName",
 			received: "",
+			isIgnored: false,
 		});
 
 		const ignored1 = getMissingVariableFromSourceProblem({
@@ -290,6 +305,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "chocolate",
 			received: "",
+			isIgnored: true,
 		});
 
 		const ignored2 = getMissingVariableFromSourceProblem({
@@ -299,6 +315,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "chocolate",
 			received: "",
+			isIgnored: true,
 		});
 
 		const ignored3 = getMissingVariableFromSourceProblem({
@@ -308,6 +325,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "firstName",
 			received: "",
+			isIgnored: true,
 		});
 
 		const ignored4 = getMissingVariableFromSourceProblem({
@@ -317,6 +335,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 			expected: "firstName",
 			received: "",
+			isIgnored: true,
 		});
 
 		const ignoreKeysContext = {
@@ -324,19 +343,19 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ignoreKeys: ["farewell", "chocolate"],
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, ignoreKeysContext);
+		rule.run(translationFiles, baseConfig, problemStore, ignoreKeysContext);
 
-		expect(problemReporter.report).toHaveBeenCalledWith(ignored1, true);
-		expect(problemReporter.report).toHaveBeenCalledWith(ignored2, true);
-		expect(problemReporter.report).toHaveBeenCalledWith(ignored3, true);
-		expect(problemReporter.report).toHaveBeenCalledWith(ignored4, true);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
+		expect(problemStore.report).toHaveBeenCalledWith(ignored1);
+		expect(problemStore.report).toHaveBeenCalledWith(ignored2);
+		expect(problemStore.report).toHaveBeenCalledWith(ignored3);
+		expect(problemStore.report).toHaveBeenCalledWith(ignored4);
+		expect(problemStore.report).toHaveBeenCalledWith(expected1);
+		expect(problemStore.report).toHaveBeenCalledWith(expected2);
 	});
 });
 
 describe(`${rule.meta.name}: off`, () => {
-	const problemReporter = createMockProblemReporter();
+	const problemStore = createMockProblemReporter();
 
 	const context: RuleContext = {
 		severity: "off",
@@ -353,6 +372,6 @@ describe(`${rule.meta.name}: off`, () => {
 		de: { a: "[DE]", b: "[FR]", c: "[DE]" },
 	};
 
-	rule.run(translationFiles, baseConfig, problemReporter, context);
-	expect(problemReporter.report).not.toHaveBeenCalled();
+	rule.run(translationFiles, baseConfig, problemStore, context);
+	expect(problemStore.report).not.toHaveBeenCalled();
 });

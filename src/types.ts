@@ -1,4 +1,4 @@
-import { ProblemReporter } from "./classes/problem-reporter.ts";
+import { ProblemStore } from "./classes/problem-store.class.ts";
 import { SEVERITY_LEVEL, RULE_TYPE } from "./constants.ts";
 
 export type RuleSeverity = keyof typeof SEVERITY_LEVEL;
@@ -24,6 +24,7 @@ export type Problem = {
 	severity: RuleSeverity;
 	locale: string;
 	message: string;
+	isIgnored: boolean;
 	expected?: string | number | object;
 	received?: string | number | object;
 };
@@ -54,7 +55,7 @@ export type Rule = {
 	run: (
 		translationFiles: TranslationFiles,
 		config: Config,
-		problemReporter: ProblemReporter,
+		problemStore: ProblemStore,
 		context: RuleContext
 	) => void;
 };

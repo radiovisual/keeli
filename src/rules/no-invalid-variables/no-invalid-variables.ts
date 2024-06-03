@@ -31,7 +31,7 @@ const noInvalidVariables: Rule = {
 	run: (
 		translationFiles: TranslationFiles,
 		config: Config,
-		problemReporter,
+		problemStore,
 		context: RuleContext
 	) => {
 		const { defaultLocale } = config;
@@ -48,7 +48,7 @@ const noInvalidVariables: Rule = {
 
 		for (let [locale, data] of Object.entries(translationFiles)) {
 			for (let [key, value] of Object.entries(data)) {
-				const shouldIgnore = ignoreKeys.includes(key);
+				const isIgnored = ignoreKeys.includes(key);
 
 				// Check all files for unbalanced brackets, which can lead to syntax errors
 				// We report these first since if they exist they tend to mess with the other
@@ -57,7 +57,7 @@ const noInvalidVariables: Rule = {
 				// seperate from the icu.parse() call, since the parser does not see trailing
 				// closing brackets as a problem.
 				if (hasUnbalancedBrackets(value)) {
-					problemReporter.report(
+					problemStore.report(
 						getUnbalancedVariableBracketsSyntaxProblem({
 							key,
 							locale,
@@ -66,8 +66,8 @@ const noInvalidVariables: Rule = {
 							// TODO: highlight the area where the problem occured
 							// since the error comes with location offsets where the error is found
 							received: value,
-						}),
-						shouldIgnore
+							isIgnored,
+						})
 					);
 				}
 
@@ -78,7 +78,7 @@ const noInvalidVariables: Rule = {
 					try {
 						translatedVariables = extractVariableNamesFromMessage(value);
 					} catch (err: unknown) {
-						problemReporter.report(
+						problemStore.report(
 							getInvalidVariableSyntaxProblem({
 								key,
 								locale,
@@ -87,8 +87,8 @@ const noInvalidVariables: Rule = {
 								// TODO: highlight the area where the problem occured
 								// since the error comes with location offsets where the error is found
 								received: value,
-							}),
-							shouldIgnore
+								isIgnored,
+							})
 						);
 					}
 
@@ -103,7 +103,7 @@ const noInvalidVariables: Rule = {
 								!translatedVariables ||
 								!translatedVariables?.includes(baseMessageVariable)
 							) {
-								problemReporter.report(
+								problemStore.report(
 									getMissingVariableFromSourceProblem({
 										key,
 										locale,
@@ -111,8 +111,8 @@ const noInvalidVariables: Rule = {
 										ruleMeta,
 										expected: baseMessageVariable,
 										received: translatedVariables ?? "",
-									}),
-									shouldIgnore
+										isIgnored,
+									})
 								);
 							}
 						}
@@ -126,7 +126,7 @@ const noInvalidVariables: Rule = {
 								(Array.isArray(baseMessageVariables[key]) &&
 									!baseMessageVariables[key].includes(translatedVariable))
 							) {
-								problemReporter.report(
+								problemStore.report(
 									getMismatchedVariableFromSourceProblem({
 										key,
 										locale,
@@ -134,8 +134,8 @@ const noInvalidVariables: Rule = {
 										ruleMeta,
 										expected: baseMessageVariables[key] ?? "",
 										received: translatedVariable,
-									}),
-									shouldIgnore
+										isIgnored,
+									})
 								);
 							}
 						});

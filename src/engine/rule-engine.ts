@@ -1,12 +1,14 @@
+import chalk from "chalk";
 import type { Config, Rule, TranslationFiles } from "../types";
 import * as rules from "../rules/index.js";
-import { ProblemReporter } from "../classes/problem-reporter.js";
+import { ProblemStore } from "../classes/problem-store.class.js";
 import { getRuleIgnoreKeys, getRuleSeverity } from "../utils/rules-helpers";
 import { RULE_TYPE, SEVERITY_LEVEL } from "../constants";
 import { loadLanguageFiles } from "../utils/file-helpers";
+import { Logger } from "../classes/logger.class";
 
 function runRules(config: Config) {
-	const problemReporter = new ProblemReporter();
+	const problemStore = new ProblemStore();
 	const languageFiles = loadLanguageFiles(config) as TranslationFiles;
 
 	const configurationRules = Object.values(rules).filter(
@@ -22,15 +24,14 @@ function runRules(config: Config) {
 		const severity = getRuleSeverity(config, rule);
 		const ignoreKeys = getRuleIgnoreKeys(config, rule);
 
-		rule.run(languageFiles, config, problemReporter, {
+		rule.run(languageFiles, config, problemStore, {
 			ignoreKeys,
 			severity,
 		});
 	});
 
-	if (problemReporter.getConfigurationProblemCount() > 0) {
-		// TODO: send config problems to the problem logger, respecting the dryRun
-		console.log("Config problems found", problemReporter.getProblems());
+	if (problemStore.getConfigurationProblemCount() > 0) {
+		exitRun(problemStore, config.dryRun);
 		return;
 	}
 
@@ -39,15 +40,32 @@ function runRules(config: Config) {
 		const ignoreKeys = getRuleIgnoreKeys(config, rule);
 
 		if (severity !== SEVERITY_LEVEL.off) {
-			rule.run(languageFiles, config, problemReporter, {
+			rule.run(languageFiles, config, problemStore, {
 				ignoreKeys,
 				severity,
 			});
 		}
 	});
 
-	// TODO: send validation problems to the problem logger, respecting the dryRun
-	console.log("Validation problems found", problemReporter.getProblems());
+	exitRun(problemStore, config.dryRun);
+}
+
+function exitRun(problemStore: ProblemStore, isDryRun: boolean) {
+	const problems = problemStore.getProblems();
+
+	const hasErrors = problems.length > 0;
+
+	const logger = new Logger(problemStore);
+
+	logger.logErrors();
+
+	if (hasErrors && !isDryRun) {
+		process.exit(1);
+	} else if (hasErrors && isDryRun) {
+		process.exit(0);
+	}
+
+	process.exit(0);
 }
 
 export { runRules };

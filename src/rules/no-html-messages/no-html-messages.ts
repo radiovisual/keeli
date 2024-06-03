@@ -23,7 +23,7 @@ const noHtmlMessages: Rule = {
 	run: (
 		translationFiles: TranslationFiles,
 		config: Config,
-		problemReporter,
+		problemStore,
 		context: RuleContext
 	) => {
 		const { severity, ignoreKeys } = context;
@@ -34,17 +34,17 @@ const noHtmlMessages: Rule = {
 
 		for (let [locale, data] of Object.entries(translationFiles)) {
 			for (let [key, message] of Object.entries(data)) {
-				const shouldIgnore = ignoreKeys.includes(key);
+				const isIgnored = ignoreKeys.includes(key);
 
 				if (getMessageHasHtml(message)) {
-					problemReporter.report(
+					problemStore.report(
 						getHtmlFoundInMessageProblem({
 							severity,
 							locale,
 							ruleMeta,
 							key,
-						}),
-						shouldIgnore
+							isIgnored,
+						})
 					);
 				}
 			}

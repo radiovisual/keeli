@@ -37,14 +37,14 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 	};
 
 	it(`should report missing keys in translation files with ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: { expected1: "[EN] expected one", expected2: "[EN] expected two" },
 			fr: {},
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, context);
+		rule.run(translationFiles, baseConfig, problemStore, context);
 
 		const expected1 = getMissingExpectedKeyFoundProblem({
 			key: "expected1",
@@ -60,20 +60,20 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledTimes(2);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected1);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected2);
+		expect(problemStore.report).toHaveBeenCalledTimes(2);
+		expect(problemStore.report).toHaveBeenCalledWith(expected1);
+		expect(problemStore.report).toHaveBeenCalledWith(expected2);
 	});
 
 	it(`should report missing keys and unexpected keys in translation files with ${severity}`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const translationFiles: TranslationFiles = {
 			en: { expected1: "[EN] expected one", expected2: "[EN] expected two" },
 			fr: { unexpected: "[FR] expected one", expected2: "[FR] expected two" },
 		};
 
-		rule.run(translationFiles, baseConfig, problemReporter, context);
+		rule.run(translationFiles, baseConfig, problemStore, context);
 
 		const expected1 = getUnexpectedKeyFoundProblem({
 			key: "unexpected",
@@ -89,14 +89,14 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledTimes(2);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected1);
-		expect(problemReporter.report).toHaveBeenCalledWith(expected2);
+		expect(problemStore.report).toHaveBeenCalledTimes(2);
+		expect(problemStore.report).toHaveBeenCalledWith(expected1);
+		expect(problemStore.report).toHaveBeenCalledWith(expected2);
 	});
 });
 
 describe(`${rule.meta.name}: off`, () => {
-	const problemReporter = createMockProblemReporter();
+	const problemStore = createMockProblemReporter();
 
 	const context: RuleContext = {
 		severity: "off",
@@ -108,6 +108,6 @@ describe(`${rule.meta.name}: off`, () => {
 		fr: { unexpected: "[FR] expected one", expected2: "[FR] expected two" },
 	};
 
-	rule.run(translationFiles, baseConfig, problemReporter, context);
-	expect(problemReporter.report).not.toHaveBeenCalled();
+	rule.run(translationFiles, baseConfig, problemStore, context);
+	expect(problemStore.report).not.toHaveBeenCalled();
 });

@@ -5,6 +5,7 @@ class Problem {
 	severity: RuleSeverity;
 	locale: string;
 	message: string;
+	isIgnored: boolean;
 	expected?: string | object | number;
 	received?: string | object | number;
 
@@ -15,6 +16,7 @@ class Problem {
 		this.message = builder.message;
 		this.expected = builder.expected;
 		this.received = builder.received;
+		this.isIgnored = Boolean(builder.isIgnored);
 	}
 
 	static get Builder() {
@@ -31,9 +33,15 @@ class ProblemBuilder {
 	message!: string;
 	expected?: string | object | number;
 	received?: string | object | number;
+	isIgnored?: boolean;
 
 	withSeverity(severity: RuleSeverity): this {
 		this.severity = severity;
+		return this;
+	}
+
+	withIsIgnored(isIgnored?: boolean): this {
+		this.isIgnored = Boolean(isIgnored);
 		return this;
 	}
 

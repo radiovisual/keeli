@@ -24,7 +24,7 @@ const noEmptyMessages: Rule = {
 	run: (
 		translationFiles: TranslationFiles,
 		config: Config,
-		problemReporter,
+		problemStore,
 		context: RuleContext
 	) => {
 		const { defaultLocale } = config;
@@ -38,26 +38,31 @@ const noEmptyMessages: Rule = {
 		for (const [locale, data] of Object.entries(translationFiles)) {
 			for (const [key, message] of Object.entries(data)) {
 				const baseMessage = baseLocale[key] ? baseLocale[key].trim() : "";
-				const shouldIgnore = ignoreKeys.includes(key);
+				const isIgnored = ignoreKeys.includes(key);
 
 				const hasEmptyBaseMessage = locale === defaultLocale && !baseMessage;
 				const hasEmptyTranslation =
 					locale !== defaultLocale && message.trim() === "";
 
 				if (hasEmptyBaseMessage) {
-					problemReporter.report(
-						getEmptySourceMessageProblem({ key, locale, severity, ruleMeta }),
-						shouldIgnore
+					problemStore.report(
+						getEmptySourceMessageProblem({
+							key,
+							locale,
+							severity,
+							ruleMeta,
+							isIgnored,
+						})
 					);
 				} else if (hasEmptyTranslation) {
-					problemReporter.report(
+					problemStore.report(
 						getEmptyTranslatedMessageProblem({
 							key,
 							locale,
 							severity,
 							ruleMeta,
-						}),
-						shouldIgnore
+							isIgnored,
+						})
 					);
 				}
 			}

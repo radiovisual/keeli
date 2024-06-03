@@ -24,7 +24,7 @@ const noMissingKeys: Rule = {
 	run: (
 		translationFiles: TranslationFiles,
 		config: Config,
-		problemReporter,
+		problemStore,
 		context: RuleContext
 	) => {
 		const { defaultLocale } = config;
@@ -46,7 +46,7 @@ const noMissingKeys: Rule = {
 		localesToCheck.forEach((locale) => {
 			for (let key of Object.keys(translationFiles[locale])) {
 				if (!baseMessageKeys.includes(key)) {
-					problemReporter.report(
+					problemStore.report(
 						getUnexpectedKeyFoundProblem({
 							key,
 							locale,
@@ -64,7 +64,7 @@ const noMissingKeys: Rule = {
 
 			for (let baseKey of baseMessageKeys) {
 				if (!translationKeys.includes(baseKey)) {
-					problemReporter.report(
+					problemStore.report(
 						getMissingExpectedKeyFoundProblem({
 							key: baseKey,
 							locale,

@@ -40,7 +40,7 @@ const context: RuleContext = {
 
 describe(`${rule.meta.name}`, () => {
 	it(`should report missing defaultLocale`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const { severity } = context;
 
@@ -50,19 +50,19 @@ describe(`${rule.meta.name}`, () => {
 			defaultLocale: null,
 		};
 
-		rule.run(translationFiles, config, problemReporter, context);
+		rule.run(translationFiles, config, problemStore, context);
 
 		const expectedProblem = getMisingDefaultLocaleProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 
 	it(`should report empty defaultLocale`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const { severity } = context;
 
@@ -71,19 +71,19 @@ describe(`${rule.meta.name}`, () => {
 			defaultLocale: "",
 		};
 
-		rule.run(translationFiles, config, problemReporter, context);
+		rule.run(translationFiles, config, problemStore, context);
 
 		const expectedProblem = getMisingDefaultLocaleProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 
 	it(`should report missing sourceFile`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const { severity } = context;
 
@@ -93,19 +93,19 @@ describe(`${rule.meta.name}`, () => {
 			sourceFile: null,
 		};
 
-		rule.run(translationFiles, config, problemReporter, context);
+		rule.run(translationFiles, config, problemStore, context);
 
 		const expectedProblem = getMissingSourceFileProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 
 	it(`should report empty sourceFile`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const { severity } = context;
 
@@ -114,19 +114,19 @@ describe(`${rule.meta.name}`, () => {
 			sourceFile: "",
 		};
 
-		rule.run(translationFiles, config, problemReporter, context);
+		rule.run(translationFiles, config, problemStore, context);
 
 		const expectedProblem = getMissingSourceFileProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 
 	it(`should report missing translationFiles`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const { severity } = context;
 
@@ -136,19 +136,19 @@ describe(`${rule.meta.name}`, () => {
 			translationFiles: null,
 		};
 
-		rule.run(translationFiles, config, problemReporter, context);
+		rule.run(translationFiles, config, problemStore, context);
 
 		const expectedProblem = getInvalidTranslationFilesProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 
 	it(`should report missing translationFiles source files`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const { severity } = context;
 
@@ -159,19 +159,19 @@ describe(`${rule.meta.name}`, () => {
 			},
 		};
 
-		rule.run(translationFiles, config, problemReporter, context);
+		rule.run(translationFiles, config, problemStore, context);
 
 		const expectedProblem = getInvalidTranslationFilesProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 
 	it(`should report null translationFiles source files`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const { severity } = context;
 
@@ -183,19 +183,19 @@ describe(`${rule.meta.name}`, () => {
 			},
 		};
 
-		rule.run(translationFiles, config, problemReporter, context);
+		rule.run(translationFiles, config, problemStore, context);
 
 		const expectedProblem = getInvalidTranslationFilesProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 
 	it(`should report empty translationFiles object`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const { severity } = context;
 
@@ -204,19 +204,19 @@ describe(`${rule.meta.name}`, () => {
 			translationFiles: {},
 		};
 
-		rule.run(translationFiles, config, problemReporter, context);
+		rule.run(translationFiles, config, problemStore, context);
 
 		const expectedProblem = getInvalidTranslationFilesProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 
 	it(`should report null pathToTranslatedFiles`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const { severity } = context;
 
@@ -226,19 +226,19 @@ describe(`${rule.meta.name}`, () => {
 			pathToTranslatedFiles: null,
 		};
 
-		rule.run(translationFiles, config, problemReporter, context);
+		rule.run(translationFiles, config, problemStore, context);
 
 		const expectedProblem = getInvalidPathToTranslatedFilesProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 
 	it(`should report empty pathToTranslatedFiles`, () => {
-		const problemReporter = createMockProblemReporter();
+		const problemStore = createMockProblemReporter();
 
 		const { severity } = context;
 
@@ -247,14 +247,14 @@ describe(`${rule.meta.name}`, () => {
 			pathToTranslatedFiles: "",
 		};
 
-		rule.run(translationFiles, config, problemReporter, context);
+		rule.run(translationFiles, config, problemStore, context);
 
 		const expectedProblem = getInvalidPathToTranslatedFilesProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
 
-		expect(problemReporter.report).toHaveBeenCalledWith(expectedProblem);
-		expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
 });

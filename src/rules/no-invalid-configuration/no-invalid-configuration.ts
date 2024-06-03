@@ -26,7 +26,7 @@ const noInvalidConfiguration: Rule = {
 	run: (
 		translationFiles: TranslationFiles,
 		config: Config,
-		problemReporter,
+		problemStore,
 		context: RuleContext
 	) => {
 		const { defaultLocale, sourceFile, pathToTranslatedFiles } = config;
@@ -34,16 +34,14 @@ const noInvalidConfiguration: Rule = {
 
 		// Look for missing or invalid 'defaultLocale' in the configuration
 		if (!defaultLocale || isEmptyString(defaultLocale)) {
-			problemReporter.report(
+			problemStore.report(
 				getMisingDefaultLocaleProblem({ ruleMeta, severity })
 			);
 		}
 
 		// Look for missing or invalid 'sourceFile' in the configuration
 		if (!sourceFile || isEmptyString(sourceFile)) {
-			problemReporter.report(
-				getMissingSourceFileProblem({ ruleMeta, severity })
-			);
+			problemStore.report(getMissingSourceFileProblem({ ruleMeta, severity }));
 		}
 
 		// Look for missing or invalid 'translationFiles' in the configuration
@@ -65,14 +63,14 @@ const noInvalidConfiguration: Rule = {
 					);
 				}))
 		) {
-			problemReporter.report(
+			problemStore.report(
 				getInvalidTranslationFilesProblem({ ruleMeta, severity })
 			);
 		}
 
 		// Look for missing or invalid 'pathToTranslatedFiles' in the configuration
 		if (!pathToTranslatedFiles || isEmptyString(pathToTranslatedFiles)) {
-			problemReporter.report(
+			problemStore.report(
 				getInvalidPathToTranslatedFilesProblem({ ruleMeta, severity })
 			);
 		}
