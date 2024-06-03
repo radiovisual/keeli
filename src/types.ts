@@ -1,5 +1,5 @@
 import { ProblemReporter } from "./classes/problem-reporter.ts";
-import { SEVERITY_LEVEL } from "./constants.ts";
+import { SEVERITY_LEVEL, RULE_TYPE } from "./constants.ts";
 
 export type RuleSeverity = keyof typeof SEVERITY_LEVEL;
 export type RuleAdvancedConfig = {
@@ -36,7 +36,7 @@ export type RuleMeta = {
 	name: string;
 	defaultSeverity: RuleSeverity;
 	description: string;
-	type: "configuration" | "validation";
+	type: keyof typeof RULE_TYPE;
 	url: string;
 };
 

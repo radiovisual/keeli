@@ -1,0 +1,82 @@
+import {
+	Config,
+	Rule,
+	RuleContext,
+	RuleMeta,
+	TranslationFiles,
+} from "../../types.ts";
+import { isEmptyString } from "../../utils/string-helpers.ts";
+import {
+	getInvalidTranslationFilesProblem,
+	getMissingSourceFileProblem,
+	getMisingDefaultLocaleProblem,
+	getInvalidPathToTranslatedFilesProblem,
+} from "./problems.ts";
+
+const ruleMeta: RuleMeta = {
+	name: "no-invalid-configuration",
+	description: `A configuration file must be supplied with all required fields.`,
+	url: "TBD",
+	type: "configuration",
+	defaultSeverity: "error",
+};
+
+const noInvalidConfiguration: Rule = {
+	meta: ruleMeta,
+	run: (
+		translationFiles: TranslationFiles,
+		config: Config,
+		problemReporter,
+		context: RuleContext
+	) => {
+		const { defaultLocale, sourceFile, pathToTranslatedFiles } = config;
+		const { severity } = context;
+
+		// Look for missing or invalid 'defaultLocale' in the configuration
+		if (!defaultLocale || isEmptyString(defaultLocale)) {
+			problemReporter.report(
+				getMisingDefaultLocaleProblem({ ruleMeta, severity })
+			);
+		}
+
+		// Look for missing or invalid 'sourceFile' in the configuration
+		if (!sourceFile || isEmptyString(sourceFile)) {
+			problemReporter.report(
+				getMissingSourceFileProblem({ ruleMeta, severity })
+			);
+		}
+
+		// Look for missing or invalid 'translationFiles' in the configuration
+		const translationFileEntries = Array.from(
+			Object.entries(config?.translationFiles ?? {})
+		);
+
+		if (
+			!config?.translationFiles ||
+			typeof config.translationFiles !== "object" ||
+			translationFileEntries.length === 0 ||
+			(typeof config?.translationFiles === "object" &&
+				!translationFileEntries.every(([locale, filename]) => {
+					return (
+						typeof locale === "string" &&
+						typeof filename === "string" &&
+						!isEmptyString(locale) &&
+						!isEmptyString(filename)
+					);
+				}))
+		) {
+			problemReporter.report(
+				getInvalidTranslationFilesProblem({ ruleMeta, severity })
+			);
+		}
+
+		// Look for missing or invalid 'pathToTranslatedFiles' in the configuration
+		if (!pathToTranslatedFiles || isEmptyString(pathToTranslatedFiles)) {
+			problemReporter.report(
+				getInvalidPathToTranslatedFilesProblem({ ruleMeta, severity })
+			);
+		}
+	},
+};
+
+export { noInvalidConfiguration };

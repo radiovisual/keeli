@@ -2,7 +2,8 @@
 
 ## Rule Details
 
-**Default Severity**: `error`
+**Default Severity**: `error`  
+**Rule Type**: `validation`
 
 Messages in your translation files should not contain any HTML syntax.
 

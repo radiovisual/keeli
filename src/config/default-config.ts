@@ -1,10 +1,10 @@
 import { Config } from "../types.ts";
 
 const config: Config = {
-	defaultLocale: "en",
-	sourceFile: "en.json",
+	defaultLocale: "",
+	sourceFile: "",
 	translationFiles: {},
-	pathToTranslatedFiles: "i18n",
+	pathToTranslatedFiles: "",
 	rules: {
 		"no-untranslated-messages": "error",
 		"no-empty-messages": "error",

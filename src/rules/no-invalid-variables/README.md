@@ -2,7 +2,8 @@
 
 ## Rule Details
 
-**Default Severity**: `error`
+**Default Severity**: `error`  
+**Rule Type**: `validation`
 
 All variables declared in the base messages file and any translated files must have valid syntax, and the variables declared in the base (source) messages file must exist in the translated string.
 

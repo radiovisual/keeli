@@ -2,7 +2,8 @@
 
 ## Rule Details
 
-**Default Severity**: `error`
+**Default Severity**: `error`  
+**Rule Type**: `validation`
 
 :bulb: This rule runs on the translated files, so its considered a `validation` rule type.
 

@@ -2,7 +2,8 @@
 
 ## Rule Details
 
-**Default Severity**: `error`
+**Default Severity**: `error`  
+**Rule Type**: `validation`
 
 The no-empty-messages rule ensures that all messages in the translation files are not empty strings. It also verifies that messages in the base locale are not empty.
 
