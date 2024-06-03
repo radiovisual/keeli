@@ -1,0 +1,9 @@
+{
+	"extensionsToTreatAsEsm": [".ts"],
+	"preset": "ts-jest",
+	"testEnvironment": "node",
+	"testPathIgnorePatterns": ["dist"],
+	"collectCoverage": true,
+	"coverageDirectory": "coverage",
+	"coverageReporters": ["text", "lcov"]
+}

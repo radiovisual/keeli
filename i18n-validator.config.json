@@ -1,0 +1,18 @@
+{
+	"defaultLocale": "en",
+	"sourceFile": "en.json",
+	"translationFiles": {
+		"de": "de.json",
+		"fr": "fr.json"
+	},
+	"pathToTranslatedFiles": "fixtures/i18n",
+	"rules": {
+		"no-untranslated-messages": "error",
+		"no-empty-messages": "error",
+		"no-html-messages": "error",
+		"no-missing-keys": "error",
+		"no-invalid-variables": "error"
+	},
+	"dryRun": false,
+	"enabled": true
+}

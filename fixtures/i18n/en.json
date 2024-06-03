@@ -1,0 +1,13 @@
+{
+	"untranslated-message": "Hi!",
+	"empty-string": "",
+	"only-empty-in-en": "",
+	"declares-a-valid-variable": "Hi, {firstName}",
+	"declares-an-unbalanced-variable-in-en": "[EN] unbalanced variable}",
+	"declares-another-unbalanced-variable-in-en": "[EN] another unbalanced {variable",
+	"declares-a-missing-variable-in-fr": "[EN] missing {variable}",
+	"declares-a-single-missing-variable-in-fr": "[EN] should be two {one} {two}",
+	"declares-a-malfomed-variable-in-de": "[EN] malformed {variable}",
+	"html-message": "Hi, <b>{firstName}</b>",
+	"missing-key-in-fr": "[EN] this key should not be found in fr.json"
+}

@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "NodeNext",
+		"esModuleInterop": true,
+		"moduleResolution": "NodeNext",
+		"rootDir": "./src",
+		"outDir": "./dist",
+		"strict": true,
+		"noEmit": true,
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+		"allowImportingTsExtensions": true,
+		"allowSyntheticDefaultImports": true
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/rules/no-untranslated-messages/no-untranslated-messages.ts",
+		"src/rules/no-untranslated-messages/index.ts",
+		"src/index.ts",
+		"src/config/default-config.ts",
+		"src/types.ts"
+	],
+	"exclude": ["node_modules", "dist"]
+}
