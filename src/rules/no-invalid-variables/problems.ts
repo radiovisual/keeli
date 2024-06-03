@@ -52,3 +52,16 @@ export function getInvalidVariableSyntaxProblem(
 		.withReceived(received)
 		.build();
 }
+
+export function getUnbalancedVariableBracketsSyntaxProblem(
+	problemContext: ProblemContext
+): Problem {
+	const { key, locale, severity, ruleMeta, received } = problemContext;
+
+	return Problem.Builder.withRuleMeta(ruleMeta)
+		.withSeverity(severity)
+		.withLocale(locale)
+		.withMessage(`Unbalanced variable brackets found in key: ${key}`)
+		.withReceived(received)
+		.build();
+}

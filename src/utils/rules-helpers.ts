@@ -11,8 +11,13 @@ export function getRuleSeverity(config: Config, rule: Rule): RuleSeverity {
 
 	if (typeof ruleConfig === "string") {
 		return ruleConfig;
-	} else if (typeof ruleConfig === "object" && ruleConfig.severity) {
-		ruleConfig.severity;
+	}
+
+	if (
+		typeof ruleConfig === "object" &&
+		typeof ruleConfig?.severity === "string"
+	) {
+		return ruleConfig.severity;
 	}
 
 	return rule.meta.defaultSeverity;

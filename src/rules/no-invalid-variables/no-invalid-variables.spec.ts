@@ -10,6 +10,7 @@ import {
 	getMismatchedVariableFromSourceProblem,
 	getMissingVariableFromSourceProblem,
 	getInvalidVariableSyntaxProblem,
+	getUnbalancedVariableBracketsSyntaxProblem,
 } from "./problems.ts";
 
 const ruleMeta = noInvalidVariables.meta;
@@ -106,6 +107,55 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
 	});
 
+	it(`should report malformed variables in translation files with ${severity}`, () => {
+		const problemReporter = createMockProblemReporter();
+
+		const translationFiles: TranslationFiles = {
+			en: {
+				greeting: "[EN] {expectedGreetingVariable}",
+				farewell: "[EN] {expectedFarewellVariable}",
+			},
+			fr: {
+				greeting: "[FR] {expectedGreetingVariable",
+				farewell: "[FR] {expectedFarewellVariable}",
+			},
+		};
+
+		rule.run(translationFiles, baseConfig, problemReporter, context);
+
+		const expected1 = getUnbalancedVariableBracketsSyntaxProblem({
+			key: "greeting",
+			locale: "fr",
+			severity,
+			ruleMeta,
+			expected: undefined,
+			received: translationFiles.fr.greeting,
+		});
+
+		const expected2 = getInvalidVariableSyntaxProblem({
+			key: "greeting",
+			locale: "fr",
+			severity,
+			ruleMeta,
+			expected: undefined,
+			received: translationFiles.fr.greeting,
+		});
+
+		const expected3 = getMissingVariableFromSourceProblem({
+			key: "greeting",
+			locale: "fr",
+			severity,
+			ruleMeta,
+			expected: "expectedGreetingVariable",
+			received: "",
+		});
+
+		// expect(problemReporter.report).toHaveBeenCalledTimes(1);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected1, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected2, false);
+		expect(problemReporter.report).toHaveBeenCalledWith(expected3, false);
+	});
+
 	it(`should report unbalanced variable brackets in the source file with ${severity}`, () => {
 		const problemReporter = createMockProblemReporter();
 
@@ -122,7 +172,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 
 		rule.run(translationFiles, baseConfig, problemReporter, context);
 
-		const expected1 = getInvalidVariableSyntaxProblem({
+		const expected1 = getUnbalancedVariableBracketsSyntaxProblem({
 			key: "greeting",
 			locale: "en",
 			severity,
@@ -131,7 +181,7 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 			received: "[EN] {greetingName",
 		});
 
-		const expected2 = getInvalidVariableSyntaxProblem({
+		const expected2 = getUnbalancedVariableBracketsSyntaxProblem({
 			key: "farewell",
 			locale: "en",
 			severity,

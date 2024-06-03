@@ -15,6 +15,7 @@ import {
 	getMissingVariableFromSourceProblem,
 	getMismatchedVariableFromSourceProblem,
 	getInvalidVariableSyntaxProblem,
+	getUnbalancedVariableBracketsSyntaxProblem,
 } from "./problems.ts";
 
 const ruleMeta: RuleMeta = {
@@ -57,7 +58,7 @@ const noInvalidVariables: Rule = {
 				// closing brackets as a problem.
 				if (hasUnbalancedBrackets(value)) {
 					problemReporter.report(
-						getInvalidVariableSyntaxProblem({
+						getUnbalancedVariableBracketsSyntaxProblem({
 							key,
 							locale,
 							severity,
