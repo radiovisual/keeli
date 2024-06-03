@@ -1,4 +1,3 @@
-import type { MessageFormatElement } from "@formatjs/icu-messageformat-parser";
 import * as icu from "@formatjs/icu-messageformat-parser";
 
 export function extractVariableNamesFromMessage(

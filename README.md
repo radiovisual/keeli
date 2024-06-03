@@ -10,6 +10,10 @@ Translated files in your software project are an often-overlooked source of prob
 
 Furthermore, there are best practices we want to adhere to with our translated files, and these best practices should be enforceable with an integrity check.
 
+## Roadmap to Version `1.0.0`
+
+We are getting close to the initial `1.0.0` release. :tada: Check out [this milestone](https://github.com/radiovisual/i18n-validator/milestone/1) for details.
+
 ## Configuration
 
 For each project where you want to run the i18n-validator, you will need to have a file named `i18n-validator.config.json` with the following format:
