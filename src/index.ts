@@ -20,8 +20,15 @@ if (fs.existsSync(configPath)) {
 
 	const config = { ...defaultConfig, ...userConfig };
 
+	if (!config.enabled) {
+		const message = `i18n-validator is disabled. Exiting.`;
+		console.log(chalk.yellow(message));
+		process.exit(1);
+	}
+
 	runRules(config);
 } else {
 	const message = `You must have an i18n-validator.config.js file in the project root to run the i18n-validator.`;
 	console.log(chalk.red(message));
+	process.exit(1);
 }
