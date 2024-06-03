@@ -1,4 +1,4 @@
-# i18n-validator [![CI](https://github.com/radiovisual/i18n-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/radiovisual/i18n-validator/actions/workflows/ci.yml)
+# i18n-validator [![CI](https://github.com/radiovisual/i18n-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/radiovisual/i18n-validator/actions/workflows/ci.yml) [![codecov](https://codecov.io/github/radiovisual/i18n-validator/graph/badge.svg?token=G4X3X08FB6)](https://codecov.io/github/radiovisual/i18n-validator)
 
 > Configurable CLI validation tool to look for common problems in your translated source files.
 
