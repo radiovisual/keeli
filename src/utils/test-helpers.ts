@@ -1,4 +1,4 @@
-import { ProblemReporter } from "../../classes/problem-reporter";
+import { ProblemReporter } from "../classes/problem-reporter";
 
 export const createMockProblemReporter = () => {
 	return {

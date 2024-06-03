@@ -5,7 +5,7 @@
 		"de": "de.json",
 		"fr": "fr.json"
 	},
-	"pathToTranslatedFiles": "src/tests/fixtures/i18n",
+	"pathToTranslatedFiles": "fixtures/i18n",
 	"rules": {
 		"no-untranslated-messages": "error",
 		"no-empty-messages": "error",

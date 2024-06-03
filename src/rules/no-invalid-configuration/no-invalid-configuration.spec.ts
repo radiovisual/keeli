@@ -1,11 +1,11 @@
-import { createMockProblemReporter } from "../../tests/utils/test-helpers.ts";
+import { createMockProblemReporter } from "../../utils/test-helpers";
 import {
 	Config,
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
 } from "../../types.ts";
-import { noInvalidConfiguration } from "./no-invalid-configuration.ts";
+import { noInvalidConfiguration } from "./no-invalid-configuration";
 import {
 	getInvalidPathToTranslatedFilesProblem,
 	getInvalidTranslationFilesProblem,

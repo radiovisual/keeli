@@ -1,4 +1,4 @@
-import { createMockProblemReporter } from "../../tests/utils/test-helpers.ts";
+import { createMockProblemReporter } from "../../utils/test-helpers.ts";
 import {
 	Config,
 	RuleContext,
