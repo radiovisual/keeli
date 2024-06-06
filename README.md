@@ -1,10 +1,10 @@
-# i18n-validator [![CI](https://github.com/radiovisual/i18n-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/radiovisual/i18n-validator/actions/workflows/ci.yml) [![codecov](https://codecov.io/github/radiovisual/i18n-validator/graph/badge.svg?token=G4X3X08FB6)](https://codecov.io/github/radiovisual/i18n-validator)
+# keeli [![CI](https://github.com/radiovisual/keeli/actions/workflows/ci.yml/badge.svg)](https://github.com/radiovisual/keeli/actions/workflows/ci.yml) [![codecov](https://codecov.io/github/radiovisual/keeli/graph/badge.svg?token=G4X3X08FB6)](https://codecov.io/github/radiovisual/keeli)
 
 > Configurable CLI validation tool to look for common problems in your translated source files.
 
 ## Why?
 
-> Have you ever shipped "buggy" translation files to your users in production? **Probably!**. I know I have!
+> Have you ever shipped "buggy" translation files to your users in production? **Probably!** I know I have!
 
 Translated files in your software project are an often-overlooked source of problems that can affect the usability, reliability and reputation of your applications. These translated files are often edited manually, built automatically (without any integrity checks) or outsourced to third parties to provide translations. These files typically do not pass through any (or most) of your automated tests, or they get skipped in your manual tests...which means the hidden problems get shipped to your real users in production.
 
@@ -12,11 +12,11 @@ Furthermore, there are best practices we want to adhere to with our translated f
 
 ## Roadmap to Version `1.0.0`
 
-We are getting close to the initial `1.0.0` release. :tada: Check out [this milestone](https://github.com/radiovisual/i18n-validator/milestone/1) for details.
+We are getting close to the initial `1.0.0` release. :tada: Check out [this milestone](https://github.com/radiovisual/keeli/milestone/1) for details.
 
 ## Configuration
 
-For each project where you want to run the i18n-validator, you will need to have a file named `i18n-validator.config.json` with the following format:
+For each project where you want to run the keeli, you will need to have a file named `keeli.config.json` with the following format:
 
 ```json5
 {
@@ -84,7 +84,7 @@ For each project where you want to run the i18n-validator, you will need to have
 	 **/
 	dryRun: false,
 	/**
-	 * Enable or disable this entire i18n-validator.
+	 * Enable or disable this entire keeli.
 	 *
 	 **/
 	enabled: true,
@@ -148,6 +148,10 @@ One of the main motivations with this CLI is to _expose_ (not hide) the problems
 # Contributing
 
 Contributions to this project are always welcome! :heart: Feel free to open issues, pull requests, etc and let's make this project better together.
+
+If you have the repo cloned locally, you can test run the CLI by running:
+
+`run build && node dist/index.js`, which will run all of the validation rules on the translation files in the fixtures directory. If you have the CLI linked with npm then you can just run `npm run build && keeli`
 
 ---
 

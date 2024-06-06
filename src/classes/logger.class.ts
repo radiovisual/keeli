@@ -18,7 +18,7 @@ class Logger {
 			problemStore.getIgnoredValidationProblems();
 	}
 
-	// TODO: Clean up this summary when the pretty reporter is done https://github.com/radiovisual/i18n-validator/issues/3
+	// TODO: Clean up this summary when the pretty reporter is done https://github.com/radiovisual/keeli/issues/3
 	public logErrors() {
 		this.problemStore.getAllProblems().forEach((problem) => {
 			console.log(`${problem.severity} | ${problem.locale} ${problem.message}`);
@@ -27,7 +27,7 @@ class Logger {
 		console.log(this.getPrintSummary());
 	}
 
-	// TODO: Clean up this summary when the pretty reporter is done https://github.com/radiovisual/i18n-validator/issues/3
+	// TODO: Clean up this summary when the pretty reporter is done https://github.com/radiovisual/keeli/issues/3
 	public getPrintSummary() {
 		let summary = ["\n"];
 

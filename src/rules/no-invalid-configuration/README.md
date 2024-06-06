@@ -38,4 +38,4 @@ This rule is not configurable, i.e., you can't assign a severity level or turn t
 
 ## Version
 
-This rule was introduced in i18n-validator v1.0.0.
+This rule was introduced in keeli v1.0.0.
