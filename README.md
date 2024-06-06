@@ -151,7 +151,10 @@ Contributions to this project are always welcome! :heart: Feel free to open issu
 
 If you have the repo cloned locally, you can test run the CLI by running:
 
-`run build && node dist/index.js`, which will run all of the validation rules on the translation files in the fixtures directory. If you have the CLI linked with npm then you can just run `npm run build && keeli`
+`run build:dev && node dist/index.js`, which will run all of the validation rules on the translation files in the fixtures directory.
+
+> [!TIP]
+> If you have the CLI linked with `npm link` then you can just run `npm run build:dev && keeli`
 
 ---
 
