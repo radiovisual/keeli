@@ -10,7 +10,7 @@ import { config } from "./config/default-config.ts";
 
 const defaultConfig: Config = config;
 
-const configPath = path.join(__dirname, "../i18n-validator.config.json");
+const configPath = path.join(__dirname, "../keeli.config.json");
 
 // Only start the routine running if the configuration file is found.
 if (fs.existsSync(configPath)) {
@@ -21,14 +21,14 @@ if (fs.existsSync(configPath)) {
 	const config = { ...defaultConfig, ...userConfig };
 
 	if (!config.enabled) {
-		const message = `i18n-validator is disabled. Exiting.`;
+		const message = `keeli is disabled. Exiting.`;
 		console.log(chalk.yellow(message));
 		process.exit(1);
 	}
 
 	runRules(config);
 } else {
-	const message = `You must have an i18n-validator.config.js file in the project root to run the i18n-validator.`;
+	const message = `You must have an keeli.config.js file in the project root to run the keeli.`;
 	console.log(chalk.red(message));
 	process.exit(1);
 }

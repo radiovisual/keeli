@@ -76,4 +76,4 @@ To disable the check for this rule for specific keys, you can pass in the name o
 
 ## Version
 
-This rule was introduced in i18n-validator v1.0.0.
+This rule was introduced in keeli v1.0.0.

@@ -30,7 +30,7 @@ export function loadLanguageFiles(config: Config): TranslationFiles {
 		);
 
 		try {
-			// TODO: convert to JSON before parsing if the file is not JSON. https://github.com/radiovisual/i18n-validator/issues/2
+			// TODO: convert to JSON before parsing if the file is not JSON. https://github.com/radiovisual/keeli/issues/2
 			files[locale] = JSON.parse(fs.readFileSync(translatedFilePath, "utf8"));
 		} catch (err: unknown) {
 			console.error(

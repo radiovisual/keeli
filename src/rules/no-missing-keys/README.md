@@ -41,4 +41,4 @@ This rule does not support any advanced configuration.
 
 ## Version
 
-This rule was introduced in i18n-validator v1.0.0.
+This rule was introduced in keeli v1.0.0.
