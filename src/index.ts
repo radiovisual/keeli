@@ -5,18 +5,16 @@ import path from "node:path";
 import chalk from "chalk";
 
 import { runRules } from "./engine/rule-engine.ts";
-import { Config } from "./types.js";
+import type { Config } from "./types.js";
 import { config } from "./config/default-config.ts";
 
 const defaultConfig: Config = config;
 
 const configPath = path.join(__dirname, "../keeli.config.json");
 
-// Only start the routine running if the configuration file is found.
+// Only start keeli if the keeli configuration file is found.
 if (fs.existsSync(configPath)) {
-	const userConfig: Partial<Config> = JSON.parse(
-		fs.readFileSync(configPath, "utf8")
-	);
+	const userConfig: Config = JSON.parse(fs.readFileSync(configPath, "utf8"));
 
 	const config = { ...defaultConfig, ...userConfig };
 
