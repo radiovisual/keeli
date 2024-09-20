@@ -1,6 +1,11 @@
 import path from "node:path";
 import fs from "node:fs";
-import { Config, TranslationFiles } from "../types";
+import { flattie } from "flattie";
+import type { Config, TranslationFiles } from "../types";
+
+export function flatten(obj: TranslationFiles): Record<string, string> {
+	return flattie(obj, ".");
+}
 
 /**
  * Import all of the translation files in the current project and bundle their data into a single object.
@@ -31,7 +36,9 @@ export function loadLanguageFiles(config: Config): TranslationFiles {
 
 		try {
 			// TODO: convert to JSON before parsing if the file is not JSON. https://github.com/radiovisual/keeli/issues/2
-			files[locale] = JSON.parse(fs.readFileSync(translatedFilePath, "utf8"));
+			files[locale] = flatten(
+				JSON.parse(fs.readFileSync(translatedFilePath, "utf8"))
+			);
 		} catch (err: unknown) {
 			console.error(
 				`There was an error trying to read the file at path: '${translatedFilePath}' for the locale: '${locale}'. Please ensure that this is a valid translation file and try again.`
