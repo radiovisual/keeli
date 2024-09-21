@@ -9,7 +9,7 @@ import { noInvalidConfiguration } from "./no-invalid-configuration";
 import {
 	getInvalidPathToTranslatedFilesProblem,
 	getInvalidTranslationFilesProblem,
-	getMisingDefaultLocaleProblem,
+	getMissingDefaultLocaleProblem,
 	getMissingSourceFileProblem,
 } from "./problems.ts";
 
@@ -52,7 +52,7 @@ describe(`${rule.meta.name}`, () => {
 
 		rule.run(translationFiles, config, problemStore, context);
 
-		const expectedProblem = getMisingDefaultLocaleProblem({
+		const expectedProblem = getMissingDefaultLocaleProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
@@ -73,7 +73,7 @@ describe(`${rule.meta.name}`, () => {
 
 		rule.run(translationFiles, config, problemStore, context);
 
-		const expectedProblem = getMisingDefaultLocaleProblem({
+		const expectedProblem = getMissingDefaultLocaleProblem({
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});

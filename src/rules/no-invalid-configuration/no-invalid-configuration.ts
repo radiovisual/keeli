@@ -9,7 +9,7 @@ import { isEmptyString } from "../../utils/string-helpers.ts";
 import {
 	getInvalidTranslationFilesProblem,
 	getMissingSourceFileProblem,
-	getMisingDefaultLocaleProblem,
+	getMissingDefaultLocaleProblem,
 	getInvalidPathToTranslatedFilesProblem,
 } from "./problems.ts";
 
@@ -35,7 +35,7 @@ const noInvalidConfiguration: Rule = {
 		// Look for missing or invalid 'defaultLocale' in the configuration
 		if (!defaultLocale || isEmptyString(defaultLocale)) {
 			problemStore.report(
-				getMisingDefaultLocaleProblem({ ruleMeta, severity })
+				getMissingDefaultLocaleProblem({ ruleMeta, severity })
 			);
 		}
 

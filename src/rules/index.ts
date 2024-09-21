@@ -4,9 +4,11 @@ import { noInvalidVariables } from "./no-invalid-variables/index.js";
 import { noHtmlMessages } from "./no-html-messages/index.js";
 import { noInvalidConfiguration } from "./no-invalid-configuration/index.js";
 import { noMissingKeys } from "./no-missing-keys/index.js";
+import { noInvalidSeverity } from "./no-invalid-severity/index.js";
 
 export {
 	noInvalidConfiguration,
+	noInvalidSeverity,
 	noUntranslatedMessages,
 	noEmptyMessages,
 	noInvalidVariables,
