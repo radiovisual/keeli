@@ -6,7 +6,7 @@ type ProblemContext = {
 	ruleMeta: RuleMeta;
 };
 
-export function getMisingDefaultLocaleProblem(
+export function getMissingDefaultLocaleProblem(
 	problemContext: ProblemContext
 ): Problem {
 	const { severity, ruleMeta } = problemContext;

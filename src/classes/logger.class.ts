@@ -21,7 +21,9 @@ class Logger {
 	// TODO: Clean up this summary when the pretty reporter is done https://github.com/radiovisual/keeli/issues/3
 	public logErrors() {
 		this.problemStore.getAllProblems().forEach((problem) => {
-			console.log(`${problem.severity} | ${problem.locale} ${problem.message}`);
+			console.log(
+				`${problem.severity} | ${problem?.locale ?? ""} ${problem.message}`
+			);
 		});
 		console.log("---");
 		console.log(this.getPrintSummary());
