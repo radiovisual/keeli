@@ -62,4 +62,35 @@ describe(`${rule.meta.name}`, () => {
 		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
 		expect(problemStore.report).toHaveBeenCalledTimes(1);
 	});
+
+	it(`should report invalid rule severities in advanced configuration`, () => {
+		const problemStore = createMockProblemReporter();
+
+		const { severity } = context;
+
+		const inValidSeverity = "foo" as RuleSeverity;
+
+		const config: Config = {
+			...baseConfig,
+			rules: {
+				"no-html-messages": {
+					severity: inValidSeverity,
+				},
+			},
+		};
+
+		rule.run(translationFiles, config, problemStore, context);
+
+		const expectedProblem = getInvalidSeverityProblem(
+			{
+				severity: severity as RuleSeverity,
+				ruleMeta,
+			},
+			inValidSeverity,
+			"no-html-messages"
+		);
+
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
+	});
 });

@@ -5,6 +5,7 @@ import { noHtmlMessages } from "./no-html-messages/index.js";
 import { noInvalidConfiguration } from "./no-invalid-configuration/index.js";
 import { noMissingKeys } from "./no-missing-keys/index.js";
 import { noInvalidSeverity } from "./no-invalid-severity/index.js";
+import { noMalformedKeys } from "./no-malformed-keys/index.js";
 
 export {
 	noInvalidConfiguration,
@@ -14,4 +15,5 @@ export {
 	noInvalidVariables,
 	noHtmlMessages,
 	noMissingKeys,
+	noMalformedKeys,
 };

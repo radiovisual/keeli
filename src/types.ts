@@ -5,7 +5,11 @@ export type RuleSeverity = keyof typeof SEVERITY_LEVEL;
 export type RuleAdvancedConfig = {
 	severity: RuleSeverity;
 	ignoreKeys?: string[];
+	namingConvention?: string;
+	validationFunctionPath?: string;
 };
+
+export type RuleConfigEntry = RuleSeverity | RuleAdvancedConfig;
 
 export type Config = {
 	defaultLocale: string;
@@ -13,7 +17,7 @@ export type Config = {
 	translationFiles: { [key: string]: string };
 	pathToTranslatedFiles: string;
 	rules: {
-		[key: string]: RuleSeverity | RuleAdvancedConfig;
+		[key: string]: RuleConfigEntry;
 	};
 	dryRun: boolean;
 	enabled: boolean;

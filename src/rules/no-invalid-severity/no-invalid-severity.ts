@@ -29,7 +29,15 @@ const noInvalidSeverity: Rule = {
 		const { severity } = context;
 
 		// Look for invalid rule severity in the configuration file
-		Object.entries(config.rules).forEach(([rule, ruleSeverity]) => {
+		Object.entries(config.rules).forEach(([rule, ruleValue]) => {
+			let ruleSeverity;
+
+			if (typeof ruleValue === "string") {
+				ruleSeverity = ruleValue;
+			} else if (typeof ruleValue === "object") {
+				ruleSeverity = ruleValue?.severity;
+			}
+
 			if (!validSeverities.includes(ruleSeverity as string)) {
 				const problem = getInvalidSeverityProblem(
 					{ severity, ruleMeta },

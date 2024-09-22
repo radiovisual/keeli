@@ -11,7 +11,11 @@
 		"no-empty-messages": "error",
 		"no-html-messages": "error",
 		"no-missing-keys": "error",
-		"no-invalid-variables": "error"
+		"no-invalid-variables": "error",
+		"no-malformed-keys": {
+			"severity": "error",
+			"namingConvention": "kebab-case"
+		}
 	},
 	"dryRun": false,
 	"enabled": true
