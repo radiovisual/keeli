@@ -5,7 +5,7 @@
 **Default Severity**: `error`  
 **Rule Type**: `configuration`
 
-The settings you supply in the configuraton file must be valid and complete.
+The settings you supply in the configuration file must be valid and complete.
 
 This rule makes the following checks that your configuration is ready to go.
 
