@@ -58,6 +58,9 @@ keeli will see a flat version of this key when it validates the key names:
 
 All of the delimited segments in this key: `some_super`, `duper_deeply`, `super_nested` and `message` will all need to match your specified naming convention to be considered valid. If for some reason you are not satisfied with these rules, then you can always [use your own validation function](#provide-your-own-validation-function)
 
+> [!IMPORTANT]
+> When nested JSON structures are "flattened", keeli will use a period character (e.g., `.`) to concatenate the keys (see example above). When keeli runs its validations on your period-delimited keys it will try to ensure that each value in-between the periods match the naming convention you are using (i.e., `camel-case`, `snake-case`, etc). So be careful to maintain your naming convention in-between your own use of periods, if you choose to use them in your keys. If you pass in your own custom validation function, you will get the entire flattened key to handle how you choose.
+
 ## Example Configuration
 
 Simple configuration where you just supply the severity level of `error` | `warn` | `off`:

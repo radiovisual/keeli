@@ -42,6 +42,8 @@ const noMalformedKeys: Rule = {
 		// The default naming convention for keeli is camel case
 		let validationFunction: (key: string) => boolean = isCamelCase;
 
+		let isUsingExternalValidation = false;
+
 		const ruleConfigEntry: RuleConfigEntry = config.rules["no-malformed-keys"];
 
 		if (typeof ruleConfigEntry === "object") {
@@ -59,6 +61,7 @@ const noMalformedKeys: Rule = {
 			if (validationFunctionPath) {
 				// Load the function at the provided validationFunctionPath
 				validationFunction = require(validationFunctionPath);
+				isUsingExternalValidation = true;
 			} else if (namingConvention) {
 				if (namingConvention === keyNamingConventions.camelCase) {
 					validationFunction = isCamelCase;
@@ -76,7 +79,24 @@ const noMalformedKeys: Rule = {
 			for (let key of Object.keys(data)) {
 				const isIgnored = _ignoreKeys.includes(key);
 
-				if (!validationFunction(key)) {
+				// if the key is period-delimited (and we are using one of keeli's internal key-naming conventions), then we need to check each period-delimited part of the key on its own
+				if (!isUsingExternalValidation && key.indexOf(".") > -1) {
+					const fullKey = key;
+					const foundInvalidPart = key
+						.split(".")
+						.some((keyPart) => !validationFunction(keyPart));
+
+					if (foundInvalidPart) {
+						const problem = getMalformedKeyFoundProblem({
+							key: fullKey,
+							severity,
+							ruleMeta,
+							isIgnored,
+							locale,
+						});
+						problemStore.report(problem);
+					}
+				} else if (!validationFunction(key)) {
 					const problem = getMalformedKeyFoundProblem({
 						key,
 						severity,

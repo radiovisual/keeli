@@ -98,6 +98,147 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 		expect(problemStore.report).toHaveBeenCalledWith(expected4);
 	});
 
+	it(`should report malformed key from delimited keys when namingConvention is camel-case with severity ${severity}`, () => {
+		const problemStore = createMockProblemReporter();
+
+		const translationFiles: TranslationFiles = {
+			en: {
+				"NotCamelCase.NotCamelCase": "[EN] expected one",
+				"not_camel.case_case.example": "[EN] expected two",
+			},
+			fr: {
+				"NotCamelCase.NotCamelCase": "[EN] expected one",
+				"not_camel.case_case.example": "[EN] expected two",
+			},
+		};
+
+		const config = {
+			...baseConfig,
+			rules: {
+				"no-malformed-keys": {
+					severity,
+					namingConvention: "camel-case",
+				},
+			},
+		};
+
+		rule.run(translationFiles, config, problemStore, context);
+
+		const expected1 = getMalformedKeyFoundProblem({
+			key: "NotCamelCase.NotCamelCase",
+			severity,
+			ruleMeta,
+			locale: "en",
+			isIgnored: false,
+		});
+
+		const expected2 = getMalformedKeyFoundProblem({
+			key: "not_camel.case_case.example",
+			severity,
+			ruleMeta,
+			locale: "en",
+			isIgnored: false,
+		});
+
+		const expected3 = getMalformedKeyFoundProblem({
+			key: "NotCamelCase.NotCamelCase",
+			severity,
+			ruleMeta,
+			locale: "fr",
+			isIgnored: false,
+		});
+
+		const expected4 = getMalformedKeyFoundProblem({
+			key: "not_camel.case_case.example",
+			severity,
+			ruleMeta,
+			locale: "fr",
+			isIgnored: false,
+		});
+
+		expect(problemStore.report).toHaveBeenCalledTimes(4);
+		expect(problemStore.report).toHaveBeenCalledWith(expected1);
+		expect(problemStore.report).toHaveBeenCalledWith(expected2);
+		expect(problemStore.report).toHaveBeenCalledWith(expected3);
+		expect(problemStore.report).toHaveBeenCalledWith(expected4);
+	});
+
+	it(`should not report a malformed key problem for period-delimited camel-case keys when namingConvention is camel-case with severity ${severity}`, () => {
+		const problemStore = createMockProblemReporter();
+
+		const translationFiles: TranslationFiles = {
+			en: {
+				"camelCase.camelCase": "[EN] expected one",
+				"moreCamelCase.example": "[EN] expected two",
+			},
+			fr: {
+				"camelCase.camelCase": "[FR] expected one",
+				"moreCamelCase.example": "[FR] expected two",
+			},
+		};
+
+		const config = {
+			...baseConfig,
+			rules: {
+				"no-malformed-keys": {
+					severity,
+					namingConvention: "camel-case",
+				},
+			},
+		};
+
+		rule.run(translationFiles, config, problemStore, context);
+
+		expect(problemStore.report).not.toHaveBeenCalled();
+	});
+
+	it(`should report a malformed key problem for period-delimited camel-case keys when namingConvention is camel-case with severity ${severity}`, () => {
+		const problemStore = createMockProblemReporter();
+
+		const translationFiles: TranslationFiles = {
+			en: {
+				"camelCase.not-camel-case": "[EN] expected one",
+				"moreCamelCase.example": "[EN] expected two",
+			},
+			fr: {
+				"camelCase.not-camel-case": "[FR] expected one",
+				"moreCamelCase.example": "[FR] expected two",
+			},
+		};
+
+		const config = {
+			...baseConfig,
+			rules: {
+				"no-malformed-keys": {
+					severity,
+					namingConvention: "camel-case",
+				},
+			},
+		};
+
+		rule.run(translationFiles, config, problemStore, context);
+
+		const expected1 = getMalformedKeyFoundProblem({
+			key: "camelCase.not-camel-case",
+			severity,
+			ruleMeta,
+			locale: "en",
+			isIgnored: false,
+		});
+
+		const expected2 = getMalformedKeyFoundProblem({
+			key: "camelCase.not-camel-case",
+			severity,
+			ruleMeta,
+			locale: "fr",
+			isIgnored: false,
+		});
+
+		expect(problemStore.report).toHaveBeenCalledTimes(2);
+		expect(problemStore.report).toHaveBeenCalledWith(expected1);
+		expect(problemStore.report).toHaveBeenCalledWith(expected2);
+	});
+
 	it(`should not report camelCase key as malformed key when namingConvention is camel-case with severity ${severity}`, () => {
 		const problemStore = createMockProblemReporter();
 
@@ -555,6 +696,100 @@ describe.each([["error"], ["warning"]])(`${rule.meta.name}`, (severityStr) => {
 		expect(problemStore.report).toHaveBeenCalledWith(expected2);
 		expect(problemStore.report).toHaveBeenCalledWith(expected3);
 		expect(problemStore.report).toHaveBeenCalledWith(expected4);
+	});
+
+	it(`should report malformed key when namingConvention is kebab-case with severity ${severity}`, () => {
+		const problemStore = createMockProblemReporter();
+
+		const translationFiles: TranslationFiles = {
+			en: {
+				NOT_KEBAB_CASE: "[EN] expected one",
+				notKebabCase: "[EN] expected two",
+			},
+			fr: {
+				NOT_KEBAB_CASE: "[FR] expected one",
+				notKebabCase: "[FR] expected two",
+			},
+		};
+
+		const config = {
+			...baseConfig,
+			rules: {
+				"no-malformed-keys": {
+					severity,
+					namingConvention: "kebab-case",
+				},
+			},
+		};
+
+		rule.run(translationFiles, config, problemStore, context);
+
+		const expected1 = getMalformedKeyFoundProblem({
+			key: "NOT_KEBAB_CASE",
+			severity,
+			ruleMeta,
+			locale: "en",
+			isIgnored: false,
+		});
+
+		const expected2 = getMalformedKeyFoundProblem({
+			key: "notKebabCase",
+			severity,
+			ruleMeta,
+			locale: "en",
+			isIgnored: false,
+		});
+
+		const expected3 = getMalformedKeyFoundProblem({
+			key: "NOT_KEBAB_CASE",
+			severity,
+			ruleMeta,
+			locale: "fr",
+			isIgnored: false,
+		});
+
+		const expected4 = getMalformedKeyFoundProblem({
+			key: "notKebabCase",
+			severity,
+			ruleMeta,
+			locale: "fr",
+			isIgnored: false,
+		});
+
+		expect(problemStore.report).toHaveBeenCalledTimes(4);
+		expect(problemStore.report).toHaveBeenCalledWith(expected1);
+		expect(problemStore.report).toHaveBeenCalledWith(expected2);
+		expect(problemStore.report).toHaveBeenCalledWith(expected3);
+		expect(problemStore.report).toHaveBeenCalledWith(expected4);
+	});
+
+	it(`should not report malformed key when namingConvention is kebab-case with severity ${severity}`, () => {
+		const problemStore = createMockProblemReporter();
+
+		const translationFiles: TranslationFiles = {
+			en: {
+				"kebab-case": "[EN] expected one",
+				"more-kebab-case.delimited": "[EN] expected two",
+			},
+			fr: {
+				"kebab-case": "[EN] expected one",
+				"more-kebab-case.delimited": "[EN] expected two",
+			},
+		};
+
+		const config = {
+			...baseConfig,
+			rules: {
+				"no-malformed-keys": {
+					severity,
+					namingConvention: "kebab-case",
+				},
+			},
+		};
+
+		rule.run(translationFiles, config, problemStore, context);
+
+		expect(problemStore.report).not.toHaveBeenCalled();
 	});
 });
 
