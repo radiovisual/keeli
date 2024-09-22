@@ -25,3 +25,11 @@ export function isPascalCase(key: string) {
 export function isKebabCase(key: string) {
 	return !isEmptyString(key) && _.kebabCase(key) === key;
 }
+
+export function stringHasWhitespacePadding(message: string) {
+	return message.trim() !== message;
+}
+
+export function stringHasExtraneousWhitespace(message: string) {
+	return message.replace(/\s+/gm, " ") !== message;
+}
