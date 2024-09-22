@@ -10,5 +10,7 @@
 	"declares-a-malfomed-variable-in-de": "[DE] malformed {variable",
 	"html-message": "[DE] Hi, <b>{firstName}</b>",
 	"missing-key-in-fr": "[DE] this key should not be found in fr.json",
-	"unexpected-key": "[DE] this key is not defined in the source file en.json"
+	"unexpected-key": "[DE] this key is not defined in the source file en.json",
+	"extra-whitespace-padding": "  [DE] this key has extra whitespace padding  ",
+	"extra-whitespace-internally-de": "[DE] this key has    extra internal whitespace    padding in de"
 }

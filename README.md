@@ -33,7 +33,7 @@ For each project where you want to run the keeli, you will need to have a file n
 	 **/
 	sourceFile: "en.json",
 	/**
-	 * An object describing the locale and its assosiated translation file name.
+	 * An object describing the locale and its associated translation file name.
 	 * Example: {"de": "de.json", "fr": "fr.json" }
 	 *
 	 **/
@@ -102,6 +102,8 @@ Each rule can have a default setting of `error`, `warn` or `off`, these defaults
 | no-invalid-variables     | `error` |
 | no-html-messages         | `error` |
 | no-missing-keys          | `error` |
+| no-malformed-keys        | `error` |
+| no-extra-whitespace      | `error` |
 
 # Overriding Rules
 

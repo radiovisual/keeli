@@ -9,5 +9,7 @@
 	"declares-a-single-missing-variable-in-fr": "[EN] should be two {one} {two}",
 	"declares-a-malfomed-variable-in-de": "[EN] malformed {variable}",
 	"html-message": "Hi, <b>{firstName}</b>",
-	"missing-key-in-fr": "[EN] this key should not be found in fr.json"
+	"missing-key-in-fr": "[EN] this key should not be found in fr.json",
+	"extra-whitespace-padding": "  [EN] this key has extra whitespace padding  ",
+	"extra-whitespace-internally-de": "[EN] this key has extra internal whitespace padding in de"
 }

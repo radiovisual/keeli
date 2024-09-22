@@ -4,6 +4,8 @@ import {
 	isSnakeCase,
 	isPascalCase,
 	isKebabCase,
+	stringHasWhitespacePadding,
+	stringHasExtraneousWhitespace,
 } from "./string-helpers";
 
 describe("isEmptyString", () => {
@@ -82,5 +84,41 @@ describe("isKebabCase", () => {
 		expect(isKebabCase("tHIS_iS_nOT-KEBAB-cASE")).toBe(false);
 		expect(isKebabCase("this-is-not-kebab-case-")).toBe(false);
 		expect(isKebabCase("-this-is-not-kebab-case-")).toBe(false);
+	});
+});
+describe("stringHasWhitespacePadding", () => {
+	it("should return true for whitespace-padded strings", () => {
+		expect(stringHasWhitespacePadding(" with whitespace padding before")).toBe(
+			true
+		);
+		expect(stringHasWhitespacePadding("with whitespace padding after ")).toBe(
+			true
+		);
+		expect(
+			stringHasWhitespacePadding("  with whitespace padding before and after  ")
+		).toBe(true);
+	});
+
+	it("should return false for strings without whitespace padding strings", () => {
+		expect(stringHasWhitespacePadding("no whitespace padding")).toBe(false);
+	});
+});
+
+describe("stringHasExtraneousWhitespace", () => {
+	it("should return true for strings with more than 1 internal contiguous whitespace character", () => {
+		expect(
+			stringHasExtraneousWhitespace("with    contiguous    whitespace padding")
+		).toBe(true);
+		expect(stringHasExtraneousWhitespace("with newlines \n\tpadding")).toBe(
+			true
+		);
+		expect(stringHasExtraneousWhitespace("with tabs\t\t\tpadding")).toBe(true);
+		expect(
+			stringHasExtraneousWhitespace("with carriage returns\t\t\tpadding")
+		).toBe(true);
+	});
+
+	it("should return false for strings without internal contiguous whitespace", () => {
+		expect(stringHasExtraneousWhitespace("no whitespace padding")).toBe(false);
 	});
 });
