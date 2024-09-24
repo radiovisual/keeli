@@ -9,10 +9,13 @@
 	"rules": {
 		"no-untranslated-messages": "error",
 		"no-empty-messages": "error",
-		"no-extra-whitespace": "error",
-		"no-html-messages": "error",
+		"no-extra-whitespace": {
+			"severity": "error",
+			"ignoreKeys": []
+		},
+		"no-html-messages": "kjh",
 		"no-missing-keys": "error",
-		"no-invalid-variables": "error",
+		"no-invalid-variables": "warn",
 		"no-malformed-keys": {
 			"severity": "error",
 			"namingConvention": "kebab-case"

@@ -19,8 +19,8 @@ export function getInvalidSeverityProblem(
 	return Problem.Builder.withRuleMeta(ruleMeta)
 		.withSeverity(severity)
 		.withMessage(
-			`Invalid severity: "${invalidSeverity}" assigned to ${ruleName}. You must use: ${validSeverities.join(
-				"|"
+			`Invalid severity: "${invalidSeverity}" assigned to ${ruleName}. Use: ${validSeverities.join(
+				" | "
 			)}`
 		)
 		.build();
