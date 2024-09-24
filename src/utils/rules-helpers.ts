@@ -1,3 +1,4 @@
+import { validSeverities } from "../constants";
 import type { Config, Rule, RuleSeverity } from "../types";
 
 /**
@@ -9,13 +10,14 @@ import type { Config, Rule, RuleSeverity } from "../types";
 export function getRuleSeverity(config: Config, rule: Rule): RuleSeverity {
 	const ruleConfig = config.rules[rule.meta.name];
 
-	if (typeof ruleConfig === "string") {
+	if (typeof ruleConfig === "string" && validSeverities.includes(ruleConfig)) {
 		return ruleConfig;
 	}
 
 	if (
 		typeof ruleConfig === "object" &&
-		typeof ruleConfig?.severity === "string"
+		typeof ruleConfig?.severity === "string" &&
+		validSeverities.includes(ruleConfig.severity)
 	) {
 		return ruleConfig.severity;
 	}

@@ -30,7 +30,7 @@ function runRules(config: Config) {
 		});
 	});
 
-	if (problemStore.getConfigurationProblemCount() > 0) {
+	if (problemStore.getConfigurationErrorCount() > 0) {
 		exitRun(problemStore, config.dryRun);
 		return;
 	}
@@ -51,11 +51,11 @@ function runRules(config: Config) {
 }
 
 function exitRun(problemStore: ProblemStore, isDryRun: boolean) {
-	const problems = problemStore.getProblems();
+	const errorCount = problemStore.getErrorCount();
 
-	const hasErrors = problems.length > 0;
+	const hasErrors = errorCount > 0;
 
-	const logger = new Logger(problemStore);
+	const logger = new Logger(problemStore, isDryRun);
 
 	logger.logErrors();
 
