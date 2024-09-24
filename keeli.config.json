@@ -13,9 +13,9 @@
 			"severity": "error",
 			"ignoreKeys": []
 		},
-		"no-html-messages": "kjh",
+		"no-html-messages": "error",
 		"no-missing-keys": "error",
-		"no-invalid-variables": "warn",
+		"no-invalid-variables": "error",
 		"no-malformed-keys": {
 			"severity": "error",
 			"namingConvention": "kebab-case"
