@@ -17,6 +17,7 @@ const ruleMeta: RuleMeta = {
 	url: "TBD",
 	type: "validation",
 	defaultSeverity: "error",
+	configurable: true,
 };
 
 const noEmptyMessages: Rule = {

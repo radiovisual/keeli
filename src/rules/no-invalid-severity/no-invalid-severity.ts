@@ -16,6 +16,7 @@ const ruleMeta: RuleMeta = {
 	url: "TBD",
 	type: "configuration",
 	defaultSeverity: "error",
+	configurable: false,
 };
 
 const noInvalidSeverity: Rule = {
@@ -26,7 +27,7 @@ const noInvalidSeverity: Rule = {
 		problemStore,
 		context: RuleContext
 	) => {
-		const { severity } = context;
+		const severity = ruleMeta.defaultSeverity;
 
 		// Look for invalid rule severity in the configuration file
 		Object.entries(config.rules).forEach(([rule, ruleValue]) => {

@@ -13,6 +13,7 @@ describe("getRuleSeverity", () => {
 			url: "",
 			defaultSeverity: "warn",
 			name: "example-rule",
+			configurable: true,
 		};
 
 		const rule: Partial<Rule> = {
@@ -37,6 +38,7 @@ describe("getRuleSeverity", () => {
 			url: "",
 			defaultSeverity: "error",
 			name,
+			configurable: true,
 		};
 
 		const rule: Partial<Rule> = {
@@ -63,6 +65,7 @@ describe("getRuleSeverity", () => {
 			url: "",
 			defaultSeverity: "error",
 			name,
+			configurable: true,
 		};
 
 		const rule: Partial<Rule> = {
@@ -93,6 +96,7 @@ describe("getRuleIgnoreKeys", () => {
 			url: "",
 			defaultSeverity: "error",
 			name,
+			configurable: true,
 		};
 
 		const rule: Partial<Rule> = {
@@ -121,6 +125,7 @@ describe("getRuleIgnoreKeys", () => {
 			url: "",
 			defaultSeverity: "error",
 			name,
+			configurable: true,
 		};
 
 		const rule: Partial<Rule> = {
@@ -145,6 +150,7 @@ describe("getRuleIgnoreKeys", () => {
 			url: "",
 			defaultSeverity: "error",
 			name,
+			configurable: true,
 		};
 
 		const rule: Partial<Rule> = {

@@ -43,6 +43,7 @@ export type RuleMeta = {
 	description: string;
 	type: keyof typeof RULE_TYPE;
 	url: string;
+	configurable: boolean;
 };
 
 export type RuleContext = {

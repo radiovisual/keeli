@@ -11,6 +11,8 @@ import {
 	getInvalidTranslationFilesProblem,
 	getMissingDefaultLocaleProblem,
 	getMissingSourceFileProblem,
+	getUnConfigurableRuleFoundInConfigProblem,
+	getUnknownRuleConfigurationProblem,
 } from "./problems.ts";
 
 const ruleMeta = noInvalidConfiguration.meta;
@@ -253,6 +255,58 @@ describe(`${rule.meta.name}`, () => {
 			severity: severity as RuleSeverity,
 			ruleMeta,
 		});
+
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
+	});
+
+	it(`should report unknown rules in configuration file`, () => {
+		const problemStore = createMockProblemReporter();
+
+		const { severity } = context;
+
+		const config: Config = {
+			...baseConfig,
+			rules: {
+				"this-is-an-unknown-rule": "error",
+			},
+		};
+
+		rule.run(translationFiles, config, problemStore, context);
+
+		const expectedProblem = getUnknownRuleConfigurationProblem(
+			{
+				severity: severity as RuleSeverity,
+				ruleMeta,
+			},
+			"this-is-an-unknown-rule"
+		);
+
+		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
+		expect(problemStore.report).toHaveBeenCalledTimes(1);
+	});
+
+	it(`should report when un-configurable rules find configuration in the config file`, () => {
+		const problemStore = createMockProblemReporter();
+
+		const { severity } = context;
+
+		const config: Config = {
+			...baseConfig,
+			rules: {
+				"no-invalid-configuration": "off",
+			},
+		};
+
+		rule.run(translationFiles, config, problemStore, context);
+
+		const expectedProblem = getUnConfigurableRuleFoundInConfigProblem(
+			{
+				severity: severity as RuleSeverity,
+				ruleMeta,
+			},
+			"no-invalid-configuration"
+		);
 
 		expect(problemStore.report).toHaveBeenCalledWith(expectedProblem);
 		expect(problemStore.report).toHaveBeenCalledTimes(1);

@@ -7,10 +7,16 @@ import {
 } from "../../types.ts";
 import { isEmptyString } from "../../utils/string-helpers.ts";
 import {
+	configurableRuleNames,
+	unConfigurableRuleNames,
+} from "../../constants";
+import {
 	getInvalidTranslationFilesProblem,
 	getMissingSourceFileProblem,
 	getMissingDefaultLocaleProblem,
 	getInvalidPathToTranslatedFilesProblem,
+	getUnknownRuleConfigurationProblem,
+	getUnConfigurableRuleFoundInConfigProblem,
 } from "./problems.ts";
 
 const ruleMeta: RuleMeta = {
@@ -19,6 +25,7 @@ const ruleMeta: RuleMeta = {
 	url: "TBD",
 	type: "configuration",
 	defaultSeverity: "error",
+	configurable: false,
 };
 
 const noInvalidConfiguration: Rule = {
@@ -30,7 +37,7 @@ const noInvalidConfiguration: Rule = {
 		context: RuleContext
 	) => {
 		const { defaultLocale, sourceFile, pathToTranslatedFiles } = config;
-		const { severity } = context;
+		const severity = ruleMeta.defaultSeverity;
 
 		// Look for missing or invalid 'defaultLocale' in the configuration
 		if (!defaultLocale || isEmptyString(defaultLocale)) {
@@ -74,6 +81,31 @@ const noInvalidConfiguration: Rule = {
 				getInvalidPathToTranslatedFilesProblem({ ruleMeta, severity })
 			);
 		}
+
+		// Look for unexpected rule names in the configuration
+		Object.keys(config?.rules).forEach((ruleName) => {
+			if (
+				!configurableRuleNames.includes(ruleName) &&
+				!unConfigurableRuleNames.includes(ruleName)
+			) {
+				const problem = getUnknownRuleConfigurationProblem(
+					{ ruleMeta, severity },
+					ruleName
+				);
+				problemStore.report(problem);
+			}
+		});
+
+		// Look for un-configurable rule names in the configuration
+		Object.keys(config?.rules).forEach((ruleName) => {
+			if (unConfigurableRuleNames.includes(ruleName)) {
+				const problem = getUnConfigurableRuleFoundInConfigProblem(
+					{ ruleMeta, severity },
+					ruleName
+				);
+				problemStore.report(problem);
+			}
+		});
 	},
 };
 

@@ -57,3 +57,33 @@ export function getInvalidPathToTranslatedFilesProblem(
 		)
 		.build();
 }
+
+export function getUnknownRuleConfigurationProblem(
+	problemContext: ProblemContext,
+	unknownRuleName: string
+): Problem {
+	const { severity, ruleMeta } = problemContext;
+
+	return Problem.Builder.withRuleMeta(ruleMeta)
+		.withRuleMeta(ruleMeta)
+		.withSeverity(severity)
+		.withMessage(
+			`Unknown rule '${unknownRuleName}' found in configuration. Remove or update the rule entry.`
+		)
+		.build();
+}
+
+export function getUnConfigurableRuleFoundInConfigProblem(
+	problemContext: ProblemContext,
+	ruleName: string
+): Problem {
+	const { severity, ruleMeta } = problemContext;
+
+	return Problem.Builder.withRuleMeta(ruleMeta)
+		.withRuleMeta(ruleMeta)
+		.withSeverity(severity)
+		.withMessage(
+			`The rule '${ruleName}' is not configurable. Remove it from your config's "rules" section.`
+		)
+		.build();
+}
