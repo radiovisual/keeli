@@ -8,7 +8,13 @@ import type { Config, Rule, RuleSeverity } from "../types";
  * @returns string
  */
 export function getRuleSeverity(config: Config, rule: Rule): RuleSeverity {
+	const isConfigurable = rule.meta.configurable;
+
 	const ruleConfig = config.rules[rule.meta.name];
+
+	if (!isConfigurable) {
+		return rule.meta.defaultSeverity;
+	}
 
 	if (typeof ruleConfig === "string" && validSeverities.includes(ruleConfig)) {
 		return ruleConfig;

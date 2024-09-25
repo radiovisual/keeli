@@ -19,3 +19,24 @@ export const keyNamingConventions = {
 };
 
 export const validKeyNamingConventions = Object.values(keyNamingConventions);
+
+/**
+ * Export a list of the rule names that are configurable
+ */
+export const configurableRuleNames: string[] = [
+	"no-empty-messages",
+	"no-untranslated-messages",
+	"no-invalid-variables",
+	"no-html-messages",
+	"no-missing-keys",
+	"no-malformed-keys",
+	"no-extra-whitespace",
+];
+
+/**
+ * Export a list of the rule names that are NOT configurable
+ */
+export const unConfigurableRuleNames: string[] = [
+	"no-invalid-configuration",
+	"no-invalid-severity",
+];

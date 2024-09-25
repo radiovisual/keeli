@@ -15,8 +15,9 @@ This rule makes the following checks that your configuration is ready to go.
    2. A valid `sourceFile`
    3. Valid `translationFiles` object
    4. A valid `pathToTranslatedFiles` string
+   5. Only known rules can be passed into the `rules` section
 
-✅ Examples of a **correct** setup for this rule (all messages are non-empty):
+✅ Examples of a **correct** setup for this rule (all messages are non-empty, and valid rules are used):
 
 ```json
 {
@@ -25,7 +26,10 @@ This rule makes the following checks that your configuration is ready to go.
 	"translationFiles": {
 		"locale": "filename-of-this-locales-messages"
 	},
-	"pathToTranslatedFiles": "path/to/translation/files/directory"
+	"pathToTranslatedFiles": "path/to/translation/files/directory",
+	"rules": {
+		"no-html-messages": "warn"
+	}
 }
 ```
 
