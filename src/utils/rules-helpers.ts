@@ -1,5 +1,5 @@
-import { validSeverities } from "../constants";
-import type { Config, Rule, RuleSeverity } from "../types";
+import { validSeverities } from "../constants.ts";
+import type { Config, Rule, RuleSeverity } from "../types.ts";
 
 /**
  * Get the user-supplied (or default) configured severity of a specific rule.

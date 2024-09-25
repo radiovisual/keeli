@@ -58,7 +58,7 @@ const noMalformedKeys: Rule = {
 			// Check if the user provided their own validation function. If supplied.
 			// this user-supplied validation function will be the only validation function that we run.
 			// At this point, Keeli is already running, so we can assume the provided function
-			// is valid, otherwise the problem would have ben caught when the configuration rules run.
+			// is valid, otherwise the problem would have been caught when the configuration rules run.
 			if (validationFunctionPath) {
 				// Load the function at the provided validationFunctionPath
 				validationFunction = require(validationFunctionPath);

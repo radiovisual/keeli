@@ -1,5 +1,5 @@
-import type { Config, Rule, RuleSeverity, RuleMeta } from "../types";
-import { getRuleSeverity, getRuleIgnoreKeys } from "./rules-helpers";
+import type { Config, Rule, RuleMeta } from "../types.ts";
+import { getRuleSeverity, getRuleIgnoreKeys } from "./rules-helpers.ts";
 
 describe("getRuleSeverity", () => {
 	it("should get ruleMeta.defaultSeverity if none is supplied", () => {

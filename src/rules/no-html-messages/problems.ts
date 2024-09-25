@@ -1,5 +1,5 @@
-import { Problem } from "../../classes/problem.class";
-import { RuleMeta, RuleSeverity } from "../../types";
+import { Problem } from "../../classes/problem.class.ts";
+import { RuleMeta, RuleSeverity } from "../../types.ts";
 
 type ProblemContext = {
 	key: string;

@@ -2,4 +2,4 @@
 // validation function to the no-malformed-keys.validationFunctionPath option
 module.exports = (key) => {
     return false;
-}
+};
