@@ -1,1 +1,1 @@
-export { noInvalidVariables } from "./no-invalid-variables";
+export { noInvalidVariables } from "./no-invalid-variables.ts";

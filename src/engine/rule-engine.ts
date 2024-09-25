@@ -1,11 +1,11 @@
 import chalk from "chalk";
-import type { Config, Rule, TranslationFiles } from "../types";
+import type { Config, Rule, TranslationFiles } from "../types.ts";
 import * as rules from "../rules/index.js";
 import { ProblemStore } from "../classes/problem-store.class.js";
-import { getRuleIgnoreKeys, getRuleSeverity } from "../utils/rules-helpers";
-import { RULE_TYPE, SEVERITY_LEVEL } from "../constants";
-import { loadLanguageFiles } from "../utils/file-helpers";
-import { Logger } from "../classes/logger.class";
+import { getRuleIgnoreKeys, getRuleSeverity } from "../utils/rules-helpers.ts";
+import { RULE_TYPE, SEVERITY_LEVEL } from "../constants.ts";
+import { loadLanguageFiles } from "../utils/file-helpers.ts";
+import { Logger } from "../classes/logger.class.ts";
 
 function runRules(config: Config) {
 	const problemStore = new ProblemStore();

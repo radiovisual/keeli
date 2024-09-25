@@ -9,7 +9,7 @@ import { isEmptyString } from "../../utils/string-helpers.ts";
 import {
 	configurableRuleNames,
 	unConfigurableRuleNames,
-} from "../../constants";
+} from "../../constants.ts";
 import {
 	getInvalidTranslationFilesProblem,
 	getMissingSourceFileProblem,

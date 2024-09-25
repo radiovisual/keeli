@@ -1,6 +1,6 @@
-import type { Config } from "../types";
+import type { Config } from "../types.ts";
 
-import { getAllSupportedLocales } from "./config-helpers";
+import { getAllSupportedLocales } from "./config-helpers.ts";
 
 describe("getAllSupportedLocales", () => {
 	it("should get all supported locales", () => {

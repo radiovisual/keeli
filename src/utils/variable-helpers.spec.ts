@@ -1,4 +1,4 @@
-import { hasUnbalancedBrackets } from "./variable-helpers";
+import { hasUnbalancedBrackets } from "./variable-helpers.ts";
 
 describe("hasUnbalancedBrackets", () => {
 	it("should return true for strings with unbalanced brackets", () => {
