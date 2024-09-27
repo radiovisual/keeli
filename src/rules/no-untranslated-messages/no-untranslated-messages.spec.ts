@@ -4,7 +4,7 @@ import {
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.js";
+} from "../../types.ts";
 import { noUntranslatedMessages } from "./no-untranslated-messages.ts";
 import { getUntranslatedMessageProblem } from "./problems.ts";
 

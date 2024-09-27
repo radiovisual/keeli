@@ -22,7 +22,7 @@ import {
 const ruleMeta: RuleMeta = {
 	name: "no-invalid-configuration",
 	description: `A configuration file must be supplied with all required fields.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-invalid-configuration",
 	type: "configuration",
 	defaultSeverity: "error",
 	configurable: false,

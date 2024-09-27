@@ -1,7 +1,6 @@
-import chalk from "chalk";
 import type { Config, Rule, TranslationFiles } from "../types.ts";
-import * as rules from "../rules/index.js";
-import { ProblemStore } from "../classes/problem-store.class.js";
+import * as rules from "../rules/index.ts";
+import { ProblemStore } from "../classes/problem-store.class.ts";
 import { getRuleIgnoreKeys, getRuleSeverity } from "../utils/rules-helpers.ts";
 import { RULE_TYPE, SEVERITY_LEVEL } from "../constants.ts";
 import { loadLanguageFiles } from "../utils/file-helpers.ts";

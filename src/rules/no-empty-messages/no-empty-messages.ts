@@ -14,7 +14,7 @@ import {
 const ruleMeta: RuleMeta = {
 	name: "no-empty-messages",
 	description: `Checks for empty messages in translations.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-empty-messages",
 	type: "validation",
 	defaultSeverity: "error",
 	configurable: true,

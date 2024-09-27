@@ -18,7 +18,7 @@ import { getMalformedKeyFoundProblem } from "./problems.ts";
 const ruleMeta: RuleMeta = {
 	name: "no-malformed-keys",
 	description: `All keys in the translation files must use a consistent naming convention.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-malformed-keys",
 	type: "validation",
 	defaultSeverity: "error",
 	configurable: true,

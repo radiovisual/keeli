@@ -1,5 +1,6 @@
 import { ProblemStore } from "./problem-store.class.ts";
 import { Problem } from "./problem.class.ts";
+import terminalLink from "terminal-link";
 import Table, {
 	HorizontalTableRow,
 	VerticalTableRow,
@@ -105,7 +106,7 @@ class Logger {
 		}
 
 		items.push(messageWitDiff);
-		items.push(ruleMeta.name);
+		items.push(terminalLink(ruleMeta.name, ruleMeta.url, { fallback: false }));
 
 		return items as Cell[];
 	}

@@ -11,7 +11,7 @@ import { getUntranslatedMessageProblem } from "./problems.ts";
 const ruleMeta: RuleMeta = {
 	name: "no-untranslated-messages",
 	description: `All messages in the translation files must be translated.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-untranslated-messages",
 	type: "validation",
 	defaultSeverity: "error",
 	configurable: true,

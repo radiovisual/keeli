@@ -21,7 +21,7 @@ import {
 const ruleMeta: RuleMeta = {
 	name: "no-invalid-variables",
 	description: `All variables in each of the translation files must match the variables declared in the source file and have a valid syntax.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-invalid-variables",
 	type: "validation",
 	defaultSeverity: "error",
 	configurable: true,

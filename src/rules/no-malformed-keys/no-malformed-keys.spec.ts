@@ -4,7 +4,7 @@ import {
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.js";
+} from "../../types.ts";
 import { noMalformedKeys } from "./no-malformed-keys.ts";
 import { getMalformedKeyFoundProblem } from "./problems.ts";
 

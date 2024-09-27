@@ -13,7 +13,7 @@ const ruleMeta: RuleMeta = {
 	description: `Rule severity values must a string of: ${validSeverities.join(
 		"|"
 	)}.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-invalid-severity",
 	type: "configuration",
 	defaultSeverity: "error",
 	configurable: false,

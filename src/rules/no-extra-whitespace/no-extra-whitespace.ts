@@ -16,7 +16,7 @@ import { getExtraWhitespaceFoundInMessageProblem } from "./problems.ts";
 const ruleMeta: RuleMeta = {
 	name: "no-extra-whitespace",
 	description: `Whitespace should not appear before or after a message, or have more than 1 contiguous whitespace character internally.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-extra-whitespace",
 	type: "validation",
 	defaultSeverity: "error",
 	configurable: true,

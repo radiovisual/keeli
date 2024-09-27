@@ -4,7 +4,7 @@ import {
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.js";
+} from "../../types.ts";
 import { noMissingKeys } from "./no-missing-keys.ts";
 import {
 	getMissingExpectedKeyFoundProblem,

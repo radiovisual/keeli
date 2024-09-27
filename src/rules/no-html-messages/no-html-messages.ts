@@ -13,7 +13,7 @@ import { getHtmlFoundInMessageProblem } from "./problems.ts";
 const ruleMeta: RuleMeta = {
 	name: "no-html-messages",
 	description: `HTML syntax is not allowed in the messages.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-html-messages",
 	type: "validation",
 	defaultSeverity: "error",
 	configurable: true,

@@ -4,7 +4,7 @@ import {
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.js";
+} from "../../types.ts";
 import { noExtraWhitespace } from "./no-extra-whitespace.ts";
 import { getExtraWhitespaceFoundInMessageProblem } from "./problems.ts";
 

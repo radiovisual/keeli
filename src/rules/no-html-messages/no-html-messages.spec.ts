@@ -4,7 +4,7 @@ import {
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.js";
+} from "../../types.ts";
 import { noHtmlMessages } from "./no-html-messages.ts";
 import { getHtmlFoundInMessageProblem } from "./problems.ts";
 

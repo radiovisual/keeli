@@ -4,7 +4,7 @@ import {
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.js";
+} from "../../types.ts";
 import { noInvalidVariables } from "./no-invalid-variables.ts";
 import {
 	getMismatchedVariableFromSourceProblem,
