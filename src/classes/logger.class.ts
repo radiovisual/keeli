@@ -1,5 +1,5 @@
-import { ProblemStore } from "./problem-store.class.js";
-import { Problem } from "./problem.class.js";
+import { ProblemStore } from "./problem-store.class.ts";
+import { Problem } from "./problem.class.ts";
 import terminalLink from "terminal-link";
 import Table, {
 	HorizontalTableRow,
@@ -8,7 +8,7 @@ import Table, {
 	Cell,
 } from "cli-table3";
 import chalk from "chalk";
-import { SEVERITY_LEVEL } from "../constants.js";
+import { SEVERITY_LEVEL } from "../constants.ts";
 
 class Logger {
 	private problemStore: ProblemStore;

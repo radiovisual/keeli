@@ -1,5 +1,5 @@
-import type { TranslationFiles } from "../types.js";
-import { flatten } from "./file-helpers.js";
+import type { TranslationFiles } from "../types.ts";
+import { flatten } from "./file-helpers.ts";
 
 describe("flatten", () => {
 	it("should flatten nested JavaScript objects", () => {

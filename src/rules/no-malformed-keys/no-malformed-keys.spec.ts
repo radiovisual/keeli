@@ -1,12 +1,12 @@
-import { createMockProblemReporter } from "../../utils/test-helpers.js";
+import { createMockProblemReporter } from "../../utils/test-helpers.ts";
 import {
 	Config,
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.js";
-import { noMalformedKeys } from "./no-malformed-keys.js";
-import { getMalformedKeyFoundProblem } from "./problems.js";
+} from "../../types.ts";
+import { noMalformedKeys } from "./no-malformed-keys.ts";
+import { getMalformedKeyFoundProblem } from "./problems.ts";
 
 const ruleMeta = noMalformedKeys.meta;
 const rule = noMalformedKeys;

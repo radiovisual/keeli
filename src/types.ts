@@ -1,5 +1,5 @@
-import { ProblemStore } from "./classes/problem-store.class.js";
-import { SEVERITY_LEVEL, RULE_TYPE } from "./constants.js";
+import { ProblemStore } from "./classes/problem-store.class.ts";
+import { SEVERITY_LEVEL, RULE_TYPE } from "./constants.ts";
 
 export type RuleSeverity = keyof typeof SEVERITY_LEVEL;
 export type RuleAdvancedConfig = {

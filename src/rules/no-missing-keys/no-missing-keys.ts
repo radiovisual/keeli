@@ -1,15 +1,15 @@
-import { SEVERITY_LEVEL } from "../../constants.js";
+import { SEVERITY_LEVEL } from "../../constants.ts";
 import {
 	Config,
 	Rule,
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.js";
+} from "../../types.ts";
 import {
 	getUnexpectedKeyFoundProblem,
 	getMissingExpectedKeyFoundProblem,
-} from "./problems.js";
+} from "./problems.ts";
 
 const ruleMeta: RuleMeta = {
 	name: "no-missing-keys",

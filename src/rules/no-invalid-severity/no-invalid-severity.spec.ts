@@ -1,12 +1,12 @@
-import { createMockProblemReporter } from "../../utils/test-helpers.js";
+import { createMockProblemReporter } from "../../utils/test-helpers.ts";
 import {
 	Config,
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.js";
-import { noInvalidSeverity } from "./no-invalid-severity.js";
-import { getInvalidSeverityProblem } from "./problems.js";
+} from "../../types.ts";
+import { noInvalidSeverity } from "./no-invalid-severity.ts";
+import { getInvalidSeverityProblem } from "./problems.ts";
 
 const ruleMeta = noInvalidSeverity.meta;
 const rule = noInvalidSeverity;

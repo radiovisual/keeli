@@ -1,22 +1,22 @@
-import { SEVERITY_LEVEL } from "../../constants.js";
+import { SEVERITY_LEVEL } from "../../constants.ts";
 import {
 	Config,
 	Rule,
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.js";
+} from "../../types.ts";
 import {
 	extractVariableNamesFromMessage,
 	extractVariablesFromLocaleData,
 	hasUnbalancedBrackets,
-} from "../../utils/variable-helpers.js";
+} from "../../utils/variable-helpers.ts";
 import {
 	getMissingVariableFromSourceProblem,
 	getMismatchedVariableFromSourceProblem,
 	getInvalidVariableSyntaxProblem,
 	getUnbalancedVariableBracketsSyntaxProblem,
-} from "./problems.js";
+} from "./problems.ts";
 
 const ruleMeta: RuleMeta = {
 	name: "no-invalid-variables",

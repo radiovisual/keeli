@@ -1,12 +1,12 @@
-import { createMockProblemReporter } from "../../utils/test-helpers.js";
+import { createMockProblemReporter } from "../../utils/test-helpers.ts";
 import {
 	Config,
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.js";
-import { noHtmlMessages } from "./no-html-messages.js";
-import { getHtmlFoundInMessageProblem } from "./problems.js";
+} from "../../types.ts";
+import { noHtmlMessages } from "./no-html-messages.ts";
+import { getHtmlFoundInMessageProblem } from "./problems.ts";
 
 const ruleMeta = noHtmlMessages.meta;
 const rule = noHtmlMessages;

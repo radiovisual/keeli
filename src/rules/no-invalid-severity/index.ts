@@ -1,1 +1,1 @@
-export { noInvalidSeverity } from "./no-invalid-severity.js";
+export { noInvalidSeverity } from "./no-invalid-severity.ts";

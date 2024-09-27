@@ -1,4 +1,4 @@
-import { SEVERITY_LEVEL, keyNamingConventions } from "../../constants.js";
+import { SEVERITY_LEVEL, keyNamingConventions } from "../../constants.ts";
 import {
 	Config,
 	Rule,
@@ -6,14 +6,14 @@ import {
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.js";
+} from "../../types.ts";
 import {
 	isCamelCase,
 	isKebabCase,
 	isPascalCase,
 	isSnakeCase,
-} from "../../utils/string-helpers.js";
-import { getMalformedKeyFoundProblem } from "./problems.js";
+} from "../../utils/string-helpers.ts";
+import { getMalformedKeyFoundProblem } from "./problems.ts";
 
 const ruleMeta: RuleMeta = {
 	name: "no-malformed-keys",

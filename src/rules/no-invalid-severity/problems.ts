@@ -1,6 +1,6 @@
-import { Problem } from "../../classes/problem.class.js";
-import { RuleMeta, RuleSeverity } from "../../types.js";
-import { SEVERITY_LEVEL } from "../../constants.js";
+import { Problem } from "../../classes/problem.class.ts";
+import { RuleMeta, RuleSeverity } from "../../types.ts";
+import { SEVERITY_LEVEL } from "../../constants.ts";
 
 const validSeverities = Object.values(SEVERITY_LEVEL);
 

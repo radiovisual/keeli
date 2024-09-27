@@ -1,4 +1,4 @@
-import { RuleMeta, RuleSeverity } from "../types.js";
+import { RuleMeta, RuleSeverity } from "../types.ts";
 
 class Problem {
 	ruleMeta: RuleMeta;

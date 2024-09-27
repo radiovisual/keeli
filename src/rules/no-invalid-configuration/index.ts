@@ -1,1 +1,1 @@
-export { noInvalidConfiguration } from "./no-invalid-configuration.js";
+export { noInvalidConfiguration } from "./no-invalid-configuration.ts";

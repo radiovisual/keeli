@@ -1,4 +1,4 @@
-import { getMessageHasHtml } from "./message-helpers.js";
+import { getMessageHasHtml } from "./message-helpers.ts";
 
 describe("getMessageHasHtml", () => {
 	it("should return true for simple HTML tags", () => {

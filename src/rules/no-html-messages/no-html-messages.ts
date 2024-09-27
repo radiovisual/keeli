@@ -1,14 +1,14 @@
-import { SEVERITY_LEVEL } from "../../constants.js";
+import { SEVERITY_LEVEL } from "../../constants.ts";
 import {
 	Config,
 	Rule,
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.js";
-import { getMessageHasHtml } from "../../utils/message-helpers.js";
+} from "../../types.ts";
+import { getMessageHasHtml } from "../../utils/message-helpers.ts";
 
-import { getHtmlFoundInMessageProblem } from "./problems.js";
+import { getHtmlFoundInMessageProblem } from "./problems.ts";
 
 const ruleMeta: RuleMeta = {
 	name: "no-html-messages",

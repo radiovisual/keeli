@@ -1,15 +1,15 @@
-import { createMockProblemReporter } from "../../utils/test-helpers.js";
+import { createMockProblemReporter } from "../../utils/test-helpers.ts";
 import {
 	Config,
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.js";
-import { noMissingKeys } from "./no-missing-keys.js";
+} from "../../types.ts";
+import { noMissingKeys } from "./no-missing-keys.ts";
 import {
 	getMissingExpectedKeyFoundProblem,
 	getUnexpectedKeyFoundProblem,
-} from "./problems.js";
+} from "./problems.ts";
 
 const ruleMeta = noMissingKeys.meta;
 const rule = noMissingKeys;

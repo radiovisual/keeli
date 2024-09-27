@@ -1,17 +1,17 @@
-import { SEVERITY_LEVEL } from "../../constants.js";
+import { SEVERITY_LEVEL } from "../../constants.ts";
 import {
 	Config,
 	Rule,
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.js";
+} from "../../types.ts";
 import {
 	stringHasExtraneousWhitespace,
 	stringHasWhitespacePadding,
-} from "../../utils/string-helpers.js";
+} from "../../utils/string-helpers.ts";
 
-import { getExtraWhitespaceFoundInMessageProblem } from "./problems.js";
+import { getExtraWhitespaceFoundInMessageProblem } from "./problems.ts";
 
 const ruleMeta: RuleMeta = {
 	name: "no-extra-whitespace",

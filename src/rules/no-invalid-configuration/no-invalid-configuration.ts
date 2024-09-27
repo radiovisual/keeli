@@ -4,12 +4,12 @@ import {
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.js";
-import { isEmptyString } from "../../utils/string-helpers.js";
+} from "../../types.ts";
+import { isEmptyString } from "../../utils/string-helpers.ts";
 import {
 	configurableRuleNames,
 	unConfigurableRuleNames,
-} from "../../constants.js";
+} from "../../constants.ts";
 import {
 	getInvalidTranslationFilesProblem,
 	getMissingSourceFileProblem,
@@ -17,7 +17,7 @@ import {
 	getInvalidPathToTranslatedFilesProblem,
 	getUnknownRuleConfigurationProblem,
 	getUnConfigurableRuleFoundInConfigProblem,
-} from "./problems.js";
+} from "./problems.ts";
 
 const ruleMeta: RuleMeta = {
 	name: "no-invalid-configuration",

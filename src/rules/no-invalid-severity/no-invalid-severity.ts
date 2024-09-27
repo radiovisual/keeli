@@ -1,12 +1,12 @@
-import { validSeverities } from "../../constants.js";
+import { validSeverities } from "../../constants.ts";
 import {
 	Config,
 	Rule,
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.js";
-import { getInvalidSeverityProblem } from "./problems.js";
+} from "../../types.ts";
+import { getInvalidSeverityProblem } from "./problems.ts";
 
 const ruleMeta: RuleMeta = {
 	name: "no-invalid-severity",

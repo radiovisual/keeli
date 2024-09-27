@@ -1,1 +1,1 @@
-export { noExtraWhitespace } from "./no-extra-whitespace.js";
+export { noExtraWhitespace } from "./no-extra-whitespace.ts";

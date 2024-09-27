@@ -4,9 +4,9 @@ import fs from "node:fs";
 import path from "node:path";
 import chalk from "chalk";
 
-import { runRules } from "./engine/rule-engine.js";
-import type { Config } from "./types.js";
-import { config } from "./config/default-config.js";
+import { runRules } from "./engine/rule-engine.ts";
+import type { Config } from "./types.ts";
+import { config } from "./config/default-config.ts";
 
 const defaultConfig: Config = config;
 

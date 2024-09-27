@@ -1,17 +1,17 @@
-import { createMockProblemReporter } from "../../utils/test-helpers.js";
+import { createMockProblemReporter } from "../../utils/test-helpers.ts";
 import {
 	Config,
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.js";
-import { noInvalidVariables } from "./no-invalid-variables.js";
+} from "../../types.ts";
+import { noInvalidVariables } from "./no-invalid-variables.ts";
 import {
 	getMismatchedVariableFromSourceProblem,
 	getMissingVariableFromSourceProblem,
 	getInvalidVariableSyntaxProblem,
 	getUnbalancedVariableBracketsSyntaxProblem,
-} from "./problems.js";
+} from "./problems.ts";
 
 const ruleMeta = noInvalidVariables.meta;
 const rule = noInvalidVariables;

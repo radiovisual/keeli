@@ -1,12 +1,12 @@
-import { SEVERITY_LEVEL } from "../../constants.js";
+import { SEVERITY_LEVEL } from "../../constants.ts";
 import {
 	Config,
 	Rule,
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.js";
-import { getUntranslatedMessageProblem } from "./problems.js";
+} from "../../types.ts";
+import { getUntranslatedMessageProblem } from "./problems.ts";
 
 const ruleMeta: RuleMeta = {
 	name: "no-untranslated-messages",
