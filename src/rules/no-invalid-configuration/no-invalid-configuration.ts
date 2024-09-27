@@ -4,12 +4,12 @@ import {
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.ts";
-import { isEmptyString } from "../../utils/string-helpers.ts";
+} from "../../types.js";
+import { isEmptyString } from "../../utils/string-helpers.js";
 import {
 	configurableRuleNames,
 	unConfigurableRuleNames,
-} from "../../constants.ts";
+} from "../../constants.js";
 import {
 	getInvalidTranslationFilesProblem,
 	getMissingSourceFileProblem,
@@ -17,12 +17,12 @@ import {
 	getInvalidPathToTranslatedFilesProblem,
 	getUnknownRuleConfigurationProblem,
 	getUnConfigurableRuleFoundInConfigProblem,
-} from "./problems.ts";
+} from "./problems.js";
 
 const ruleMeta: RuleMeta = {
 	name: "no-invalid-configuration",
 	description: `A configuration file must be supplied with all required fields.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-invalid-configuration",
 	type: "configuration",
 	defaultSeverity: "error",
 	configurable: false,

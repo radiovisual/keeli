@@ -1,27 +1,27 @@
-import { SEVERITY_LEVEL } from "../../constants.ts";
+import { SEVERITY_LEVEL } from "../../constants.js";
 import {
 	Config,
 	Rule,
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.ts";
+} from "../../types.js";
 import {
 	extractVariableNamesFromMessage,
 	extractVariablesFromLocaleData,
 	hasUnbalancedBrackets,
-} from "../../utils/variable-helpers.ts";
+} from "../../utils/variable-helpers.js";
 import {
 	getMissingVariableFromSourceProblem,
 	getMismatchedVariableFromSourceProblem,
 	getInvalidVariableSyntaxProblem,
 	getUnbalancedVariableBracketsSyntaxProblem,
-} from "./problems.ts";
+} from "./problems.js";
 
 const ruleMeta: RuleMeta = {
 	name: "no-invalid-variables",
 	description: `All variables in each of the translation files must match the variables declared in the source file and have a valid syntax.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-invalid-variables",
 	type: "validation",
 	defaultSeverity: "error",
 	configurable: true,

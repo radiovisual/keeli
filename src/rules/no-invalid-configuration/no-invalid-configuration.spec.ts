@@ -1,11 +1,11 @@
-import { createMockProblemReporter } from "../../utils/test-helpers.ts";
+import { createMockProblemReporter } from "../../utils/test-helpers.js";
 import {
 	Config,
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.ts";
-import { noInvalidConfiguration } from "./no-invalid-configuration.ts";
+} from "../../types.js";
+import { noInvalidConfiguration } from "./no-invalid-configuration.js";
 import {
 	getInvalidPathToTranslatedFilesProblem,
 	getInvalidTranslationFilesProblem,
@@ -13,7 +13,7 @@ import {
 	getMissingSourceFileProblem,
 	getUnConfigurableRuleFoundInConfigProblem,
 	getUnknownRuleConfigurationProblem,
-} from "./problems.ts";
+} from "./problems.js";
 
 const ruleMeta = noInvalidConfiguration.meta;
 const rule = noInvalidConfiguration;

@@ -1,17 +1,17 @@
-import { SEVERITY_LEVEL } from "../../constants.ts";
+import { SEVERITY_LEVEL } from "../../constants.js";
 import {
 	Config,
 	Rule,
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.ts";
-import { getUntranslatedMessageProblem } from "./problems.ts";
+} from "../../types.js";
+import { getUntranslatedMessageProblem } from "./problems.js";
 
 const ruleMeta: RuleMeta = {
 	name: "no-untranslated-messages",
 	description: `All messages in the translation files must be translated.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-untranslated-messages",
 	type: "validation",
 	defaultSeverity: "error",
 	configurable: true,

@@ -1,20 +1,20 @@
-import { SEVERITY_LEVEL } from "../../constants.ts";
+import { SEVERITY_LEVEL } from "../../constants.js";
 import {
 	Config,
 	Rule,
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.ts";
+} from "../../types.js";
 import {
 	getUnexpectedKeyFoundProblem,
 	getMissingExpectedKeyFoundProblem,
-} from "./problems.ts";
+} from "./problems.js";
 
 const ruleMeta: RuleMeta = {
 	name: "no-missing-keys",
 	description: `All keys declared in the source file are the only keys allowed in the translation files.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-missing-keys",
 	type: "validation",
 	defaultSeverity: "error",
 	configurable: true,

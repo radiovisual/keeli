@@ -1,15 +1,15 @@
-import { createMockProblemReporter } from "../../utils/test-helpers.ts";
+import { createMockProblemReporter } from "../../utils/test-helpers.js";
 import {
 	Config,
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
-} from "../../types.ts";
-import { noEmptyMessages } from "./no-empty-messages.ts";
+} from "../../types.js";
+import { noEmptyMessages } from "./no-empty-messages.js";
 import {
 	getEmptySourceMessageProblem,
 	getEmptyTranslatedMessageProblem,
-} from "./problems.ts";
+} from "./problems.js";
 
 const ruleMeta = noEmptyMessages.meta;
 const rule = noEmptyMessages;

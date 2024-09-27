@@ -1,1 +1,1 @@
-export { noEmptyMessages } from "./no-empty-messages.ts";
+export { noEmptyMessages } from "./no-empty-messages.js";

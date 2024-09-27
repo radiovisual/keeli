@@ -1,12 +1,12 @@
-import { createMockProblemReporter } from "../../utils/test-helpers.ts";
+import { createMockProblemReporter } from "../../utils/test-helpers.js";
 import {
 	Config,
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
 } from "../../types.js";
-import { noUntranslatedMessages } from "./no-untranslated-messages.ts";
-import { getUntranslatedMessageProblem } from "./problems.ts";
+import { noUntranslatedMessages } from "./no-untranslated-messages.js";
+import { getUntranslatedMessageProblem } from "./problems.js";
 
 const ruleMeta = noUntranslatedMessages.meta;
 const rule = noUntranslatedMessages;

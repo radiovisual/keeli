@@ -1,4 +1,4 @@
-import { SEVERITY_LEVEL, keyNamingConventions } from "../../constants.ts";
+import { SEVERITY_LEVEL, keyNamingConventions } from "../../constants.js";
 import {
 	Config,
 	Rule,
@@ -6,19 +6,19 @@ import {
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.ts";
+} from "../../types.js";
 import {
 	isCamelCase,
 	isKebabCase,
 	isPascalCase,
 	isSnakeCase,
-} from "../../utils/string-helpers.ts";
-import { getMalformedKeyFoundProblem } from "./problems.ts";
+} from "../../utils/string-helpers.js";
+import { getMalformedKeyFoundProblem } from "./problems.js";
 
 const ruleMeta: RuleMeta = {
 	name: "no-malformed-keys",
 	description: `All keys in the translation files must use a consistent naming convention.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-malformed-keys",
 	type: "validation",
 	defaultSeverity: "error",
 	configurable: true,

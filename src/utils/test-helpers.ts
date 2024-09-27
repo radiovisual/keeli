@@ -1,4 +1,4 @@
-import { ProblemStore } from "../classes/problem-store.class.ts";
+import { ProblemStore } from "../classes/problem-store.class.js";
 
 export const createMockProblemReporter = () => {
 	return {

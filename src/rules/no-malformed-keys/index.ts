@@ -1,1 +1,1 @@
-export { noMalformedKeys } from "./no-malformed-keys.ts";
+export { noMalformedKeys } from "./no-malformed-keys.js";

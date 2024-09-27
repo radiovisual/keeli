@@ -6,7 +6,7 @@ import {
 	isKebabCase,
 	stringHasWhitespacePadding,
 	stringHasExtraneousWhitespace,
-} from "./string-helpers.ts";
+} from "./string-helpers.js";
 
 describe("isEmptyString", () => {
 	it("should return true for empty strings", () => {

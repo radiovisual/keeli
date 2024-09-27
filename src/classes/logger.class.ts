@@ -1,5 +1,6 @@
-import { ProblemStore } from "./problem-store.class.ts";
-import { Problem } from "./problem.class.ts";
+import { ProblemStore } from "./problem-store.class.js";
+import { Problem } from "./problem.class.js";
+import terminalLink from "terminal-link";
 import Table, {
 	HorizontalTableRow,
 	VerticalTableRow,
@@ -7,7 +8,7 @@ import Table, {
 	Cell,
 } from "cli-table3";
 import chalk from "chalk";
-import { SEVERITY_LEVEL } from "../constants.ts";
+import { SEVERITY_LEVEL } from "../constants.js";
 
 class Logger {
 	private problemStore: ProblemStore;
@@ -105,7 +106,7 @@ class Logger {
 		}
 
 		items.push(messageWitDiff);
-		items.push(ruleMeta.name);
+		items.push(terminalLink(ruleMeta.name, ruleMeta.url, { fallback: false }));
 
 		return items as Cell[];
 	}

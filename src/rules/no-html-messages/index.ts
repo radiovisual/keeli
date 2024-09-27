@@ -1,1 +1,1 @@
-export { noHtmlMessages } from "./no-html-messages.ts";
+export { noHtmlMessages } from "./no-html-messages.js";

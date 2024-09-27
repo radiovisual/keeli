@@ -1,7 +1,7 @@
 import path from "node:path";
 import fs from "node:fs";
 import { flattie } from "flattie";
-import type { Config, TranslationFiles } from "../types.ts";
+import type { Config, TranslationFiles } from "../types.js";
 
 export function flatten(obj: TranslationFiles): Record<string, string> {
 	return flattie(obj, ".");

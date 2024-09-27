@@ -1,5 +1,5 @@
-import { RULE_TYPE, SEVERITY_LEVEL } from "../constants.ts";
-import { Problem } from "../types.ts";
+import { RULE_TYPE, SEVERITY_LEVEL } from "../constants.js";
+import { Problem } from "../types.js";
 
 export class ProblemStore {
 	// Validation Problems

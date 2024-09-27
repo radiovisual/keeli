@@ -1,12 +1,12 @@
-import { createMockProblemReporter } from "../../utils/test-helpers.ts";
+import { createMockProblemReporter } from "../../utils/test-helpers.js";
 import {
 	Config,
 	RuleContext,
 	RuleSeverity,
 	TranslationFiles,
 } from "../../types.js";
-import { noExtraWhitespace } from "./no-extra-whitespace.ts";
-import { getExtraWhitespaceFoundInMessageProblem } from "./problems.ts";
+import { noExtraWhitespace } from "./no-extra-whitespace.js";
+import { getExtraWhitespaceFoundInMessageProblem } from "./problems.js";
 
 const ruleMeta = noExtraWhitespace.meta;
 const rule = noExtraWhitespace;

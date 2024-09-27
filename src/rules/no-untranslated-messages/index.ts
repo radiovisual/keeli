@@ -1,1 +1,1 @@
-export { noUntranslatedMessages } from "./no-untranslated-messages.ts";
+export { noUntranslatedMessages } from "./no-untranslated-messages.js";

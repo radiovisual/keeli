@@ -1,1 +1,1 @@
-export { noMissingKeys } from "./no-missing-keys.ts";
+export { noMissingKeys } from "./no-missing-keys.js";

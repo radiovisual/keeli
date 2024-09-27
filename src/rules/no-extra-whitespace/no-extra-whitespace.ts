@@ -1,22 +1,22 @@
-import { SEVERITY_LEVEL } from "../../constants.ts";
+import { SEVERITY_LEVEL } from "../../constants.js";
 import {
 	Config,
 	Rule,
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.ts";
+} from "../../types.js";
 import {
 	stringHasExtraneousWhitespace,
 	stringHasWhitespacePadding,
-} from "../../utils/string-helpers.ts";
+} from "../../utils/string-helpers.js";
 
-import { getExtraWhitespaceFoundInMessageProblem } from "./problems.ts";
+import { getExtraWhitespaceFoundInMessageProblem } from "./problems.js";
 
 const ruleMeta: RuleMeta = {
 	name: "no-extra-whitespace",
 	description: `Whitespace should not appear before or after a message, or have more than 1 contiguous whitespace character internally.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-extra-whitespace",
 	type: "validation",
 	defaultSeverity: "error",
 	configurable: true,

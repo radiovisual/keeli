@@ -19,10 +19,10 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"bin": {
-		"i18n-validate": "dist/index.js"
+		"keeli": "dist/index.js"
 	},
 	"files": [
-		"dist/**/*"
+		"dist"
 	],
 	"devDependencies": {
 		"@types/jest": "^29.5.12",
@@ -39,7 +39,8 @@
 		"chalk": "^4.0.0",
 		"cli-table3": "^0.6.5",
 		"flattie": "^1.1.1",
-		"lodash": "^4.17.21"
+		"lodash": "^4.17.21",
+		"terminal-link": "^2.1.1"
 	},
 	"keywords": [
 		"cli",

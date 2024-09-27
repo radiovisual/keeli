@@ -1,19 +1,19 @@
-import { validSeverities } from "../../constants.ts";
+import { validSeverities } from "../../constants.js";
 import {
 	Config,
 	Rule,
 	RuleContext,
 	RuleMeta,
 	TranslationFiles,
-} from "../../types.ts";
-import { getInvalidSeverityProblem } from "./problems.ts";
+} from "../../types.js";
+import { getInvalidSeverityProblem } from "./problems.js";
 
 const ruleMeta: RuleMeta = {
 	name: "no-invalid-severity",
 	description: `Rule severity values must a string of: ${validSeverities.join(
 		"|"
 	)}.`,
-	url: "TBD",
+	url: "https://github.com/radiovisual/keeli/tree/main/src/rules/no-invalid-severity",
 	type: "configuration",
 	defaultSeverity: "error",
 	configurable: false,

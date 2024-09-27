@@ -1,4 +1,4 @@
-import type { Config } from "../types.ts";
+import type { Config } from "../types.js";
 
 export function getAllSupportedLocales(config: Config): string[] {
 	const allSupportedLocales = new Set([
