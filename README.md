@@ -53,7 +53,7 @@ npm install --save-dev keeli
 **yarn**
 
 ```
-yarn add keeli --D
+yarn add keeli -D
 ```
 
 **pnpm**
