@@ -21,6 +21,7 @@ export type Config = {
 	};
 	dryRun: boolean;
 	enabled: boolean;
+	verbose?: boolean;
 };
 
 export type Problem = {

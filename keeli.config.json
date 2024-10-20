@@ -22,5 +22,6 @@
 		}
 	},
 	"dryRun": false,
-	"enabled": true
+	"enabled": true,
+	"verbose": true
 }
