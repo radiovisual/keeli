@@ -42,8 +42,6 @@ jobs:
           git push origin version-bump/${{ env.RELEASE_VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # This step will only run if all previous steps have succeeded and if it's not a pre-release
       - name: Create Pull Request for Version Bump
         if: success() && env.IS_PRE_RELEASE == 'false'
         uses: peter-evans/create-pull-request@v6
@@ -55,3 +53,12 @@ jobs:
           labels: version-bump
           token: ${{ secrets.GITHUB_TOKEN }}
           base: main
+
+      # Automatically enable auto-merge on the created PR with the version bump
+      - name: Enable Auto-Merge
+        if: success() && env.IS_PRE_RELEASE == 'false'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          pull-request-number: ${{ steps.create_pull_request.outputs.pull-request-number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          merge-method: squash
