@@ -1,6 +1,6 @@
 {
 	"name": "keeli",
-	"version": "0.0.1",
+	"version": "0.0.0",
 	"main": "dist/index.js",
 	"description": "Configurable CLI validation tool to check for common problems in your translated source files.",
 	"author": {
