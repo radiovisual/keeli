@@ -2,6 +2,9 @@ name: Publish Package to npmjs
 on:
   release:
     types: [created]
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -47,7 +50,7 @@ jobs:
       - name: Create Pull Request for Version Bump
         if: success() && env.IS_PRE_RELEASE == 'false'
         id: create_pull_request
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: Update package version to ${{ env.RELEASE_VERSION }}
           title: "chore: update package version to ${{ env.RELEASE_VERSION }}"
@@ -59,14 +62,14 @@ jobs:
 
       # Auto-merge the Pull Request with the version bump if the release is not a pre-release
       - name: Enable Auto-Merge
-        if: success() && env.IS_PRE_RELEASE == 'false'
-        uses: peter-evans/enable-pull-request-automerge@v2
+        if: success() && env.IS_PRE_RELEASE == 'false' && steps.create_pull_request.outputs.pull-request-number
+        uses: peter-evans/enable-pull-request-automerge@v3
         with:
           pull-request-number: ${{ steps.create_pull_request.outputs.pull-request-number }}
           token: ${{ secrets.GITHUB_TOKEN }}
           merge-method: squash
 
-        # Clean up the version bump branch after merge
+      # Clean up the version bump branch after merge
       - name: Delete Version Bump Branch
         if: success() && env.IS_PRE_RELEASE == 'false'
         run: |
