@@ -192,6 +192,10 @@ If you have the repo cloned locally, you can test run the CLI by running:
 > [!TIP]
 > If you have the CLI linked with `npm link` then you can just run `npm run build:dev && keeli`
 
+# Publishing
+
+Create a GitHub release with the version number you want to create. Make sure the tag you create matches the version number (e.g., `v1.2.3`) and release! GitHub actions will take over and attempt to publish the package version you specified. Note that a Pull request will get opened on the repo automatically to bump the package version to align with the latest release. This PR should be merged ASAP after opened to keep things in sync.
+
 ---
 
 🌐 💻️
