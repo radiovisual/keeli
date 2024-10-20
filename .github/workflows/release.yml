@@ -42,8 +42,10 @@ jobs:
           git push origin version-bump/${{ env.RELEASE_VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Create a Pull Request with the version bump if the release is not a pre-release
       - name: Create Pull Request for Version Bump
         if: success() && env.IS_PRE_RELEASE == 'false'
+        id: create_pull_request
         uses: peter-evans/create-pull-request@v6
         with:
           commit-message: Update package version to ${{ env.RELEASE_VERSION }}
@@ -53,8 +55,7 @@ jobs:
           labels: version-bump
           token: ${{ secrets.GITHUB_TOKEN }}
           base: main
-
-      # Automatically enable auto-merge on the created PR with the version bump
+      # Auto-merge the Pull Request with the version bump if the release is not a pre-release
       - name: Enable Auto-Merge
         if: success() && env.IS_PRE_RELEASE == 'false'
         uses: peter-evans/enable-pull-request-automerge@v2
