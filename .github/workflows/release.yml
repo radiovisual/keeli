@@ -37,7 +37,7 @@ jobs:
         if: env.IS_PRE_RELEASE == 'false'
         run: |
           git checkout -b version-bump/${{ env.RELEASE_VERSION }}
-          git add package.json
+          git add package.json package-lock.json
           git commit -m "chore: bump version to ${{ env.RELEASE_VERSION }}"
           git push origin version-bump/${{ env.RELEASE_VERSION }}
         env:
