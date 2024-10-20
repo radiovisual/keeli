@@ -16,17 +16,17 @@ Furthermore, there are best practices we want to adhere to with our translated f
 
 Keeli will help you automatically discover many problems with your translation files, including:
 
-- ✅ Finds untranslated messages
-- ✅ Finds empty messages
-- ✅ Finds missing variables
-- ✅ Finds accidentally translated variables
-- ✅ Finds variable syntax errors
-- ✅ Finds missing keys
-- ✅ Finds unknown/un-balanced keys
-- ✅ Finds keys violating your naming convention
-- ✅ Finds extra whitespace
-- ✅ Finds HTML in messages
-- ✅ _...and more!_
+✅ Finds untranslated messages
+✅ Finds empty messages
+✅ Finds missing variables
+✅ Finds accidentally translated variables
+✅ Finds variable syntax errors
+✅ Finds missing keys
+✅ Finds unknown/un-balanced keys
+✅ Finds keys violating your naming convention
+✅ Finds extra whitespace
+✅ Finds HTML in messages
+✅ _...and more!_
 
 Most of these rules are configurable so you can customize keeli to your specific needs.
 
