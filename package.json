@@ -12,9 +12,10 @@
 		"url": "https://github.com/radiovisual/keeli/issues"
 	},
 	"scripts": {
-		"build:prod": "rm -rf dist/* && node build/cli.mjs",
-		"build:dev": "rm -rf dist/* && npm run typecheck && tsc && node build/cli.mjs",
+		"build": "npm run typecheck && npm run test && npm run clean && node build/cli.mjs",
+		"build:dev": "npm run clean && npm run typecheck && node build/cli.mjs",
 		"start": "npm run build:dev -- --watch",
+		"clean": "rimraf dist",
 		"test": "jest",
 		"typecheck": "tsc --noEmit",
 		"validate-i18n": "keeli"
@@ -32,6 +33,7 @@
 		"@types/node": "^20.12.13",
 		"esbuild": "0.21.4",
 		"jest": "^29.7.0",
+		"rimraf": "^6.0.1",
 		"ts-jest": "^29.1.4",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.4.5"
