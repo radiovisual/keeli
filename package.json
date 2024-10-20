@@ -16,7 +16,8 @@
 		"build:dev": "rm -rf dist/* && npm run typecheck && tsc && node build/cli.mjs",
 		"start": "npm run build:dev -- --watch",
 		"test": "jest",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"validate-i18n": "keeli"
 	},
 	"bin": {
 		"keeli": "dist/index.js"
