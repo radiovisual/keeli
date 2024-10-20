@@ -6,13 +6,29 @@
 
 > Have you ever shipped "buggy" translation files to your users in production? **Probably!** I know I have!
 
-Translated files in your software project are an often-overlooked source of problems that can affect the usability, reliability and reputation of your applications. These translated files are often edited manually, built automatically (without any integrity checks) or outsourced to third parties to provide translations. These files typically do not pass through any (or most) of your automated tests, or they get skipped in your manual tests...which means the hidden problems get shipped to your real users in production.
+**Let's face it, we all make mistakes (developers, translators, copywriters, marketers, humans, etc)**. Our translation files in our software should be protected against the most common mistakes.
+
+Translated files in your software project are an often-overlooked source of problems that can affect the usability, reliability and reputation of your application(s). These translated files are often edited manually, built automatically (without any integrity checks) or outsourced to third parties to provide translations. These files typically do not pass through any (or most) of your automated tests, or they easily get skipped in your manual tests...which means the hidden problems get shipped to your real users in production.
 
 Furthermore, there are best practices we want to adhere to with our translated files, and these best practices should be enforceable with an integrity check.
 
-## Roadmap to Version `1.0.0`
+## Keeli to the rescue!
 
-We are getting close to the initial `1.0.0` release. :tada: Check out [this milestone](https://github.com/radiovisual/keeli/milestone/1) for details.
+Keeli will help you automatically discover many problems with your translation files, including:
+
+- ✅ Finds untranslated messages
+- ✅ Finds empty messages
+- ✅ Finds missing variables
+- ✅ Finds accidentally translated variables
+- ✅ Finds variable syntax errors
+- ✅ Finds missing keys
+- ✅ Finds unknown/un-balanced keys
+- ✅ Finds keys violating your naming convention
+- ✅ Finds extra whitespace
+- ✅ Finds HTML in messages
+- ✅ _...and more!_
+
+Most of these rules are configurable so you can customize keeli to your specific needs.
 
 ## Configuration
 
@@ -69,10 +85,12 @@ For each project where you want to run the keeli, you will need to have a file n
 	 *
 	 **/
 	rules: {
-		"no-untranslated-messages": "error",
 		"no-empty-messages": "error",
+		"no-extra-whitespace": "error",
 		"no-html-messages": "error",
 		"no-invalid-variables": "error",
+		"no-untranslated-messages": "error",
+		"no-malformed-keys": "error",
 		"no-missing-keys": "error",
 	},
 	/**
@@ -88,22 +106,38 @@ For each project where you want to run the keeli, you will need to have a file n
 	 *
 	 **/
 	enabled: true,
+	/**
+	 * Enable or disable verbose logging mode.
+	 *
+	 **/
+	verbose: false,
 }
 ```
 
 # Rule Defaults
 
-Each rule can have a default setting of `error`, `warn` or `off`, these defaults will apply if you do not provide a configuration for the rule in the configuration file.
+Each rule (that allows you to configure the severity) can have a default setting of `error`, `warn` or `off`, these defaults will apply if you do not provide a configuration for the rule in the configuration file.
 
-| Rule name                | Default |
-| ------------------------ | ------- |
-| no-untranslated-messages | `error` |
-| no-empty-messages        | `error` |
-| no-invalid-variables     | `error` |
-| no-html-messages         | `error` |
-| no-missing-keys          | `error` |
-| no-malformed-keys        | `error` |
-| no-extra-whitespace      | `error` |
+| Rule name                                                                                                     | Default |
+| ------------------------------------------------------------------------------------------------------------- | ------- |
+| [no-empty-messages](https://github.com/radiovisual/keeli/tree/main/src/rules/no-empty-messages)               | `error` |
+| [no-extra-whitespace](https://github.com/radiovisual/keeli/tree/main/src/rules/no-extra-whitespace)           | `error` |
+| [no-html-messages](https://github.com/radiovisual/keeli/tree/main/src/rules/no-html-messages)                 | `error` |
+| [no-untranslated-messages](https://github.com/radiovisual/keeli/tree/main/src/rules/no-untranslated-messages) | `error` |
+| [no-invalid-variables](https://github.com/radiovisual/keeli/tree/main/src/rules/no-invalid-variables)         | `error` |
+| [no-malformed-keys](https://github.com/radiovisual/keeli/tree/main/src/rules/no-malformed-keys)               | `error` |
+| [no-missing-keys](https://github.com/radiovisual/keeli/tree/main/src/rules/no-missing-keys)                   | `error` |
+| [no-invalid-configuration](https://github.com/radiovisual/keeli/tree/main/src/rules/no-missing-keys)          | `error` |
+| [no-invalid-severity](https://github.com/radiovisual/keeli/tree/main/src/rules/no-missing-keys)               | `error` |
+
+# Un-configurable Rule Defaults
+
+The following rules are not configurable, meaning you should not add these rules to your configuration files, but these rules run with their default severity shown below:
+
+| Rule name                                                                                                     | Default |
+| ------------------------------------------------------------------------------------------------------------- | ------- |
+| [no-invalid-configuration](https://github.com/radiovisual/keeli/tree/main/src/rules/no-invalid-configuration) | `error` |
+| [no-invalid-severity](https://github.com/radiovisual/keeli/tree/main/src/rules/no-invalid-severity)           | `error` |
 
 # Overriding Rules
 
@@ -160,4 +194,4 @@ If you have the repo cloned locally, you can test run the CLI by running:
 
 ---
 
-:rainbow: :heart: :hamburger:
+🌐 💻️

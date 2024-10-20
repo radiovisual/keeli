@@ -3,20 +3,28 @@
 import fs from "node:fs";
 import path from "node:path";
 import chalk from "chalk";
-
+import minimist, { type ParsedArgs } from "minimist";
 import { runRules } from "./engine/rule-engine.ts";
 import type { Config } from "./types.ts";
-import { config } from "./config/default-config.ts";
+import { defaultConfig } from "./config/default-config.ts";
 
-const defaultConfig: Config = config;
+const argv: ParsedArgs = minimist(process.argv.slice(2));
 
-const configPath = path.join(__dirname, "../keeli.config.json");
+const configPath =
+	typeof argv?.config === "string"
+		? path.join(process.cwd(), argv.config)
+		: path.join(process.cwd(), "../keeli.config.json");
 
 // Only start keeli if the keeli configuration file is found.
 if (fs.existsSync(configPath)) {
 	const userConfig: Config = JSON.parse(fs.readFileSync(configPath, "utf8"));
 
 	const config = { ...defaultConfig, ...userConfig };
+
+	if (config?.verbose || argv?.verbose) {
+		console.log(`Keeli config:`);
+		console.log(config);
+	}
 
 	if (!config.enabled) {
 		const message = `keeli is disabled. Exiting.`;
@@ -26,7 +34,7 @@ if (fs.existsSync(configPath)) {
 
 	runRules(config);
 } else {
-	const message = `You must have an keeli.config.js file in the project root to run the keeli.`;
+	const message = `keeli's config file was not found at path: ${configPath}`;
 	console.log(chalk.red(message));
 	process.exit(1);
 }
