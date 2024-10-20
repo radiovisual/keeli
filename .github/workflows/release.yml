@@ -2,6 +2,7 @@ name: Publish Package to npmjs
 on:
   release:
     types: [created]
+# Permissions set for the GITHUB_TOKEN (these might also be set on the GitHub Account)
 permissions:
   contents: write
   pull-requests: write
