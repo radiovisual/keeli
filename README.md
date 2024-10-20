@@ -62,7 +62,7 @@ yarn add keeli -D
 pnpm add keeli --save-dev
 ```
 
-Then you can use the `keeli` command in your package,json scripts, for example: `"validate-i18n": "keeli"`
+Then you can use the `keeli` command in your package.json scripts, for example: `"validate-i18n": "keeli"` or `"validate-i18n": "npx keeli"`
 
 ## Configuration
 
