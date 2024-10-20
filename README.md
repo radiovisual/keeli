@@ -38,11 +38,11 @@ If you want the `keeli` command to be globally available on your system, you can
 npm install --global keeli
 ```
 
-And then you have the `keeli` command in your terminal. Now you are ready to [configure Keeli for your first validation check](#configuration)
+And then you have the `keeli` command in your terminal. Now you are ready to [configure Keeli for your first validation check](#configuration). 🎉
 
 ## Project Installation
 
-If you don't need the `keeli` command to be available globally on your system, then you can install Keeli into your project directly as a `devDependency` using the package manager of your choice:
+If you don't need the `keeli` command to be available globally on your system, then you can install Keeli into your project directly into `devDependencies` using the package manager of your choice:
 
 **npm**
 
