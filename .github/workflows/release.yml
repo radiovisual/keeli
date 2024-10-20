@@ -43,8 +43,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Show diff for debugging
-        run: git diff
+      - name: Show package.json and package-lock.json changes
+        run: |
+          cat package.json
+          cat package-lock.json
+          git diff
 
       # Create a Pull Request with the version bump if the release is not a pre-release
       - name: Create Pull Request for Version Bump
