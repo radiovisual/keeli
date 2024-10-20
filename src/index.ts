@@ -12,8 +12,8 @@ const argv: ParsedArgs = minimist(process.argv.slice(2));
 
 const configPath =
 	typeof argv?.config === "string"
-		? path.join(process.cwd(), argv.config)
-		: path.join(process.cwd(), "../keeli.config.json");
+		? path.resolve(process.cwd(), argv.config)
+		: path.resolve(process.cwd(), "keeli.config.json");
 
 // Only start keeli if the keeli configuration file is found.
 if (fs.existsSync(configPath)) {

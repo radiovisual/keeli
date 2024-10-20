@@ -30,9 +30,48 @@ Keeli will help you automatically discover many problems with your translation f
 
 Most of these rules are configurable so you can customize keeli to your specific needs.
 
+## Global Installation
+
+If you want the `keeli` command to be globally available on your system, you can install it globally:
+
+```bash
+npm install --global keeli
+```
+
+And then you have the `keeli` command in your terminal. Now you are ready to [configure Keeli for your first validation check](#configuration). 🎉
+
+## Project Installation
+
+If you don't need the `keeli` command to be available globally on your system, then you can install Keeli into your project directly into `devDependencies` using the package manager of your choice:
+
+**npm**
+
+```
+npm install --save-dev keeli
+```
+
+**yarn**
+
+```
+yarn add keeli -D
+```
+
+**pnpm**
+
+```
+pnpm add keeli --save-dev
+```
+
+Then you can use the `keeli` command in your package.json scripts, for example: `"validate-i18n": "keeli"` or `"validate-i18n": "npx keeli"`
+
 ## Configuration
 
-For each project where you want to run the keeli, you will need to have a file named `keeli.config.json` with the following format:
+For each project where you want to run the keeli, you will need to have a file named `keeli.config.json` in the project root where your internationalization files are defined.
+
+> [!TIP]
+> You can also pass in a custom configuration file path location with keeli's `--config` option.
+
+Each configuration file should be a valid JSON file and have a similar format to this (with comments removed):
 
 ```json5
 {
@@ -113,6 +152,9 @@ For each project where you want to run the keeli, you will need to have a file n
 	verbose: false,
 }
 ```
+
+> [!TIP]
+> Your configuration file does need to be complete, if you do not specify a value for any parameter that is not required, then the default configuration value will apply. If you forget to provide a value for a required value, then keeli will throw a useful error.
 
 # Rule Defaults
 
