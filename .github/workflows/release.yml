@@ -27,7 +27,7 @@ jobs:
             echo "IS_PRE_RELEASE=false" >> $GITHUB_ENV
             echo "RELEASE_TAG=latest" >> $GITHUB_ENV
           fi
-      - run: npm version ${{ env.RELEASE_VERSION }} --no-git-tag-version
+      - run: npm version ${{ env.RELEASE_VERSION }} --no-git-tag-version --no-commit
       - run: npm run build
       - name: Publish to npm
         run: npm publish --tag ${{ env.RELEASE_TAG }}
@@ -42,12 +42,6 @@ jobs:
           git push origin version-bump/${{ env.RELEASE_VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Show package.json and package-lock.json changes
-        run: |
-          cat package.json
-          cat package-lock.json
-          git diff
 
       # Create a Pull Request with the version bump if the release is not a pre-release
       - name: Create Pull Request for Version Bump
