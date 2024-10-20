@@ -33,12 +33,3 @@ jobs:
         run: npm publish --tag ${{ env.RELEASE_TAG }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Commit and push version bump
-        if: env.IS_PRE_RELEASE == 'false'
-        run: |
-          git checkout -b version-bump/${{ env.RELEASE_VERSION }}
-          git add package.json package-lock.json
-          git commit -m "chore: bump version to ${{ env.RELEASE_VERSION }}"
-          git push origin version-bump/${{ env.RELEASE_VERSION }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
